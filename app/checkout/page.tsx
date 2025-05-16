@@ -1,7 +1,5 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -10,45 +8,82 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
+import { Textarea } from "@/components/ui/textarea"
+import { useToast } from "@/components/ui/use-toast"
 import { useCart } from "@/context/CartContext"
-import { formatPrice } from "@/lib/utils"
-import { motion } from "framer-motion"
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { cart, cartTotal } = useCart()
+  const { cart, cartTotal, clearCart } = useCart()
+  const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [paymentMethod, setPaymentMethod] = useState("cod")
+
+  // Form state
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    city: "",
+    district: "",
+    province: "",
+    note: "",
+  })
 
   // Shipping cost calculation
   const shippingCost = cartTotal > 1000000 ? 0 : 30000
   const totalCost = cartTotal + shippingCost
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+
+    // Validate form
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.address) {
+      toast({
+        title: "Lỗi",
+        description: "Vui lòng điền đầy đủ thông tin",
+        variant: "destructive",
+      })
+      setIsSubmitting(false)
+      return
+    }
 
     // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 1500))
 
+    // Save order data (in a real app, this would be sent to a server)
+    const orderData = {
+      id: `ORD-${Date.now()}`,
+      date: new Date().toISOString(),
+      customer: formData,
+      items: cart,
+      total: totalCost,
+      shippingCost,
+      paymentMethod,
+      status: "pending",
+    }
+
+    // Store order in localStorage for demo purposes
+    const orders = JSON.parse(localStorage.getItem("orders") || "[]")
+    orders.push(orderData)
+    localStorage.setItem("orders", JSON.stringify(orders))
+
+    // Clear cart after successful order
+    clearCart()
+
     // Redirect to payment status page
-    router.push("/payment-status?status=success")
-  }
-
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    router.push(`/payment-status?orderId=${orderData.id}&status=success`)
   }
 
   if (cart.length === 0) {
@@ -64,14 +99,12 @@ export default function CheckoutPage() {
   }
 
   return (
-    <motion.div className="container mx-auto px-4 py-8" initial="hidden" animate="visible" variants={containerVariants}>
-      <motion.h1 className="mb-8 text-2xl font-bold md:text-3xl" variants={itemVariants}>
-        Thanh toán
-      </motion.h1>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="mb-8 text-2xl font-bold md:text-3xl">Thanh toán</h1>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Checkout Form */}
-        <motion.div className="lg:col-span-2" variants={itemVariants}>
+        <div className="lg:col-span-2">
           <div className="mb-6 flex justify-between">
             <div className="flex items-center">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-white">1</div>
@@ -90,22 +123,26 @@ export default function CheckoutPage() {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <Label htmlFor="firstName" className="mb-1 block text-sm font-medium">
-                    Họ
+                    Họ <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="firstName"
                     name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     className="w-full rounded-md border border-gray-300 p-2"
                     required
                   />
                 </div>
                 <div>
                   <Label htmlFor="lastName" className="mb-1 block text-sm font-medium">
-                    Tên
+                    Tên <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="lastName"
                     name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     className="w-full rounded-md border border-gray-300 p-2"
                     required
                   />
@@ -115,56 +152,83 @@ export default function CheckoutPage() {
               <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                   <Label htmlFor="email" className="mb-1 block text-sm font-medium">
-                    Email
+                    Email <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="email"
                     name="email"
                     type="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full rounded-md border border-gray-300 p-2"
                     required
                   />
                 </div>
                 <div>
                   <Label htmlFor="phone" className="mb-1 block text-sm font-medium">
-                    Số điện thoại
+                    Số điện thoại <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="phone" name="phone" className="w-full rounded-md border border-gray-300 p-2" required />
+                  <Input
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-gray-300 p-2"
+                    required
+                  />
                 </div>
               </div>
 
               <div className="mt-4">
                 <Label htmlFor="address" className="mb-1 block text-sm font-medium">
-                  Địa chỉ
+                  Địa chỉ <span className="text-red-500">*</span>
                 </Label>
-                <Input id="address" name="address" className="w-full rounded-md border border-gray-300 p-2" required />
+                <Input
+                  id="address"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className="w-full rounded-md border border-gray-300 p-2"
+                  required
+                />
               </div>
 
               <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
                 <div>
                   <Label htmlFor="city" className="mb-1 block text-sm font-medium">
-                    Thành phố
+                    Thành phố <span className="text-red-500">*</span>
                   </Label>
-                  <Input id="city" name="city" className="w-full rounded-md border border-gray-300 p-2" required />
+                  <Input
+                    id="city"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-gray-300 p-2"
+                    required
+                  />
                 </div>
                 <div>
                   <Label htmlFor="district" className="mb-1 block text-sm font-medium">
-                    Quận/Huyện
+                    Quận/Huyện <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="district"
                     name="district"
+                    value={formData.district}
+                    onChange={handleChange}
                     className="w-full rounded-md border border-gray-300 p-2"
                     required
                   />
                 </div>
                 <div>
                   <Label htmlFor="province" className="mb-1 block text-sm font-medium">
-                    Tỉnh/Thành phố
+                    Tỉnh/Thành phố <span className="text-red-500">*</span>
                   </Label>
                   <select
                     id="province"
                     name="province"
+                    value={formData.province}
+                    onChange={handleChange}
                     className="w-full rounded-md border border-gray-300 p-2"
                     required
                   >
@@ -174,8 +238,23 @@ export default function CheckoutPage() {
                     <option value="Đà Nẵng">Đà Nẵng</option>
                     <option value="Hải Phòng">Hải Phòng</option>
                     <option value="Cần Thơ">Cần Thơ</option>
+                    <option value="Khác">Khác</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="mt-4">
+                <Label htmlFor="note" className="mb-1 block text-sm font-medium">
+                  Ghi chú
+                </Label>
+                <Textarea
+                  id="note"
+                  name="note"
+                  value={formData.note}
+                  onChange={handleChange}
+                  placeholder="Ghi chú về đơn hàng, ví dụ: thời gian hay chỉ dẫn địa điểm giao hàng chi tiết hơn."
+                  className="w-full rounded-md border border-gray-300 p-2"
+                />
               </div>
 
               <Separator className="my-6" />
@@ -289,10 +368,10 @@ export default function CheckoutPage() {
               </div>
             </div>
           </form>
-        </motion.div>
+        </div>
 
         {/* Order Summary */}
-        <motion.div variants={itemVariants}>
+        <div>
           <div className="rounded-lg border border-gray-200 p-6 shadow-sm">
             <h2 className="mb-4 text-xl font-semibold">Tóm tắt đơn hàng</h2>
 
@@ -301,7 +380,7 @@ export default function CheckoutPage() {
                 <div key={`${item.id}-${item.size}-${item.color.name}`} className="mb-4 flex gap-3">
                   <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-md bg-gray-100">
                     <img
-                      src={item.image || "/placeholder.svg"}
+                      src={item.image || "/placeholder.svg?height=64&width=64"}
                       alt={item.name}
                       className="h-full w-full object-cover object-center"
                     />
@@ -311,7 +390,7 @@ export default function CheckoutPage() {
                     <p className="text-sm text-gray-500">
                       {item.color.name} / {item.size} / SL: {item.quantity}
                     </p>
-                    <p className="mt-auto font-medium">{formatPrice(item.price * item.quantity)}</p>
+                    <p className="mt-auto font-medium">${(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                 </div>
               ))}
@@ -322,24 +401,24 @@ export default function CheckoutPage() {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <span className="text-gray-600">Tạm tính</span>
-                <span>{formatPrice(cartTotal)}</span>
+                <span>${cartTotal.toFixed(2)}</span>
               </div>
 
               <div className="flex justify-between">
                 <span className="text-gray-600">Phí vận chuyển</span>
-                <span>{shippingCost === 0 ? "Miễn phí" : formatPrice(shippingCost)}</span>
+                <span>{shippingCost === 0 ? "Miễn phí" : `$${shippingCost.toFixed(2)}`}</span>
               </div>
 
               <Separator className="my-2" />
 
               <div className="flex justify-between font-medium">
                 <span>Tổng cộng</span>
-                <span className="text-lg">{formatPrice(totalCost)}</span>
+                <span className="text-lg">${totalCost.toFixed(2)}</span>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }

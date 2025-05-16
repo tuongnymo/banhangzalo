@@ -6,10 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { cn, formatPrice } from "@/lib/utils"
+import { cn } from "@/lib/utils"
 import type { Product } from "@/lib/products"
 import { useCart } from "@/context/CartContext"
-import { motion } from "framer-motion"
 
 interface ProductDetailProps {
   product: Product
@@ -47,7 +46,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   const handleBuyNow = () => {
     // Add to cart first
-    handleAddToCart()
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.discount ? product.price * (1 - product.discount / 100) : product.price,
+      image: product.image,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: quantity,
+    })
 
     // Then navigate to checkout
     router.push("/checkout")
@@ -59,14 +66,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {/* Product Images */}
       <div className="space-y-4">
-        <motion.div
-          className="relative aspect-square overflow-hidden rounded-xl bg-gray-100"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-100">
           <img
-            src={product.image || "/placeholder.svg"}
+            src={product.image || "/placeholder.svg?height=600&width=600"}
             alt={product.name}
             className="h-full w-full object-cover object-center"
           />
@@ -75,7 +77,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               -{product.discount}%
             </div>
           )}
-        </motion.div>
+        </div>
 
         <div className="flex gap-2 overflow-x-auto pb-2">
           {[1, 2, 3, 4].map((index) => (
@@ -84,7 +86,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               className="relative aspect-square h-20 w-20 overflow-hidden rounded-md border-2 border-transparent hover:border-black"
             >
               <img
-                src={product.image || "/placeholder.svg"}
+                src={product.image || "/placeholder.svg?height=80&width=80"}
                 alt={`${product.name} view ${index}`}
                 className="h-full w-full object-cover object-center"
               />
@@ -95,43 +97,26 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
       {/* Product Info */}
       <div className="flex flex-col">
-        <motion.h1
-          className="text-2xl font-bold md:text-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {product.name}
-        </motion.h1>
+        <h1 className="text-2xl font-bold md:text-3xl">{product.name}</h1>
 
-        <motion.div
-          className="mt-2 flex items-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
+        <div className="mt-2 flex items-center">
           {product.discount ? (
             <>
               <span className="text-xl font-bold text-gray-900">
-                {formatPrice(product.price * (1 - product.discount / 100))}
+                ${(product.price * (1 - product.discount / 100)).toFixed(2)}
               </span>
-              <span className="ml-2 text-lg text-gray-500 line-through">{formatPrice(product.price)}</span>
+              <span className="ml-2 text-lg text-gray-500 line-through">${product.price.toFixed(2)}</span>
               <span className="ml-2 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
                 {product.discount}% OFF
               </span>
             </>
           ) : (
-            <span className="text-xl font-bold text-gray-900">{formatPrice(product.price)}</span>
+            <span className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
           )}
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <h3 className="mb-2 text-sm font-medium">Chọn Size</h3>
+        <div className="mt-6">
+          <h3 className="mb-2 text-sm font-medium">Size</h3>
           <RadioGroup value={selectedSize} onValueChange={setSelectedSize} className="flex flex-wrap gap-2">
             {product.sizes.map((size) => (
               <div key={size} className="flex items-center space-x-2">
@@ -145,15 +130,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
             ))}
           </RadioGroup>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
-          <h3 className="mb-2 text-sm font-medium">Chọn Màu</h3>
+        <div className="mt-6">
+          <h3 className="mb-2 text-sm font-medium">Color</h3>
           <RadioGroup
             value={selectedColor.name}
             onValueChange={(value) => {
@@ -174,14 +154,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
             ))}
           </RadioGroup>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-6 flex items-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
+        <div className="mt-6 flex items-center">
           <div className="flex items-center rounded-md border border-gray-200">
             <Button
               variant="ghost"
@@ -229,36 +204,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <span className="sr-only">Tăng số lượng</span>
             </Button>
           </div>
+        </div>
 
-          <div className="ml-4 flex-1">
-            <Button className="w-full bg-black text-white hover:bg-gray-800">Add to Cart</Button>
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="mt-4 grid grid-cols-2 gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <Button
-            onClick={handleAddToCart}
-            variant="outline"
-            className="border-2 border-black bg-white text-black hover:bg-gray-100"
-          >
-            Thêm vào giỏ
+        {/* Buttons for Add to Cart and Buy Now */}
+        <div className="mt-6 grid grid-cols-2 gap-4">
+          <Button onClick={handleAddToCart} className="bg-black text-white hover:bg-gray-800">
+            Add to Cart
           </Button>
-          <Button onClick={handleBuyNow} className="bg-black text-white hover:bg-gray-800">
+          <Button onClick={handleBuyNow} className="bg-red-600 text-white hover:bg-red-700">
             Mua ngay
           </Button>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-4 flex gap-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
+        <div className="mt-4 flex gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -301,14 +259,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </svg>
             <span>Chia sẻ</span>
           </Button>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="mt-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.7 }}
-        >
+        <div className="mt-8">
           <Tabs defaultValue="description">
             <TabsList className="w-full justify-start border-b border-gray-200 bg-transparent p-0">
               <TabsTrigger
@@ -352,7 +305,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </div>
             </TabsContent>
           </Tabs>
-        </motion.div>
+        </div>
       </div>
     </div>
   )
