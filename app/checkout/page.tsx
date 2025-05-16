@@ -75,9 +75,11 @@ export default function CheckoutPage() {
     }
 
     // Store order in localStorage for demo purposes
-    const orders = JSON.parse(localStorage.getItem("orders") || "[]")
-    orders.push(orderData)
-    localStorage.setItem("orders", JSON.stringify(orders))
+    if (typeof window !== "undefined") {
+      const orders = JSON.parse(localStorage.getItem("orders") || "[]")
+      orders.push(orderData)
+      localStorage.setItem("orders", JSON.stringify(orders))
+    }
 
     // Clear cart after successful order
     clearCart()

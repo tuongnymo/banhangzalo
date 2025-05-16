@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
-type CartItem = {
+export interface CartItem {
   id: string
   name: string
   price: number
@@ -15,7 +15,7 @@ type CartItem = {
   quantity: number
 }
 
-type CartContextType = {
+interface CartContextType {
   cart: CartItem[]
   cartCount: number
   cartTotal: number
@@ -25,14 +25,22 @@ type CartContextType = {
   clearCart: () => void
 }
 
-const CartContext = createContext<CartContextType | undefined>(undefined)
+const CartContext = createContext<CartContextType>({
+  cart: [],
+  cartCount: 0,
+  cartTotal: 0,
+  addToCart: () => {},
+  removeFromCart: () => {},
+  updateQuantity: () => {},
+  clearCart: () => {},
+})
 
 export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
   const [cartCount, setCartCount] = useState(0)
   const [cartTotal, setCartTotal] = useState(0)
 
-  // Load cart from localStorage on initial render
+  // Load cart from localStorage on initial render (client-side only)
   useEffect(() => {
     const savedCart = localStorage.getItem("cart")
     if (savedCart) {
@@ -47,7 +55,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   // Update localStorage whenever cart changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
+    if (typeof window !== "undefined") {
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }
 
     // Update cart count and total
     const count = cart.reduce((sum, item) => sum + item.quantity, 0)
@@ -118,7 +128,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 export function useCart() {
   const context = useContext(CartContext)
-  if (context === undefined) {
+  if (!context) {
     throw new Error("useCart must be used within a CartProvider")
   }
   return context
