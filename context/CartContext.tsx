@@ -39,6 +39,23 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
   const [cartTotal, setCartTotal] = useState(0)
 
+  // Load cart from localStorage on initial render
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart")
+    if (savedCart) {
+      try {
+        setCart(JSON.parse(savedCart))
+      } catch (error) {
+        console.error("Failed to parse cart from localStorage:", error)
+      }
+    }
+  }, [])
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }, [cart])
+
   // Calculate total whenever cart changes
   useEffect(() => {
     const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)

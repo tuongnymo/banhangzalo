@@ -26,12 +26,12 @@ export default function Header() {
               </li>
               <li>
                 <Link href="/category/men" className="hover:text-gray-600">
-                  Shoes
+                  Men
                 </Link>
               </li>
               <li>
                 <Link href="/category/women" className="hover:text-gray-600">
-                  Clothing
+                  Women
                 </Link>
               </li>
               <li>

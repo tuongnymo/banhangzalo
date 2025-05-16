@@ -1,18 +1,23 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { cn } from "@/lib/utils"
+import { cn, formatPrice } from "@/lib/utils"
 import type { Product } from "@/lib/products"
+import { useCart } from "@/context/CartContext"
+import { motion } from "framer-motion"
 
 interface ProductDetailProps {
   product: Product
 }
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const router = useRouter()
+  const { addToCart } = useCart()
   const [quantity, setQuantity] = useState(1)
   const [selectedSize, setSelectedSize] = useState(product.sizes[0])
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
@@ -28,23 +33,61 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     setQuantity(quantity + 1)
   }
 
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.discount ? product.price * (1 - product.discount / 100) : product.price,
+      image: product.image,
+      size: selectedSize,
+      color: selectedColor,
+      quantity: quantity,
+    })
+  }
+
+  const handleBuyNow = () => {
+    // Add to cart first
+    handleAddToCart()
+
+    // Then navigate to checkout
+    router.push("/checkout")
+  }
+
   const discountedPrice = product.discount ? product.price * (1 - product.discount / 100) : null
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
       {/* Product Images */}
       <div className="space-y-4">
-        <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-100">
-          <div className="h-full w-full bg-gray-200"></div>
-        </div>
+        <motion.div
+          className="relative aspect-square overflow-hidden rounded-xl bg-gray-100"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <img
+            src={product.image || "/placeholder.svg"}
+            alt={product.name}
+            className="h-full w-full object-cover object-center"
+          />
+          {product.discount && (
+            <div className="absolute left-4 top-4 rounded-full bg-red-500 px-2 py-1 text-xs font-bold text-white">
+              -{product.discount}%
+            </div>
+          )}
+        </motion.div>
 
         <div className="flex gap-2 overflow-x-auto pb-2">
           {[1, 2, 3, 4].map((index) => (
             <button
               key={index}
-              className="relative aspect-square h-20 w-20 overflow-hidden rounded-md border-2 border-transparent"
+              className="relative aspect-square h-20 w-20 overflow-hidden rounded-md border-2 border-transparent hover:border-black"
             >
-              <div className="h-full w-full bg-gray-200"></div>
+              <img
+                src={product.image || "/placeholder.svg"}
+                alt={`${product.name} view ${index}`}
+                className="h-full w-full object-cover object-center"
+              />
             </button>
           ))}
         </div>
@@ -52,43 +95,65 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
       {/* Product Info */}
       <div className="flex flex-col">
-        <h1 className="text-2xl font-bold md:text-3xl">{product.name}</h1>
+        <motion.h1
+          className="text-2xl font-bold md:text-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {product.name}
+        </motion.h1>
 
-        <div className="mt-2 flex items-center">
+        <motion.div
+          className="mt-2 flex items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
           {product.discount ? (
             <>
               <span className="text-xl font-bold text-gray-900">
-                ${(product.price * (1 - product.discount / 100)).toFixed(2)}
+                {formatPrice(product.price * (1 - product.discount / 100))}
               </span>
-              <span className="ml-2 text-lg text-gray-500 line-through">${product.price.toFixed(2)}</span>
+              <span className="ml-2 text-lg text-gray-500 line-through">{formatPrice(product.price)}</span>
               <span className="ml-2 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
                 {product.discount}% OFF
               </span>
             </>
           ) : (
-            <span className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
+            <span className="text-xl font-bold text-gray-900">{formatPrice(product.price)}</span>
           )}
-        </div>
+        </motion.div>
 
-        <div className="mt-6">
-          <h3 className="mb-2 text-sm font-medium">Select Size</h3>
+        <motion.div
+          className="mt-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h3 className="mb-2 text-sm font-medium">Chọn Size</h3>
           <RadioGroup value={selectedSize} onValueChange={setSelectedSize} className="flex flex-wrap gap-2">
             {product.sizes.map((size) => (
               <div key={size} className="flex items-center space-x-2">
                 <RadioGroupItem value={size} id={`size-${size}`} className="peer sr-only" />
                 <Label
                   htmlFor={`size-${size}`}
-                  className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-gray-200 text-sm peer-data-[state=checked]:border-black peer-data-[state=checked]:bg-black peer-data-[state=checked]:text-white"
+                  className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-gray-200 text-sm transition-all hover:border-black peer-data-[state=checked]:border-black peer-data-[state=checked]:bg-black peer-data-[state=checked]:text-white"
                 >
                   {size}
                 </Label>
               </div>
             ))}
           </RadioGroup>
-        </div>
+        </motion.div>
 
-        <div className="mt-6">
-          <h3 className="mb-2 text-sm font-medium">Select Color</h3>
+        <motion.div
+          className="mt-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h3 className="mb-2 text-sm font-medium">Chọn Màu</h3>
           <RadioGroup
             value={selectedColor.name}
             onValueChange={(value) => {
@@ -102,16 +167,21 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <RadioGroupItem value={color.name} id={`color-${color.name}`} className="peer sr-only" />
                 <Label
                   htmlFor={`color-${color.name}`}
-                  className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-gray-200 peer-data-[state=checked]:ring-2 peer-data-[state=checked]:ring-black peer-data-[state=checked]:ring-offset-2"
+                  className="relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-gray-200 transition-all hover:border-gray-300 peer-data-[state=checked]:ring-2 peer-data-[state=checked]:ring-black peer-data-[state=checked]:ring-offset-2"
                 >
                   <span className="absolute inset-1 rounded-full" style={{ backgroundColor: color.hex }} />
                 </Label>
               </div>
             ))}
           </RadioGroup>
-        </div>
+        </motion.div>
 
-        <div className="mt-6 flex items-center">
+        <motion.div
+          className="mt-6 flex items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <div className="flex items-center rounded-md border border-gray-200">
             <Button
               variant="ghost"
@@ -133,7 +203,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               >
                 <path d="M5 12h14"></path>
               </svg>
-              <span className="sr-only">Decrease quantity</span>
+              <span className="sr-only">Giảm số lượng</span>
             </Button>
             <div className="flex h-10 w-12 items-center justify-center text-sm font-medium">{quantity}</div>
             <Button
@@ -156,16 +226,39 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <path d="M5 12h14"></path>
                 <path d="M12 5v14"></path>
               </svg>
-              <span className="sr-only">Increase quantity</span>
+              <span className="sr-only">Tăng số lượng</span>
             </Button>
           </div>
 
           <div className="ml-4 flex-1">
             <Button className="w-full bg-black text-white hover:bg-gray-800">Add to Cart</Button>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="mt-4 flex gap-2">
+        <motion.div
+          className="mt-4 grid grid-cols-2 gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <Button
+            onClick={handleAddToCart}
+            variant="outline"
+            className="border-2 border-black bg-white text-black hover:bg-gray-100"
+          >
+            Thêm vào giỏ
+          </Button>
+          <Button onClick={handleBuyNow} className="bg-black text-white hover:bg-gray-800">
+            Mua ngay
+          </Button>
+        </motion.div>
+
+        <motion.div
+          className="mt-4 flex gap-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
           <Button
             variant="outline"
             size="sm"
@@ -186,7 +279,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             >
               <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
             </svg>
-            <span>{isFavorite ? "Saved" : "Save"}</span>
+            <span>{isFavorite ? "Đã lưu" : "Lưu"}</span>
           </Button>
 
           <Button variant="outline" size="sm" className="flex items-center gap-1">
@@ -206,30 +299,35 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <polyline points="16 6 12 2 8 6"></polyline>
               <line x1="12" x2="12" y1="2" y2="15"></line>
             </svg>
-            <span>Share</span>
+            <span>Chia sẻ</span>
           </Button>
-        </div>
+        </motion.div>
 
-        <div className="mt-8">
+        <motion.div
+          className="mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+        >
           <Tabs defaultValue="description">
             <TabsList className="w-full justify-start border-b border-gray-200 bg-transparent p-0">
               <TabsTrigger
                 value="description"
                 className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
               >
-                Description
+                Mô tả
               </TabsTrigger>
               <TabsTrigger
                 value="details"
                 className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
               >
-                Details
+                Chi tiết
               </TabsTrigger>
               <TabsTrigger
                 value="shipping"
                 className="rounded-none border-b-2 border-transparent px-4 py-2 data-[state=active]:border-black data-[state=active]:bg-transparent data-[state=active]:shadow-none"
               >
-                Shipping
+                Vận chuyển
               </TabsTrigger>
             </TabsList>
             <TabsContent value="description" className="py-4">
@@ -247,14 +345,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </TabsContent>
             <TabsContent value="shipping" className="py-4">
               <div className="space-y-4 text-gray-600">
-                <p>Free standard shipping on all orders over $100.</p>
-                <p>Estimated delivery time: 3-5 business days.</p>
-                <p>Express shipping available at checkout.</p>
-                <p>International shipping available to select countries.</p>
+                <p>Miễn phí vận chuyển cho đơn hàng trên 1.000.000đ.</p>
+                <p>Thời gian giao hàng dự kiến: 3-5 ngày làm việc.</p>
+                <p>Vận chuyển nhanh có sẵn tại trang thanh toán.</p>
+                <p>Vận chuyển quốc tế có sẵn cho các quốc gia được chọn.</p>
               </div>
             </TabsContent>
           </Tabs>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
