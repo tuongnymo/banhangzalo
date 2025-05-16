@@ -11,7 +11,7 @@ const banners = [
     id: 1,
     title: "Spring Collection 2024",
     subtitle: "Discover the latest trends in fashion",
-    image: "https://i.imgur.com/MhISrz6.png",
+    image: "https://i.imgur.com/UnOqBkj.jpeg",
     link: "/category/shoes",
   },
   {
