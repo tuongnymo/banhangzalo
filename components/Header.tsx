@@ -13,7 +13,7 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="text-xl font-bold">
-            FASHION
+            FULLSTORE FASHION
           </Link>
 
           {/* Desktop Navigation */}
@@ -21,22 +21,22 @@ export default function Header() {
             <ul className="flex space-x-8">
               <li>
                 <Link href="/" className="hover:text-gray-600">
-                  Home
+                  Trang Chủ
                 </Link>
               </li>
               <li>
                 <Link href="/category/men" className="hover:text-gray-600">
-                  Men
+                  Shop Nam
                 </Link>
               </li>
               <li>
                 <Link href="/category/women" className="hover:text-gray-600">
-                  Women
+                  Shop Nữ
                 </Link>
               </li>
               <li>
                 <Link href="/category/accessories" className="hover:text-gray-600">
-                  Accessories
+                  Túi xách & Phụ kiện
                 </Link>
               </li>
               <li>
