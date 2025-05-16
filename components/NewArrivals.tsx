@@ -102,7 +102,7 @@ export default function NewArrivals() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold md:text-3xl relative">
-            New Arrivals
+            Sản phẩm mới cập nhật
             <span className="absolute -bottom-2 left-0 w-1/3 h-1 bg-black"></span>
           </h2>
           <div className="hidden md:flex items-center gap-2">
