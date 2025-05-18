@@ -9,23 +9,23 @@ import Image from "next/image"
 const banners = [
   {
     id: 1,
-    title: "Spring Collection 2024",
-    subtitle: "Discover the latest trends in fashion",
-    image: "https://i.imgur.com/UnOqBkj.jpeg",
+    title: "Nâng tầm phong cách",
+    subtitle: "Khám phá bộ sưu tập mới cho người dẫn đầu xu hướng",
+    image: "https://i.postimg.cc/MKdBjr9B/bannerm.png",
     link: "/category/shoes",
   },
   {
     id: 2,
-    title: "Summer Essentials",
-    subtitle: "Get ready for the summer season",
-    image: "https://i.imgur.com/sK8hHdC.jpeg",
+    title: "Đẹp từng chi tiết",
+    subtitle: "Mỗi đôi giày, mỗi chiếc túi và phụ kiện đều là điểm nhấn tinh tế nâng cao phong cách và sự tự tin cho bạn",
+    image: "https://i.postimg.cc/NM46JPf1/4.jpg",
     link: "/category/clothing",
   },
   {
     id: 3,
-    title: "Accessories Sale",
-    subtitle: "Up to 50% off on selected items",
-    image: "https://i.imgur.com/5SYdtnG.jpeg",
+    title: "Chương trình ưu đãi đặc biệt",
+    subtitle: "Giảm tới 50% đối với những khách hàng thân thiết",
+    image: "https://i.postimg.cc/TwGjcXGd/6.jpg",
     link: "/category/accessories",
   },
 ]
