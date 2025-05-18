@@ -9,22 +9,16 @@ import Image from "next/image"
 const banners = [
   {
     id: 1,
-    title: "Nâng tầm phong cách",
-    subtitle: "Khám phá bộ sưu tập mới cho người dẫn đầu xu hướng",
     image: "https://i.postimg.cc/MKdBjr9B/bannerm.png",
     link: "/category/shoes",
   },
   {
     id: 2,
-    title: "Đẹp từng chi tiết",
-    subtitle: "Mỗi đôi giày, mỗi chiếc túi và phụ kiện đều là điểm nhấn tinh tế nâng cao phong cách và sự tự tin cho bạn",
     image: "https://i.postimg.cc/NM46JPf1/4.jpg",
     link: "/category/clothing",
   },
   {
     id: 3,
-    title: "Chương trình ưu đãi",
-    subtitle: "Giảm tới 50% đối với những khách hàng thân thiết",
     image: "https://i.postimg.cc/TwGjcXGd/6.jpg",
     link: "/category/accessories",
   },
@@ -124,12 +118,6 @@ export default function BannerCarousel() {
                 <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white p-4">
                   <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{banner.title}</h1>
                   <p className="mb-6 text-base md:text-lg">{banner.subtitle}</p>
-                  <Link
-                    href={banner.link}
-                    className="rounded-md bg-white px-6 py-3 font-medium text-black transition hover:bg-gray-100 touch-manipulation"
-                  >
-                    Shop Now
-                  </Link>
                 </div>
               </div>
             </div>
