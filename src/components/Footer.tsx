@@ -8,25 +8,25 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-lg font-bold">NOIR</h3>
-            <p className="text-sm text-gray-600">Premium shoes and fashion for the modern lifestyle.</p>
+            <h3 className="mb-4 text-lg font-bold">FULLSTORE FASHION</h3>
+            <p className="text-sm text-gray-600">Uy tín, Chất lượng tạo nên thương hiệu.</p>
           </div>
           <div>
             <h3 className="mb-4 text-sm font-bold uppercase">Shop</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/category/shoes" className="text-gray-600 hover:text-gray-900">
-                  Shoes
+                  Shop Nam
                 </Link>
               </li>
               <li>
                 <Link to="/category/clothing" className="text-gray-600 hover:text-gray-900">
-                  Clothing
+                  Shop Nữ
                 </Link>
               </li>
               <li>
                 <Link to="/category/accessories" className="text-gray-600 hover:text-gray-900">
-                  Accessories
+                  Túi Xách & Phụ Kiện
                 </Link>
               </li>
               <li>
