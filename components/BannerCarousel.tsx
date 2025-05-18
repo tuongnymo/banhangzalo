@@ -88,7 +88,7 @@ export default function BannerCarousel() {
 
   return (
     <section
-      className="relative h-[50vh] min-h-[300px] max-h-[500px] w-full overflow-hidden bg-gray-100"
+      className="relative w-full h-[60vh] min-h-[250px] max-h-[600px] overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -106,14 +106,14 @@ export default function BannerCarousel() {
                 index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
             >
-              <div className="relative h-full w-full">
+              <div className="relative h-full w-full min-w-full">
                 <Image
                   src={banner.image || "/placeholder.svg"}
                   alt={banner.title}
                   fill
                   priority={index === 0}
                   sizes="100vw"
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
                   <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{banner.title}</h1>
