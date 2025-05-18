@@ -30,20 +30,20 @@ export default function RootLayout({
             <header className="border-b border-gray-200">
               <div className="container mx-auto flex items-center justify-between p-4">
                 <Link href="/" className="text-xl font-bold">
-                  FASHION
+                  FULLSTORE FASHION
                 </Link>
                 <nav className="hidden space-x-6 md:flex">
                   <Link href="/" className="hover:text-gray-500">
-                    Home
+                    Trang Chủ
                   </Link>
                   <Link href="/category/shoes" className="hover:text-gray-500">
-                    Shoes
+                    Shop Nam
                   </Link>
                   <Link href="/category/clothing" className="hover:text-gray-500">
-                    Clothing
+                    Shop Nữ
                   </Link>
                   <Link href="/category/accessories" className="hover:text-gray-500">
-                    Accessories
+                    Túi Xách & Phụ Kiện
                   </Link>
                 </nav>
                 <div className="flex items-center space-x-4">
@@ -121,63 +121,63 @@ export default function RootLayout({
               <div className="container mx-auto px-4">
                 <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
                   <div>
-                    <h3 className="mb-4 text-lg font-bold">FASHION</h3>
+                    <h3 className="mb-4 text-lg font-bold">FULLSTORE FASHION</h3>
                     <p className="text-gray-600">
-                      Premium quality fashion items for the modern individual. Discover our collections today.
+                      Uy tín, Chất lượng tạo nên thương hiệu
                     </p>
                   </div>
                   <div>
-                    <h3 className="mb-4 text-lg font-bold">Shop</h3>
+                    <h3 className="mb-4 text-lg font-bold">Cửa Hàng</h3>
                     <ul className="space-y-2 text-gray-600">
                       <li>
                         <Link href="/category/shoes" className="hover:text-black block py-1">
-                          Shoes
+                          Shop Nam
                         </Link>
                       </li>
                       <li>
                         <Link href="/category/clothing" className="hover:text-black block py-1">
-                          Clothing
+                          Shop Nữ
                         </Link>
                       </li>
                       <li>
                         <Link href="/category/accessories" className="hover:text-black block py-1">
-                          Accessories
+                          Túi Xách & Phụ Kiện
                         </Link>
                       </li>
                       <li>
                         <Link href="/category/all" className="hover:text-black block py-1">
-                          All Products
+                          Tất cả sản phẩm
                         </Link>
                       </li>
                     </ul>
                   </div>
                   <div>
-                    <h3 className="mb-4 text-lg font-bold">Company</h3>
+                    <h3 className="mb-4 text-lg font-bold">Chăm Sóc Khách Hàng</h3>
                     <ul className="space-y-2 text-gray-600">
                       <li>
                         <Link href="/about" className="hover:text-black block py-1">
-                          About Us
+                          Về chúng tôi
                         </Link>
                       </li>
                       <li>
                         <Link href="/contact" className="hover:text-black block py-1">
-                          Contact
+                          Liên hệ
                         </Link>
                       </li>
                       <li>
                         <Link href="/terms" className="hover:text-black block py-1">
-                          Terms & Conditions
+                          Điều khoản và điều kiện
                         </Link>
                       </li>
                       <li>
                         <Link href="/privacy" className="hover:text-black block py-1">
-                          Privacy Policy
+                          Chính sách bảo mật
                         </Link>
                       </li>
                     </ul>
                   </div>
                   <div>
-                    <h3 className="mb-4 text-lg font-bold">Connect</h3>
+                    <h3 className="mb-4 text-lg font-bold">Liên Kết</h3>
                     <div className="flex space-x-4">
                       <a href="#" className="hover:text-gray-500 p-2">
                         <svg
@@ -230,7 +230,7 @@ export default function RootLayout({
                   </div>
                 </div>
                 <div className="mt-12 border-t border-gray-200 pt-8 text-center">
-                  <p className="text-gray-600">© 2024 FASHION. All rights reserved.</p>
+                  <p className="text-gray-600">© 2025 FULLSTORE FASHION. All rights reserved.</p>
                 </div>
               </div>
             </footer>
