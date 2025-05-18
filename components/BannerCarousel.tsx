@@ -115,7 +115,7 @@ export default function BannerCarousel() {
                   sizes="100vw"
                   className="object-cover"
                 />
-                <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center text-white p-4">
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
                   <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{banner.title}</h1>
                   <p className="mb-6 text-base md:text-lg">{banner.subtitle}</p>
                 </div>
