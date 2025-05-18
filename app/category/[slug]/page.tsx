@@ -59,6 +59,55 @@ const allProducts = [
     image: "https://i.postimg.cc/44DDCsVf/36.jpg?height=300&width=300",
     category: "accessories",
   },
+  {
+    id: 9,
+    name: "Kẹp tóc nữ xinh xắn",
+    price: 129.99,
+    image: "https://i.postimg.cc/fbVt0cLf/33.jpg?height=300&width=300",
+    category: "accessories",
+  },
+  {
+    id: 10,
+    name: "Giày nam đế cao su bền bỉ, êm chân",
+    price: 929.99,
+    image: "https://i.postimg.cc/SKFdsvTh/19.jpg?height=300&width=300",
+    category: "shoes",
+  },
+  {
+    id: 11,
+    name: "Giày thể thao năng động, phù hợp với nhiều outfit",
+    price: 769.99,
+    image: "https://i.postimg.cc/66jhR3jz/26.jpg?height=300&width=300",
+    category: "shoes",
+  },
+  {
+    id: 12,
+    name: "Túi xách nữ sang trọng với nhiều phiên bản màu",
+    price: 539.99,
+    image: "https://i.postimg.cc/hvS3G5Gj/3.jpg?height=300&width=300",
+    category: "accessories",
+  },
+  {
+    id: 13,
+    name: "Dép sandanl nữ đi học cực trendy, cá tính",
+    price: 579.99,
+    image: "https://i.postimg.cc/rpW962k4/37.jpg?height=300&width=300",
+    category: "clothing",
+  },
+  {
+    id: 14,
+    name: "Giày nữ thể thao kẻ sọc 3 viền xinh xắn hot hit",
+    price: 649.99,
+    image: "https://i.postimg.cc/W3w63mtb/38.jpg?height=300&width=300",
+    category: "clothing",
+  },
+  {
+    id: 15,
+    name: "Vòng cài tóc cute dễ thương",
+    price: 119.99,
+    image: "https://i.postimg.cc/zB8K9Lpm/39.jpg?height=300&width=300",
+    category: "accessories",
+  },
 ]
 
 export default function CategoryPage({ params }: { params: { slug: string } }) {
