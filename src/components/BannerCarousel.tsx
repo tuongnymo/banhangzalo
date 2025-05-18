@@ -8,8 +8,8 @@ import { motion, AnimatePresence } from "framer-motion"
 const banners = [
   {
     id: 1,
-    title: "Elevate Your Style",
-    subtitle: "Discover our new collection of premium shoes and fashion items",
+    title: "Thời trang là cảm hứng",
+    subtitle: "Mỗi thiết kế mang đến năng lượng và cảm xúc mới mẻ",
     image: "/placeholder.svg?height=1080&width=1920",
     cta: { men: "Shop Men", women: "Shop Women" },
   },
