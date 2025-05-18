@@ -88,7 +88,7 @@ export default function BannerCarousel() {
 
   return (
     <section
-      className="relative w-full h-[60vh] min-h-[250px] max-h-[600px] overflow-hidden"
+      className="relative w-full aspect-[2/1] overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -113,7 +113,7 @@ export default function BannerCarousel() {
                   fill
                   priority={index === 0}
                   sizes="100vw"
-                  className="object-contain w-full h-full"
+                  className="object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
                   <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{banner.title}</h1>
