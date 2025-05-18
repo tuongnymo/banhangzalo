@@ -18,7 +18,7 @@ export default function Home() {
             <Link href="/category/shoes" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="https://i.imgur.com/OmDf1oQ.jpeg?height=300&width=300"
+                  src="https://i.postimg.cc/qMskM4fL/41.jpg?height=300&width=300"
                   alt="Shoes"
                   fill
                   className="object-cover"
@@ -30,7 +30,7 @@ export default function Home() {
             <Link href="/category/clothing" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="https://i.imgur.com/q3fxdD3.jpeg?height=300&width=300"
+                  src="https://i.postimg.cc/TYMd6hs1/40.jpg?height=300&width=300"
                   alt="Clothing"
                   fill
                   className="object-cover"
