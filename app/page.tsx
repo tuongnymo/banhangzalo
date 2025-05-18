@@ -69,14 +69,14 @@ export default function Home() {
       {/* Featured Collections */}
       <section className="bg-white py-12">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-10 text-3xl font-bold">Featured Collections</h2>
+          <h2 className="mb-10 text-3xl font-bold">Bộ Sưu Tập</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Men's Collection */}
             <div className="relative h-80 w-full overflow-hidden rounded-lg">
-              <Image src="https://i.imgur.com/UnOqBkj.jpeg" alt="Shoes" fill className="object-cover object-[bottom]" />
+              <Image src="https://i.imgur.com/sK8hHdC.jpeg" alt="Shoes" fill className="object-cover object-[bottom]" />
               <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
                 <h3 className="text-xl font-bold mb-2">Men's Collection</h3>
-                <p className="text-sm mb-4 px-4">Thế giới dành cho phái mạnh</p>
+                <p className="text-sm mb-4 px-4">Tối giản. Mạnh mẽ. Lôi cuốn</p>
                 <Link href="/category/shoes">
                   <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
                     Shop Now
@@ -88,14 +88,14 @@ export default function Home() {
             {/* Women's Collection */}
             <div className="relative h-80 w-full overflow-hidden rounded-lg">
               <Image
-                src="https://i.imgur.com/sK8hHdC.jpeg"
+                src="https://i.imgur.com/UnOqBkj.jpeg"
                 alt="Clothing"
                 fill
                 className="object-cover object-[bottom]"
               />
               <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
                 <h3 className="text-xl font-bold mb-2">Women's Collection</h3>
-                <p className="text-sm mb-4 px-4">Sự quyến rũ của phái nữ</p>
+                <p className="text-sm mb-4 px-4">Đẹp nhẹ nhàng, cuốn hút tự nhiên</p>
                 <Link href="/category/clothing">
                   <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
                     Shop Now
