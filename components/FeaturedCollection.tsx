@@ -22,7 +22,7 @@ export default function FeaturedCollection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Featured Collections
+          Bộ Sưu Tập
         </motion.h2>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           <motion.div
@@ -60,7 +60,7 @@ export default function FeaturedCollection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Discover our premium selection of men's shoes and apparel
+                Tối giản. Mạnh mẽ. Lôi cuốn
               </motion.p>
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
@@ -111,7 +111,7 @@ export default function FeaturedCollection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Explore our curated selection of women's fashion
+               Đẹp nhẹ nhàng, cuốn hút tự nhiên
               </motion.p>
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
