@@ -8,7 +8,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["via.placeholder.com"],
+    domains: ["i.postimg.cc"],
     unoptimized: true,
   },
 }
