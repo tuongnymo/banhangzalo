@@ -22,6 +22,16 @@ const banners = [
     image: "https://i.postimg.cc/TwGjcXGd/6.jpg",
     link: "/category/accessories",
   },
+  {
+    id: 4,
+    image: "https://i.postimg.cc/ZRC84WXC/5.jpg",
+    link: "/category/accessories",
+  },
+  {
+    id: 5,
+    image: "https://i.postimg.cc/bJWQJzjL/3.jpg",
+    link: "/category/accessories",
+  },
 ]
 
 export default function BannerCarousel() {
