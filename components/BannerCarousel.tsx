@@ -23,7 +23,7 @@ const banners = [
   },
   {
     id: 3,
-    title: "Chương trình ưu đãi đặc biệt",
+    title: "Chương trình ưu đãi",
     subtitle: "Giảm tới 50% đối với những khách hàng thân thiết",
     image: "https://i.postimg.cc/TwGjcXGd/6.jpg",
     link: "/category/accessories",
