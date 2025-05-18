@@ -32,7 +32,7 @@ export default function Header() {
 
         <div className="flex items-center">
           <Link to="/" className="text-xl font-bold tracking-tighter md:text-2xl">
-            NOIR
+            FULLSTORE FASHION
           </Link>
         </div>
 
@@ -43,7 +43,7 @@ export default function Header() {
               location.pathname.includes("/category/shoes") ? "text-black" : "text-gray-600"
             }`}
           >
-            Shoes
+            Shop Nam
           </Link>
           <Link
             to="/category/clothing"
@@ -51,7 +51,7 @@ export default function Header() {
               location.pathname.includes("/category/clothing") ? "text-black" : "text-gray-600"
             }`}
           >
-            Clothing
+            Shop Nữ
           </Link>
           <Link
             to="/category/accessories"
@@ -59,7 +59,7 @@ export default function Header() {
               location.pathname.includes("/category/accessories") ? "text-black" : "text-gray-600"
             }`}
           >
-            Accessories
+            Túi Xách & Phụ Kiện
           </Link>
           <Link
             to="/category/all"
