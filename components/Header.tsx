@@ -2,10 +2,14 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { useAuth } from "@/context/AuthContext"
+import { useCart } from "@/context/CartContext"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth()
+  const { cartCount } = useCart()
 
   return (
     <header className="border-b border-gray-200">
@@ -106,26 +110,58 @@ export default function Header() {
             </div>
 
             {/* Account */}
-            <Link href="/login" className="text-gray-500 hover:text-black">
-              <span className="sr-only">Account</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                />
-              </svg>
-            </Link>
+            <div className="relative">
+              {isAuthenticated ? (
+                <Link href="/account" className="text-gray-500 hover:text-black">
+                  <span className="sr-only">Account</span>
+                  <div className="h-6 w-6 overflow-hidden rounded-full bg-gray-200">
+                    {user?.avatar ? (
+                      <img
+                        src={user.avatar || "/placeholder.svg"}
+                        alt={user.name}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="h-6 w-6"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                        />
+                      </svg>
+                    )}
+                  </div>
+                </Link>
+              ) : (
+                <Link href="/login" className="text-gray-500 hover:text-black">
+                  <span className="sr-only">Login</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-6 w-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                    />
+                  </svg>
+                </Link>
+              )}
+            </div>
 
             {/* Cart */}
-            <Link href="/cart" className="text-gray-500 hover:text-black">
+            <Link href="/cart" className="relative text-gray-500 hover:text-black">
               <span className="sr-only">Cart</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -141,6 +177,11 @@ export default function Header() {
                   d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
                 />
               </svg>
+              {cartCount > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs text-white">
+                  {cartCount}
+                </span>
+              )}
             </Link>
 
             {/* Mobile Menu Button */}
@@ -195,6 +236,38 @@ export default function Header() {
                     Contact
                   </Link>
                 </li>
+                {isAuthenticated ? (
+                  <>
+                    <li>
+                      <Link href="/account" className="block hover:text-gray-600">
+                        Tài khoản của tôi
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/account/orders" className="block hover:text-gray-600">
+                        Đơn hàng của tôi
+                      </Link>
+                    </li>
+                    <li>
+                      <button onClick={logout} className="block text-red-600 hover:text-red-800">
+                        Đăng xuất
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link href="/login" className="block hover:text-gray-600">
+                        Đăng nhập
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/register" className="block hover:text-gray-600">
+                        Đăng ký
+                      </Link>
+                    </li>
+                  </>
+                )}
               </ul>
             </nav>
           </div>

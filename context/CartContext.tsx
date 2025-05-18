@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { useAuth } from "./AuthContext"
 
 export interface CartItem {
   id: string
@@ -39,33 +40,65 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([])
   const [cartCount, setCartCount] = useState(0)
   const [cartTotal, setCartTotal] = useState(0)
+  const { user } = useAuth()
 
   // Load cart from localStorage on initial render (client-side only)
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart")
-    if (savedCart) {
+    if (typeof window === "undefined") return
+
+    const loadCart = () => {
       try {
-        const parsedCart = JSON.parse(savedCart)
-        setCart(parsedCart)
+        // Nếu đã đăng nhập, lấy giỏ hàng của người dùng
+        if (user) {
+          const userCartKey = `cart_${user.id}`
+          const savedCart = localStorage.getItem(userCartKey)
+
+          if (savedCart) {
+            setCart(JSON.parse(savedCart))
+          } else {
+            // Nếu chưa có giỏ hàng của người dùng, tạo mới
+            localStorage.setItem(userCartKey, "[]")
+            setCart([])
+          }
+        } else {
+          // Nếu chưa đăng nhập, lấy giỏ hàng từ localStorage
+          const savedCart = localStorage.getItem("cart")
+          if (savedCart) {
+            setCart(JSON.parse(savedCart))
+          }
+        }
       } catch (error) {
-        console.error("Failed to parse cart from localStorage:", error)
+        console.error("Failed to load cart:", error)
+        setCart([])
       }
     }
-  }, [])
+
+    loadCart()
+  }, [user])
 
   // Update localStorage whenever cart changes
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cart", JSON.stringify(cart))
+    if (typeof window === "undefined") return
+
+    try {
+      if (user) {
+        // Lưu giỏ hàng vào localStorage theo ID người dùng
+        localStorage.setItem(`cart_${user.id}`, JSON.stringify(cart))
+      } else {
+        // Lưu giỏ hàng vào localStorage chung
+        localStorage.setItem("cart", JSON.stringify(cart))
+      }
+
+      // Update cart count and total
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0)
+      setCartCount(count)
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+      setCartTotal(total)
+    } catch (error) {
+      console.error("Failed to save cart:", error)
     }
-
-    // Update cart count and total
-    const count = cart.reduce((sum, item) => sum + item.quantity, 0)
-    setCartCount(count)
-
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-    setCartTotal(total)
-  }, [cart])
+  }, [cart, user])
 
   const addToCart = (item: CartItem) => {
     setCart((prevCart) => {
