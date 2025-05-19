@@ -48,7 +48,7 @@ export default function AboutPage() {
             - Giao hàng toàn quốc – nhanh, an toàn và đúng hẹn.
           </p>
           <h2 className="mt-8 text-2xl font-bold">Fullstore Fashion – Tôn vinh phong cách của bạn!</h2>
-          <p className="mt-8">Thank you for choosing FASHION. We look forward to being part of your style journey.</p>
+          <p className="mt-8">Cảm ơn bạn đã tin tưởng và lựa chọn Fullstore Fashion – sự hài lòng của bạn là động lực lớn nhất để chúng tôi không ngừng phát triển.</p>
         </div>
       </div>
     </div>
