@@ -1,25 +1,24 @@
 export default function ContactPage() {
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-center text-3xl font-bold md:text-4xl">Contact Us</h1>
+      <h1 className="mb-8 text-center text-3xl font-bold md:text-4xl">Liên Hệ</h1>
 
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
         <div>
-          <h2 className="mb-4 text-xl font-bold">Get in Touch</h2>
+          <h2 className="mb-4 text-xl font-bold">Liên hệ với chúng tôi</h2>
           <p className="mb-6 text-gray-700">
-            We'd love to hear from you. Please fill out the form below or reach out to us using the contact information
-            provided.
+            Chúng tôi rất mong nhận được phản hồi từ bạn. Vui lòng điền vào mẫu dưới đây hoặc liên hệ với chúng tôi qua thông tin liên lạc được cung cấp.
           </p>
 
           <div className="space-y-4">
             <div>
-              <h3 className="text-lg font-medium">Address</h3>
+              <h3 className="text-lg font-medium">Địa Chỉ</h3>
               <p className="text-gray-600">
-                123 Fashion Street
+                83 Đền Lừ
                 <br />
-                New York, NY 10001
+                Quận Hoàng Mai
                 <br />
-                United States
+                TP. Hà Nội
               </p>
             </div>
 
@@ -35,14 +34,12 @@ export default function ContactPage() {
             <div>
               <h3 className="text-lg font-medium">Phone</h3>
               <p className="text-gray-600">
-                +1 (555) 123-4567
-                <br />
-                Mon-Fri: 9am - 6pm EST
+                0922.399.666
               </p>
             </div>
 
             <div>
-              <h3 className="text-lg font-medium">Follow Us</h3>
+              <h3 className="text-lg font-medium">Theo dõi chúng tôi</h3>
               <div className="mt-2 flex space-x-4">
                 <a href="#" className="text-gray-600 hover:text-black">
                   <svg
@@ -100,13 +97,13 @@ export default function ContactPage() {
           <form className="space-y-4 rounded-lg border border-gray-200 p-6">
             <div>
               <label htmlFor="name" className="mb-1 block text-sm font-medium">
-                Name
+                Tên
               </label>
               <input
                 type="text"
                 id="name"
                 className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                placeholder="Your name"
+                placeholder="Họ và Tên của bạn"
               />
             </div>
 
@@ -118,36 +115,36 @@ export default function ContactPage() {
                 type="email"
                 id="email"
                 className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                placeholder="Your email"
+                placeholder="Email của bạn"
               />
             </div>
 
             <div>
               <label htmlFor="subject" className="mb-1 block text-sm font-medium">
-                Subject
+                Chủ Đề
               </label>
               <input
                 type="text"
                 id="subject"
                 className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                placeholder="Subject"
+                placeholder="Nội dung chủ đề"
               />
             </div>
 
             <div>
               <label htmlFor="message" className="mb-1 block text-sm font-medium">
-                Message
+                Tin nhắn
               </label>
               <textarea
                 id="message"
                 rows={5}
                 className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                placeholder="Your message"
+                placeholder="Nội dung tin nhắn"
               ></textarea>
             </div>
 
             <button type="submit" className="btn btn-primary w-full">
-              Send Message
+              Gửi phản hồi
             </button>
           </form>
         </div>
