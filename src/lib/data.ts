@@ -1,4 +1,4 @@
-import { createServerSupabase } from './supabase';
+import { createServerSupabase } from '@/src/lib/supabaseClient';
 
 // Lấy danh sách sản phẩm nổi bật
 export async function getFeaturedProducts() {

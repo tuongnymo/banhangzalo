@@ -3,61 +3,16 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
-import ProductCard from "./ProductCard"
+import ClickableProductCard from "@/components/ClickableProductCard"
 import SkeletonLoader from "./SkeletonLoader"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 // Sample products data
-const newArrivals = [
-  {
-    id: 5,
-    name: "Giày thể thao nam cao cấp",
-    price: 699.99,
-    image: "https://i.postimg.cc/HsF4ZNCy/28.jpg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 6,
-    name: "Giày nữ thời trang",
-    price: 529.99,
-    image: "https://i.postimg.cc/qvdjw7nK/32.jpg?height=300&width=300",
-    category: "shoes",
-    discount: 15,
-  },
-  {
-    id: 7,
-    name: "Túi xách nữ thời trang",
-    price: 329.99,
-    image: "https://i.postimg.cc/vHZNFkj2/5.jpg?height=300&width=300",
-    category: "accessories",
-  },
-  {
-    id: 8,
-    name: "Giày nam chất liệu da thật hàng chuẩn",
-    price: 449.99,
-    image: "https://i.postimg.cc/B63mhVHg/9.jpg?height=300&width=300",
-    category: "shoes",
-    discount: 10,
-  },
-   {
-    id: 9,
-    name: "Kẹp tóc nữ xinh xắn",
-    price: 129.99,
-    image: "https://i.postimg.cc/fbVt0cLf/33.jpg?height=300&width=300",
-    category: "accessories",
-  },
-   {
-    id: 10,
-    name: "Dép nam đế cao su êm ái",
-    price: 549.99,
-    image: "https://i.postimg.cc/NG4znBNr/6.jpg?height=300&width=300",
-    category: "accessories",
-  },
-]
 
 export default function NewArrivals() {
   const [loading, setLoading] = useState(true)
-  const [products, setProducts] = useState<typeof newArrivals>([])
+  const [products, setProducts] = useState<any[]>([])
   const containerRef = useRef<HTMLDivElement>(null)
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
@@ -102,14 +57,22 @@ export default function NewArrivals() {
   }
 
   useEffect(() => {
-    // Simulate loading data
-    const timer = setTimeout(() => {
-      setProducts(newArrivals)
+  const fetchNewArrivals = async () => {
+    try {
+      const res = await fetch("/api/allinone")
+      const data = await res.json()
+      console.log("✅ New products:", data.newProducts)
+      setProducts(data.newProducts)
+    } catch (err) {
+      console.error("❌ Lỗi khi fetch sản phẩm mới:", err)
+    } finally {
       setLoading(false)
-    }, 1000)
+    }
+  }
 
-    return () => clearTimeout(timer)
-  }, [])
+  fetchNewArrivals()
+}, [])
+
 
   return (
     <section className="py-12 bg-gradient-to-b from-white to-gray-50">
@@ -154,10 +117,20 @@ export default function NewArrivals() {
                   ))
               : // Actual products
                 products.map((product) => (
-                  <div key={product.id} className="min-w-[250px] flex-shrink-0">
-                    <ProductCard {...product} />
-                  </div>
-                ))}
+  <div key={product.id} className="min-w-[250px] max-w-[250px] w-[250px] flex-shrink-0">
+    <Link href={`/product/${product.id}`} className="block h-full">
+      <ClickableProductCard
+        id={product.id}
+        name={product.name}
+        price={product.price}
+        image={product.images?.[0] || "/placeholder.svg"}
+        discount={product.discount}
+        category={product.category}
+      />
+    </Link>
+  </div>
+))
+}
           </div>
 
           {/* Mobile scroll buttons */}

@@ -1,80 +1,68 @@
 "use client"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useAuth } from "@/context/AuthContext"
 
+type Order = {
+  id: string
+  order_code: string | null
+  total: number
+  status: string
+  created_at: string
+}
+
 export default function OrdersPage() {
   const { isAuthenticated, isLoading } = useAuth()
-  const router = useRouter()
+  const [orders, setOrders] = useState<Order[]>([])
+  const [loadingOrders, setLoadingOrders] = useState(true)
 
-  // Chuyển hướng nếu chưa đăng nhập
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
-      router.push("/login")
-    }
-  }, [isLoading, isAuthenticated, router])
+    const fetchOrders = async () => {
+      try {
+        const res = await fetch("/api/orders/user")
+        const data = await res.json()
+        console.log("📦 Đơn hàng từ API:", data)
 
-  // Hiển thị loading khi đang kiểm tra trạng thái đăng nhập
-  if (isLoading) {
+        if (Array.isArray(data)) {
+          setOrders(data)
+        } else {
+          console.warn("⚠️ Dữ liệu trả về không phải mảng:", data)
+          setOrders([])
+        }
+      } catch (err) {
+        console.error("❌ Lỗi khi lấy đơn hàng:", err)
+        setOrders([])
+      } finally {
+        setLoadingOrders(false)
+      }
+    }
+
+    if (isAuthenticated) {
+      fetchOrders()
+    }
+  }, [isAuthenticated])
+
+  if (isLoading || loadingOrders) {
     return (
-      <div className="container mx-auto flex min-h-[70vh] items-center justify-center">
-        <div className="text-center">
-          <div className="mb-4 h-12 w-12 animate-spin rounded-full border-4 border-gray-200 border-t-black mx-auto"></div>
-          <p>Đang tải...</p>
-        </div>
+      <div className="container mx-auto px-4 py-8">
+        <p>Đang tải đơn hàng...</p>
       </div>
     )
   }
 
-  // Nếu chưa đăng nhập, không hiển thị gì (sẽ được chuyển hướng bởi useEffect)
-  if (!isAuthenticated) {
-    return null
-  }
-
-  // Mô phỏng danh sách đơn hàng trống
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
         <Link href="/account" className="mb-4 inline-flex items-center text-gray-600 hover:text-black">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2"
-          >
-            <path d="m15 18-6-6 6-6"></path>
-          </svg>
-          Quay lại tài khoản
+          ← Quay lại tài khoản
         </Link>
         <h1 className="text-2xl font-bold md:text-3xl">Đơn hàng của tôi</h1>
         <p className="text-gray-600">Xem và theo dõi tất cả đơn hàng của bạn</p>
       </div>
 
-      <div className="rounded-lg border border-gray-200">
-        <div className="rounded-md bg-gray-50 p-8 text-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mx-auto mb-4 text-gray-400"
-          >
-            <rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
+      {orders.length === 0 ? (
+        <div className="rounded-md bg-gray-50 p-8 text-center border border-gray-200">
           <h4 className="mb-2 text-lg font-medium">Chưa có đơn hàng nào</h4>
           <p className="mb-4 text-gray-600">Bạn chưa có đơn hàng nào. Hãy mua sắm ngay!</p>
           <Link
@@ -84,7 +72,25 @@ export default function OrdersPage() {
             Mua sắm ngay
           </Link>
         </div>
-      </div>
+      ) : (
+        <div className="space-y-4">
+          {orders.map((order) => (
+            <div key={order.id} className="rounded-md border p-4 shadow-sm">
+              <p className="text-sm text-gray-500">
+                Mã đơn hàng: <strong>{order.order_code || order.id}</strong>
+              </p>
+              <p className="text-sm">Trạng thái: {order.status}</p>
+              <p className="text-sm">Tổng tiền: {order.total.toLocaleString("vi-VN")}₫</p>
+              <p className="text-sm text-gray-400">
+                Ngày đặt: {new Date(order.created_at).toLocaleDateString("vi-VN")}
+              </p>
+            </div>
+          ))}
+
+          {/* 🧪 Debug view */}
+          {/* <pre className="mt-6 text-xs text-gray-400">{JSON.stringify(orders, null, 2)}</pre> */}
+        </div>
+      )}
     </div>
   )
 }

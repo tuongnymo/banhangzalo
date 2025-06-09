@@ -1,183 +1,140 @@
-"use client"
+'use client'
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import { useRouter } from "next/navigation"
+import { createContext, useContext, useEffect, useState } from 'react'
+import { Session, User } from '@supabase/supabase-js'
+import { supabase } from '@/lib/supabase'
+import { useRouter } from 'next/navigation'
 
-export interface User {
-  id: string
-  name: string
-  email: string
-  avatar?: string
-}
-
-interface AuthContextType {
+type AuthContextType = {
   user: User | null
+  session: Session | null
   isLoading: boolean
   isAuthenticated: boolean
-  login: (email: string, password: string) => Promise<{ success: boolean; message: string }>
-  register: (name: string, email: string, password: string) => Promise<{ success: boolean; message: string }>
-  logout: () => void
+  signUp: (
+    email: string,
+    password: string,
+    fullName: string
+  ) => Promise<{ error: any | null }>
+  signIn: (
+    email: string,
+    password: string
+  ) => Promise<{ error: any | null }>
+  signOut: () => Promise<void>
+  logout: () => Promise<void> // ✅ THÊM Ở ĐÂY
 }
 
-const AuthContext = createContext<AuthContextType>({
-  user: null,
-  isLoading: true,
-  isAuthenticated: false,
-  login: async () => ({ success: false, message: "Not implemented" }),
-  register: async () => ({ success: false, message: "Not implemented" }),
-  logout: () => {},
-})
+const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: ReactNode }) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
+  const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
-  // Kiểm tra xem người dùng đã đăng nhập chưa khi trang được tải
   useEffect(() => {
-    const checkAuth = () => {
-      const storedUser = localStorage.getItem("user")
-      if (storedUser) {
-        try {
-          setUser(JSON.parse(storedUser))
-        } catch (error) {
-          console.error("Failed to parse user from localStorage:", error)
-          localStorage.removeItem("user")
-        }
+    const getSession = async () => {
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.getSession()
+
+      if (error) {
+        console.error(error)
       }
+
+      setSession(session)
+      setUser(session?.user ?? null)
       setIsLoading(false)
     }
 
-    if (typeof window !== "undefined") {
-      checkAuth()
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+      setUser(session?.user ?? null)
+      router.refresh()
+    })
+
+    getSession()
+
+    return () => subscription.unsubscribe()
+  }, [router])
+
+  const signUp = async (email: string, password: string, fullName: string) => {
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: fullName,
+        },
+      },
+    })
+
+    if (!error) {
+      await supabase.auth.signInWithPassword({ email, password })
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (user) {
+        await supabase.from('user_profiles').insert({
+          user_id: user.id,
+          full_name: fullName,
+        })
+      }
     }
-  }, [])
 
-  // Trong thực tế, bạn sẽ gọi API để xác thực người dùng
-  // Đây chỉ là mô phỏng cho mục đích demo
-  const login = async (email: string, password: string) => {
-    try {
-      setIsLoading(true)
-
-      // Mô phỏng gọi API
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Kiểm tra thông tin đăng nhập từ localStorage
-      const usersJson = localStorage.getItem("users") || "[]"
-      const users = JSON.parse(usersJson)
-
-      const foundUser = users.find((u: any) => u.email === email)
-
-      if (!foundUser) {
-        return { success: false, message: "Email không tồn tại" }
-      }
-
-      if (foundUser.password !== password) {
-        return { success: false, message: "Mật khẩu không chính xác" }
-      }
-
-      // Đăng nhập thành công
-      const authenticatedUser = {
-        id: foundUser.id,
-        name: foundUser.name,
-        email: foundUser.email,
-        avatar: foundUser.avatar,
-      }
-
-      setUser(authenticatedUser)
-      localStorage.setItem("user", JSON.stringify(authenticatedUser))
-
-      // Chuyển giỏ hàng từ localStorage sang giỏ hàng của người dùng
-      const cartJson = localStorage.getItem("cart") || "[]"
-      localStorage.setItem(`cart_${foundUser.id}`, cartJson)
-
-      return { success: true, message: "Đăng nhập thành công" }
-    } catch (error) {
-      console.error("Login error:", error)
-      return { success: false, message: "Đã xảy ra lỗi khi đăng nhập" }
-    } finally {
-      setIsLoading(false)
-    }
+    return { error }
   }
 
-  const register = async (name: string, email: string, password: string) => {
-    try {
-      setIsLoading(true)
+  const signIn = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
 
-      // Mô phỏng gọi API
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Kiểm tra email đã tồn tại chưa
-      const usersJson = localStorage.getItem("users") || "[]"
-      const users = JSON.parse(usersJson)
-
-      if (users.some((u: any) => u.email === email)) {
-        return { success: false, message: "Email đã được sử dụng" }
-      }
-
-      // Tạo người dùng mới
-      const newUser = {
-        id: `user_${Date.now()}`,
-        name,
-        email,
-        password, // Trong thực tế, mật khẩu phải được mã hóa
-        avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random`,
-        createdAt: new Date().toISOString(),
-      }
-
-      // Lưu vào "cơ sở dữ liệu" (localStorage)
-      users.push(newUser)
-      localStorage.setItem("users", JSON.stringify(users))
-
-      // Đăng nhập người dùng mới
-      const authenticatedUser = {
-        id: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
-        avatar: newUser.avatar,
-      }
-
-      setUser(authenticatedUser)
-      localStorage.setItem("user", JSON.stringify(authenticatedUser))
-
-      // Tạo giỏ hàng mới cho người dùng
-      localStorage.setItem(`cart_${newUser.id}`, "[]")
-
-      return { success: true, message: "Đăng ký thành công" }
-    } catch (error) {
-      console.error("Register error:", error)
-      return { success: false, message: "Đã xảy ra lỗi khi đăng ký" }
-    } finally {
-      setIsLoading(false)
+    if (!error) {
+      setUser(data.user ?? null)
+      const sessionRes = await supabase.auth.getSession()
+      setSession(sessionRes.data.session ?? null)
     }
+
+    return { error }
   }
 
-  const logout = () => {
+  const signOut = async () => {
+    await supabase.auth.signOut()
+    setSession(null)
     setUser(null)
-    localStorage.removeItem("user")
-    router.push("/")
+    router.push('/')
+    router.refresh()
   }
 
-  return (
-    <AuthContext.Provider
-      value={{
-        user,
-        isLoading,
-        isAuthenticated: !!user,
-        login,
-        register,
-        logout,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
-  )
+  const logout = async () => {
+    await supabase.auth.signOut()
+    setSession(null)
+    setUser(null)
+  }
+
+  const value: AuthContextType = {
+    user,
+    session,
+    isLoading,
+    isAuthenticated: !!user,
+    signUp,
+    signIn,
+    signOut,
+    logout, // ✅ THÊM VÀO VALUE
+  }
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export function useAuth() {
+export const useAuth = () => {
   const context = useContext(AuthContext)
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider")
+  if (context === undefined) {
+    throw new Error('useAuth must be used within an AuthProvider')
   }
   return context
 }

@@ -1,44 +1,32 @@
 "use client"
 
-import { useState } from "react"
+import type React from "react"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { ShoppingBag } from "lucide-react"
-
-// Sample products data
-const featuredProducts = [
-  {
-    id: 1,
-    name: "Giày nam thể thao giới trẻ",
-    price: 899.99,
-    image: "https://i.imgur.com/heYWddM.jpeg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 2,
-    name: "Dép sandand nữ mẫu mới nhất",
-    price: 429.99,
-    image: "https://i.imgur.com/gXFGSLT.jpeg?height=300&width=300",
-    category: "clothing",
-  },
-  {
-    id: 3,
-    name: "Giày da nam cao cấp",
-    price: 829.99,
-    image: "https://i.imgur.com/H3G99OK.jpeg?height=300&width=300",
-    category: "accessories",
-  },
-  {
-    id: 4,
-    name: "Túi xách nữ LV phong cách",
-    price: 549.99,
-    image: "https://i.imgur.com/5SYdtnG.jpeg?height=300&width=300",
-    category: "accessories",
-  },
-]
+import ClickableProductCard from "@/components/ClickableProductCard"
 
 export default function FeaturedProducts() {
+  const [products, setProducts] = useState<any[]>([])
+
+  useEffect(() => {
+  const fetchFeatured = async () => {
+    try {
+      const res = await fetch("/api/allinone")
+      const data = await res.json()
+      console.log("🔥 Best sellers:", data.bestSellers)
+      setProducts(data.bestSellers)
+    } catch (err) {
+      console.error("❌ Lỗi khi fetch featured products:", err)
+    }
+  }
+
+  fetchFeatured()
+}, [])
+
   return (
     <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4">
@@ -52,14 +40,23 @@ export default function FeaturedProducts() {
         </div>
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {featuredProducts.map((product) => (
-            <FeaturedProductCard key={product.id} product={product} />
-          ))}
+         {products.map((product) => (
+  <Link key={product.id} href={`/product/${product.id}`}>
+    <ClickableProductCard
+      id={product.id}
+      name={product.name}
+      price={product.price}
+      image={product.images?.[0] || "/placeholder.svg"}
+      discount={product.discount}
+      category={product.category}
+    />
+  </Link>
+))}
         </div>
 
         <div className="mt-12 text-center">
           <Link
-            href="/category/all"
+            href="/category"
             className="inline-block px-6 py-3 bg-black text-white font-medium rounded-md hover:bg-gray-800 transition-colors"
           >
             Xem Tất Cả Sản Phẩm
@@ -70,7 +67,7 @@ export default function FeaturedProducts() {
   )
 }
 
-function FeaturedProductCard({ product }) {
+function FeaturedProductCard({ product }: { product: any }) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
@@ -86,7 +83,7 @@ function FeaturedProductCard({ product }) {
       <Link href={`/product/${product.id}`}>
         <div className="relative h-64 w-full overflow-hidden bg-gray-100">
           <Image
-            src={product.image || "/placeholder.svg"}
+            src={product.images?.[0] || "/placeholder.svg"}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"

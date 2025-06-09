@@ -1,195 +1,59 @@
-import Image from "next/image"
-import Link from "next/link"
+'use client'
 
-// Sample products data
-const allProducts = [
-  {
-    id: 1,
-    name: "Giày thể thao nam cao cấp",
-    price: 699.99,
-    image: "https://i.postimg.cc/HsF4ZNCy/28.jpg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 2,
-    name: "Giày nữ thời trang",
-    price: 529.99,
-    image: "https://i.postimg.cc/qvdjw7nK/32.jpg?height=300&width=300",
-    category: "clothing",
-  },
-  {
-    id: 3,
-    name: "Túi xách nữ thời trang",
-    price: 329.99,
-    image: "https://i.postimg.cc/vHZNFkj2/5.jpg?height=300&width=300",
-    category: "accessories",
-  },
-  {
-    id: 4,
-    name: "Giày nam chất liệu da thật hàng chuẩn",
-    price: 449.99,
-    image: "https://i.postimg.cc/B63mhVHg/9.jpg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 5,
-    name: "Dép Sandal nữ giới trẻ",
-    price: 829.99,
-    image: "https://i.postimg.cc/D0xngNpJ/34.jpg?height=300&width=300",
-    category: "clothing",
-  },
-  {
-    id: 6,
-    name: "Giày nữ công sở",
-    price: 729.99,
-    image: "https://i.postimg.cc/3NxHdBrK/35.png?height=300&width=300",
-    category: "clothing",
-  },
-  {
-    id: 7,
-    name: "Giày Hermes nam mẫu mới",
-    price: 649.99,
-    image: "https://i.postimg.cc/SKFdsvTh/19.jpg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 8,
-    name: "Lắc tay đơn giản, sành điệu",
-    price: 389.99,
-    image: "https://i.postimg.cc/44DDCsVf/36.jpg?height=300&width=300",
-    category: "accessories",
-  },
-  {
-    id: 9,
-    name: "Kẹp tóc nữ xinh xắn",
-    price: 129.99,
-    image: "https://i.postimg.cc/fbVt0cLf/33.jpg?height=300&width=300",
-    category: "accessories",
-  },
-  {
-    id: 10,
-    name: "Giày nam đế cao su bền bỉ, êm chân",
-    price: 929.99,
-    image: "https://i.postimg.cc/SKFdsvTh/19.jpg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 11,
-    name: "Giày thể thao năng động, phù hợp với nhiều outfit",
-    price: 769.99,
-    image: "https://i.postimg.cc/66jhR3jz/26.jpg?height=300&width=300",
-    category: "shoes",
-  },
-  {
-    id: 12,
-    name: "Túi xách nữ sang trọng với nhiều phiên bản màu",
-    price: 539.99,
-    image: "https://i.postimg.cc/hvS3G5Gj/3.jpg?height=300&width=300",
-    category: "accessories",
-  },
-  {
-    id: 13,
-    name: "Dép sandanl nữ đi học cực trendy, cá tính",
-    price: 579.99,
-    image: "https://i.postimg.cc/rpW962k4/37.jpg?height=300&width=300",
-    category: "clothing",
-  },
-  {
-    id: 14,
-    name: "Giày nữ thể thao kẻ sọc 3 viền xinh xắn hot hit",
-    price: 649.99,
-    image: "https://i.postimg.cc/W3w63mtb/38.jpg?height=300&width=300",
-    category: "clothing",
-  },
-  {
-    id: 15,
-    name: "Vòng cài tóc cute dễ thương",
-    price: 119.99,
-    image: "https://i.postimg.cc/zB8K9Lpm/39.jpg?height=300&width=300",
-    category: "accessories",
-  },
-]
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
+import ProductCard from '@/components/ProductCard'
+import { createClient } from '@supabase/supabase-js'
 
-export default function CategoryPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+const supabase = createClient(supabaseUrl, supabaseKey)
 
-  // Filter products by category or show all if slug is 'all'
-  const products = slug === "all" ? allProducts : allProducts.filter((product) => product.category === slug)
+export default function CategorySlugPage() {
+  const { slug } = useParams() as { slug: string }
+  const [products, setProducts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  // Format category name for display
-  const categoryName = slug === "all" ? "All Products" : slug.charAt(0).toUpperCase() + slug.slice(1)
+  useEffect(() => {
+    if (!slug) return
+
+    const fetchProducts = async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .ilike('category', `%${slug}%`) // <-- linh hoạt hơn
+
+      if (error) {
+        console.error('Lỗi khi lấy sản phẩm:', error.message)
+      } else {
+        setProducts(data || [])
+      }
+      setLoading(false)
+    }
+
+    fetchProducts()
+  }, [slug])
+
+  if (loading) return <p className="p-4">Đang tải sản phẩm...</p>
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Breadcrumb */}
-      <div className="mb-8">
-        <nav className="flex text-sm">
-          <Link href="/" className="text-gray-500 hover:text-gray-700">
-            Home
-          </Link>
-          <span className="mx-2 text-gray-500">/</span>
-          <span className="text-gray-900">{categoryName}</span>
-        </nav>
-      </div>
-
-      <h1 className="mb-8 text-3xl font-bold">{categoryName}</h1>
-
-      {/* Filters and Sort */}
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4">
-          <button className="btn btn-outline">Filter</button>
-          <div className="hidden md:flex md:gap-4">
-            <button className="text-sm text-gray-600 hover:text-black">Price</button>
-            <button className="text-sm text-gray-600 hover:text-black">Color</button>
-            <button className="text-sm text-gray-600 hover:text-black">Size</button>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-600">Sort by:</span>
-          <select className="rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-black focus:outline-none">
-            <option>Featured</option>
-            <option>Price: Low to High</option>
-            <option>Price: High to Low</option>
-            <option>Newest</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Products Grid */}
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products.map((product) => (
-          <div
-            key={product.id}
-            className="group overflow-hidden rounded-lg border border-gray-200 transition-all hover:shadow-md"
-          >
-            <Link href={`/product/${product.id}`}>
-              <div className="relative h-64 w-full overflow-hidden bg-gray-200">
-                <Image
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.name}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-4">
-                <h3 className="mb-2 text-lg font-medium">{product.name}</h3>
-                <p className="text-gray-700">${product.price.toFixed(2)}</p>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
-
-      {/* Empty State */}
-      {products.length === 0 && (
-        <div className="my-16 text-center">
-          <h2 className="mb-4 text-2xl font-bold">No Products Found</h2>
-          <p className="mb-8 text-gray-600">
-            We couldn't find any products in this category. Please check back later or try another category.
-          </p>
-          <Link href="/category/all" className="btn btn-primary">
-            View All Products
-          </Link>
+    <div className="p-4">
+      <h1 className="text-2xl font-bold mb-4 capitalize">Danh mục: {slug}</h1>
+      {products.length === 0 ? (
+        <p>Không có sản phẩm nào trong danh mục này.</p>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              image={product.images?.[0] || "/placeholder.svg"}
+              discount={product.discount}
+              category={product.category}
+            />
+          ))}
         </div>
       )}
     </div>

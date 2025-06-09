@@ -1,147 +1,102 @@
-import Image from "next/image"
-import Link from "next/link"
+"use client"
 
-// Sample cart items
-const cartItems = [
-  {
-    id: 1,
-    name: "Classic Leather Sneakers",
-    price: 89.99,
-    image: "/placeholder.svg?height=100&width=100",
-    quantity: 1,
-    size: "US 9",
-    color: "Black",
-  },
-  {
-    id: 3,
-    name: "Minimalist Watch",
-    price: 129.99,
-    image: "/placeholder.svg?height=100&width=100",
-    quantity: 1,
-    size: "One Size",
-    color: "Silver/Black",
-  },
-]
+import { useCart } from "@/context/CartContext"
+import Link from "next/link"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { Trash2 } from "lucide-react"
 
 export default function CartPage() {
-  // Calculate cart totals
-  const subtotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
-  const shipping = 10.0
-  const tax = subtotal * 0.1 // 10% tax
-  const total = subtotal + shipping + tax
+  const { cart, updateQuantity, removeFromCart } = useCart()
+
+  const total = cart.reduce((sum, item) => {
+    const itemTotal = item.price * item.quantity
+    return sum + itemTotal
+  }, 0)
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-8 text-3xl font-bold">Shopping Cart</h1>
+      <h1 className="text-2xl font-bold mb-6">Giỏ Hàng Của Bạn</h1>
 
-      {cartItems.length > 0 ? (
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div className="lg:col-span-2">
-            {/* Cart Items */}
-            <div className="rounded-lg border border-gray-200">
-              <div className="hidden border-b border-gray-200 p-4 lg:grid lg:grid-cols-12">
-                <div className="col-span-6">
-                  <span className="font-medium">Product</span>
-                </div>
-                <div className="col-span-2 text-center">
-                  <span className="font-medium">Quantity</span>
-                </div>
-                <div className="col-span-2 text-center">
-                  <span className="font-medium">Price</span>
-                </div>
-                <div className="col-span-2 text-right">
-                  <span className="font-medium">Total</span>
-                </div>
-              </div>
-
-              {cartItems.map((item) => (
-                <div key={item.id} className="border-b border-gray-200 p-4 last:border-0">
-                  <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-0 lg:items-center">
-                    <div className="col-span-6 flex items-center gap-4">
-                      <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-gray-200">
-                        <Image src={item.image || "/placeholder.svg"} alt={item.name} fill className="object-cover" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-medium">
-                          <Link href={`/product/${item.id}`} className="hover:underline">
-                            {item.name}
-                          </Link>
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Size: {item.size} | Color: {item.color}
-                        </p>
-                        <button className="mt-1 text-sm text-gray-500 hover:text-black lg:hidden">Remove</button>
-                      </div>
-                    </div>
-
-                    <div className="col-span-2 flex items-center justify-between lg:justify-center">
-                      <span className="lg:hidden">Quantity:</span>
-                      <div className="flex items-center rounded-md border border-gray-300">
-                        <button className="px-2 py-1 text-gray-500 hover:text-black">-</button>
-                        <span className="px-2 py-1">{item.quantity}</span>
-                        <button className="px-2 py-1 text-gray-500 hover:text-black">+</button>
-                      </div>
-                    </div>
-
-                    <div className="col-span-2 flex items-center justify-between lg:justify-center">
-                      <span className="lg:hidden">Price:</span>
-                      <span>${item.price.toFixed(2)}</span>
-                    </div>
-
-                    <div className="col-span-2 flex items-center justify-between lg:justify-end">
-                      <span className="lg:hidden">Total:</span>
-                      <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
-                    </div>
-
-                    <div className="hidden lg:col-span-12 lg:flex lg:justify-end">
-                      <button className="mt-2 text-sm text-gray-500 hover:text-black">Remove</button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Continue Shopping */}
-            <div className="mt-8">
-              <Link href="/category/all" className="text-sm text-gray-600 hover:text-black">
-                ← Continue Shopping
-              </Link>
-            </div>
-          </div>
-
-          {/* Order Summary */}
-          <div>
-            <div className="rounded-lg border border-gray-200 p-6">
-              <h2 className="mb-4 text-xl font-bold">Order Summary</h2>
-              <div className="space-y-3 border-b border-gray-200 pb-4">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Tax</span>
-                  <span>${tax.toFixed(2)}</span>
-                </div>
-              </div>
-              <div className="mt-4 flex justify-between">
-                <span className="text-lg font-bold">Total</span>
-                <span className="text-lg font-bold">${total.toFixed(2)}</span>
-              </div>
-              <button className="btn btn-primary mt-6 w-full">Proceed to Checkout</button>
-            </div>
-          </div>
+      {cart.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-gray-600">Giỏ hàng đang trống.</p>
+          <Link
+            href="/category"
+            className="mt-4 inline-block bg-black text-white px-6 py-3 rounded hover:bg-gray-800 transition"
+          >
+            Tiếp tục mua sắm
+          </Link>
         </div>
       ) : (
-        <div className="my-16 text-center">
-          <h2 className="mb-4 text-2xl font-bold">Your Cart is Empty</h2>
-          <p className="mb-8 text-gray-600">Looks like you haven't added any products to your cart yet.</p>
-          <Link href="/category/all" className="btn btn-primary">
-            Start Shopping
-          </Link>
+        <div className="grid gap-6">
+          {cart.map((item) => (
+            <div
+              key={`${item.id}-${item.size}-${item.color.name}`}
+              className="flex items-center gap-4 border-b pb-4"
+            >
+              <div className="relative w-24 h-24">
+                <Image
+                src={item.image || "/placeholder.svg"}
+                alt={item.name}
+                width={80}
+                height={80}
+                />
+              </div>
+              <div className="flex-1">
+                <h2 className="font-semibold">{item.name}</h2>
+                <p className="text-sm text-gray-500">Size: {item.size}</p>
+                <p className="text-sm text-gray-500 flex items-center gap-2">
+                  Màu:
+                  <span
+                    className="inline-block w-4 h-4 rounded-full border"
+                    style={{ backgroundColor: item.color.hex }}
+                  ></span>
+                  {item.color.name}
+                </p>
+                <div className="flex items-center gap-2 mt-2">
+                  <button
+                    onClick={() =>
+                      updateQuantity(item.id, item.size, item.color.name, item.quantity - 1)
+                    }
+                    className="px-2 py-1 border rounded"
+                  >
+                    -
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button
+                    onClick={() =>
+                      updateQuantity(item.id, item.size, item.color.name, item.quantity + 1)
+                    }
+                    className="px-2 py-1 border rounded"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+              <div className="text-right">
+                <p className="font-semibold">
+                  {(item.price * item.quantity).toLocaleString("vi-VN")}đ
+                </p>
+                <button
+                  onClick={() => removeFromCart(item.id, item.size, item.color.name)}
+                  className="text-red-500 hover:text-red-700 mt-2 inline-flex items-center gap-1"
+                >
+                  <Trash2 size={16} />
+                  Xoá
+                </button>
+              </div>
+            </div>
+          ))}
+
+          <div className="text-right mt-6">
+            <p className="text-xl font-bold mb-2">
+              Tổng cộng: {total.toLocaleString("vi-VN")}đ
+            </p>
+            <Link href="/checkout">
+              <Button className="w-full md:w-auto">Tiến hành thanh toán</Button>
+            </Link>
+          </div>
         </div>
       )}
     </div>

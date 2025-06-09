@@ -12,7 +12,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const { login, isAuthenticated } = useAuth()
+  const { signIn, isAuthenticated } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
 
@@ -37,28 +37,32 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      const result = await login(email, password)
+      const result = await signIn(email, password)
+      
+      console.log("🔐 Login result:", result)
 
-      if (result.success) {
-        toast({
-          title: "Đăng nhập thành công",
-          description: "Chào mừng bạn quay trở lại!",
-        })
-        router.push("/account")
-      } else {
-        toast({
-          title: "Đăng nhập thất bại",
-          description: result.message,
-          variant: "destructive",
-        })
-      }
+if (!result.error) {
+  toast({
+    title: "Đăng nhập thành công",
+    description: "Chào mừng bạn quay trở lại!",
+  })
+  router.push("/account")
+} else {
+  toast({
+    title: "Đăng nhập thất bại",
+    description: result.error?.message || "Sai email hoặc mật khẩu",
+    variant: "destructive",
+  })
+}
     } catch (error) {
-      toast({
-        title: "Lỗi",
-        description: "Đã xảy ra lỗi khi đăng nhập",
-        variant: "destructive",
-      })
-    } finally {
+  console.error("🔥 Đăng nhập lỗi:", error)
+  toast({
+    title: "Lỗi hệ thống",
+    description: "Không thể đăng nhập lúc này. Vui lòng thử lại sau.",
+    variant: "destructive",
+  })
+}
+    finally {
       setIsLoading(false)
     }
   }

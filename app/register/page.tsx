@@ -14,7 +14,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const { register, isAuthenticated } = useAuth()
+  const { signUp, isAuthenticated } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
 
@@ -58,21 +58,21 @@ export default function RegisterPage() {
     setIsLoading(true)
 
     try {
-      const result = await register(name, email, password)
+      const result = await signUp(email, password, name)
 
-      if (result.success) {
-        toast({
-          title: "Đăng ký thành công",
-          description: "Tài khoản của bạn đã được tạo thành công!",
-        })
-        router.push("/account")
-      } else {
-        toast({
-          title: "Đăng ký thất bại",
-          description: result.message,
-          variant: "destructive",
-        })
-      }
+if (!result.error) {
+  toast({
+    title: "Đăng ký thành công",
+    description: "Tài khoản của bạn đã được tạo thành công!",
+  })
+  router.push("/account")
+} else {
+  toast({
+    title: "Đăng ký thất bại",
+    description: result.error.message,
+    variant: "destructive",
+  })
+}
     } catch (error) {
       toast({
         title: "Lỗi",

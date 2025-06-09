@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    appDir: true, // ✅ Quan trọng để App Router hoạt động
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -8,8 +11,15 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["i.postimg.cc"],
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 }
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/context/CartContext"
@@ -14,31 +14,66 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const router = useRouter()
   const { addToCart } = useCart()
   const { toast } = useToast()
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0])
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
+
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined)
+  const [selectedColor, setSelectedColor] = useState<any>(undefined)
   const [quantity, setQuantity] = useState(1)
 
-  const handleAddToCart = () => {
-    if (!selectedSize || !selectedColor) {
-      toast({
-        title: "Lỗi",
-        description: "Vui lòng chọn kích thước và màu sắc",
-        variant: "destructive",
-      })
-      return
+  // ✅ NEW: Auto-select default size & color once product is available
+  useEffect(() => {
+    if (product) {
+      setSelectedSize(product.sizes?.[0])
+      setSelectedColor(product.colors?.[0])
     }
+  }, [product])
+
+  // ✅ NEW: Guard rendering if product chưa sẵn sàng
+  if (!product) {
+    return <div className="p-4">Đang tải sản phẩm...</div>
+  }
+
+  const handleAddToCart = () => {
+  if (!selectedSize || !selectedColor) {
+    toast({
+      title: "Lỗi",
+      description: "Vui lòng chọn kích thước và màu sắc",
+      variant: "destructive",
+    })
+    return
+  }
 
     const item = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      image: product.images[0],
-      size: selectedSize,
-      color: selectedColor,
-      quantity,
-    }
+    id: product.id,
+    name: product.name,
+    price: product.price,
+    image: product.images[0],
+    size: selectedSize,
+    color: selectedColor,
+    quantity,
+  }
 
     addToCart(item)
+    setQuantity(1)
+
+    // Hiệu ứng bay vào giỏ hàng
+  const img = document.querySelector(`#product-image`)
+  const cart = document.querySelector(`#cart-icon`)
+  if (img && cart) {
+    const imgRect = img.getBoundingClientRect()
+    const cartRect = cart.getBoundingClientRect()
+    const dx = cartRect.left - imgRect.left
+    const dy = cartRect.top - imgRect.top
+
+    const clone = img.cloneNode(true) as HTMLElement
+    clone.classList.add("fly-image")
+    clone.style.left = `${imgRect.left}px`
+    clone.style.top = `${imgRect.top}px`
+    clone.style.setProperty("--dx", `${dx}px`)
+    clone.style.setProperty("--dy", `${dy}px`)
+
+    document.body.appendChild(clone)
+    setTimeout(() => clone.remove(), 800)
+  }
 
     toast({
       title: "Thành công",
@@ -90,6 +125,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               src={product.images[0] || "/placeholder.svg?height=600&width=600"}
               alt={product.name}
               className="h-full w-full object-cover object-center"
+              id="product-image"
             />
           </div>
           <div className="grid grid-cols-4 gap-2">
@@ -117,7 +153,8 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div className="mt-6">
             <h3 className="text-sm font-medium">Kích thước</h3>
             <div className="mt-2 flex flex-wrap gap-2">
-              {product.sizes.map((size) => (
+              {Array.isArray(product.sizes) &&
+              product.sizes.map((size) => (
                 <button
                   key={size}
                   type="button"
@@ -138,12 +175,13 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div className="mt-6">
             <h3 className="text-sm font-medium">Màu sắc</h3>
             <div className="mt-2 flex flex-wrap gap-2">
-              {product.colors.map((color) => (
+              {Array.isArray(product.colors) &&
+              product.colors.map((color) => (
                 <button
                   key={color.name}
                   type="button"
                   className={`relative flex h-10 w-10 items-center justify-center rounded-full border ${
-                    selectedColor.name === color.name ? "border-black" : "border-gray-300"
+                    selectedColor?.name === color.name ? "border-black" : "border-gray-300"
                   }`}
                   onClick={() => setSelectedColor(color)}
                 >
@@ -153,7 +191,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                     aria-hidden="true"
                   ></span>
                   <span className="sr-only">{color.name}</span>
-                  {selectedColor.name === color.name && (
+                  {selectedColor?.name === color.name && (
                     <span className="pointer-events-none absolute -inset-px rounded-full border-2 border-black"></span>
                   )}
                 </button>

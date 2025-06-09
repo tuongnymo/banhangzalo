@@ -12,6 +12,30 @@ body {
   background: rgb(var(--background-rgb));
 }
 
+@keyframes fly-to-cart {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 0), var(--dy, 0)) scale(0.2);
+  }
+}
+
+.fly-image {
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: fly-to-cart 0.8s ease-in-out forwards;
+  transition: transform 0.8s ease-in-out;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

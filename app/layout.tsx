@@ -1,20 +1,25 @@
 import type React from "react"
 import "./globals.css"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import Link from "next/link"
 import MobileNavigation from "@/components/MobileNavigation"
 import { AuthProvider } from "@/context/AuthContext"
 import { CartProvider } from "@/context/CartContext"
 import { Toaster } from "@/components/ui/toaster"
+import CartIconBadge from "@/components/CartIconBadge"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
   title: "Fashion Store",
   description: "Modern fashion e-commerce store",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
     generator: 'v0.dev'
+}
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({
@@ -63,23 +68,7 @@ export default function RootLayout({
                       <path d="m21 21-4.3-4.3"></path>
                     </svg>
                   </Link>
-                  <Link href="/cart" className="hover:text-gray-500 p-2 touch-manipulation">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="8" cy="21" r="1"></circle>
-                      <circle cx="19" cy="21" r="1"></circle>
-                      <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path>
-                    </svg>
-                  </Link>
+                  <CartIconBadge />
                   <Link href="/account" className="hover:text-gray-500 p-2 touch-manipulation">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

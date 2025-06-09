@@ -1,5 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
-import { Database } from '@/types/supabase';
+import { Database } from '@/src/lib/supabaseTypes';
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs"
+
+export const supabase = createPagesBrowserClient()
 
 // Tạo Supabase client cho client-side
 const createClientSide = () => {

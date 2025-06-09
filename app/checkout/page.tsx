@@ -10,11 +10,13 @@ import { useCart } from "@/context/CartContext"
 import { useToast } from "@/components/ui/use-toast"
 
 export default function CheckoutPage() {
-  const { isAuthenticated, isLoading, user } = useAuth()
+  const { isAuthenticated, isLoading, user, session } = useAuth()
   const { cart, cartTotal, clearCart } = useCart()
   const router = useRouter()
   const { toast } = useToast()
+  const [isCheckingOut, setIsCheckingOut] = useState(false)
 
+  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -46,7 +48,7 @@ export default function CheckoutPage() {
     if (user) {
       setFormData((prev) => ({
         ...prev,
-        fullName: user.name || prev.fullName,
+        fullName: user.user_metadata?.name || prev.fullName,
         email: user.email || prev.email,
       }))
     }
@@ -54,14 +56,14 @@ export default function CheckoutPage() {
 
   // Chuyển hướng nếu giỏ hàng trống
   useEffect(() => {
-    if (!isLoading && cart.length === 0) {
-      toast({
-        title: "Giỏ hàng trống",
-        description: "Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục thanh toán",
-      })
-      router.push("/cart")
-    }
-  }, [isLoading, cart, router, toast])
+  if (!isLoading && cart.length === 0 && !isCheckingOut) {
+    toast({
+      title: "Giỏ hàng trống",
+      description: "Vui lòng thêm sản phẩm vào giỏ hàng để tiếp tục thanh toán",
+    })
+    router.push("/cart")
+  }
+}, [isLoading, cart, isCheckingOut, router, toast])
 
   // Hiển thị loading khi đang kiểm tra trạng thái đăng nhập
   if (isLoading) {
@@ -107,52 +109,68 @@ export default function CheckoutPage() {
     setIsSubmitting(true)
 
     try {
-      // Mô phỏng gọi API
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+  const orderData = {
+    userId: user?.id,
+    items: cart,
+    total: cartTotal,
+    shipping_fee: cartTotal >= 1000000 ? 0 : 30000,
+    payment_method: formData.paymentMethod,
+    payment_status: formData.paymentMethod === "cod" ? "pending" : "processing",
+    status: "pending",
+    shipping_info: {
+      fullName: formData.fullName,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      city: formData.city,
+      district: formData.district,
+      province: formData.province,
+      notes: formData.notes,
+    },
+  }
 
-      // Tạo đơn hàng mới
-      const orderId = `ORD${Date.now()}`
-      const orderData = {
-        id: orderId,
-        userId: user?.id,
-        items: cart,
-        total: cartTotal,
-        shipping: cartTotal >= 1000000 ? 0 : 30000,
-        status: "pending",
-        paymentMethod: formData.paymentMethod,
-        paymentStatus: formData.paymentMethod === "cod" ? "pending" : "processing",
-        shippingInfo: {
-          fullName: formData.fullName,
-          email: formData.email,
-          phone: formData.phone,
-          address: formData.address,
-          city: formData.city,
-          district: formData.district,
-          province: formData.province,
-          notes: formData.notes,
-        },
-        createdAt: new Date().toISOString(),
-      }
+  const res = await fetch("/api/orders", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${session?.access_token}`,
+  },
+  body: JSON.stringify(orderData),
+})
 
-      // Lưu đơn hàng vào localStorage
-      const ordersJson = localStorage.getItem(`orders_${user?.id}`) || "[]"
-      const orders = JSON.parse(ordersJson)
-      orders.push(orderData)
-      localStorage.setItem(`orders_${user?.id}`, JSON.stringify(orders))
+const data = await res.json()
 
-      // Xóa giỏ hàng
-      clearCart()
+if (!res.ok) {
+  throw new Error(data.error || "Không thể tạo đơn hàng")
+}
 
-      // Chuyển hướng đến trang trạng thái thanh toán
-      router.push(`/payment-status?orderId=${orderId}`)
-    } catch (error) {
-      console.error("Checkout error:", error)
-      toast({
-        title: "Lỗi thanh toán",
-        description: "Đã xảy ra lỗi khi xử lý đơn hàng của bạn. Vui lòng thử lại sau.",
-        variant: "destructive",
-      })
-    } finally {
+const { orderId, orderCode } = data
+
+setIsCheckingOut(true)
+clearCart()
+
+setTimeout(() => {
+  const redirectUrl =
+    formData.paymentMethod === "cod"
+      ? `/thankyou?orderCode=${orderCode}`
+      : formData.paymentMethod === "bank"
+      ? `/bankpayment?orderCode=${orderCode}`
+      : `/payment-status?orderCode=${orderCode}`
+
+  router.push(redirectUrl)
+}, 0)
+
+  // Hiển thị thông báo thành công
+} catch (error) {
+  console.error("Checkout error:", error)
+  toast({
+    title: "Lỗi thanh toán",
+    description: "Đã xảy ra lỗi khi xử lý đơn hàng của bạn. Vui lòng thử lại sau.",
+    variant: "destructive",
+  })
+}
+ 
+    finally {
       setIsSubmitting(false)
     }
   }
@@ -162,6 +180,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <form onSubmit={handleSubmit}> 
       <div className="mb-8">
         <h1 className="text-2xl font-bold md:text-3xl">Thanh toán</h1>
         <p className="text-gray-600">Vui lòng điền thông tin để hoàn tất đơn hàng</p>
@@ -169,7 +188,7 @@ export default function CheckoutPage() {
 
       <div className="grid gap-8 md:grid-cols-3">
         <div className="md:col-span-2">
-          <form onSubmit={handleSubmit} className="space-y-6 rounded-lg border border-gray-200 p-6">
+          <div className="space-y-6 rounded-lg border border-gray-200 p-6">
             <h2 className="mb-4 text-xl font-semibold">Thông tin giao hàng</h2>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -255,7 +274,7 @@ export default function CheckoutPage() {
               </div>
               <div>
                 <label htmlFor="district" className="mb-1 block text-sm font-medium">
-                  Quận/Huyện
+                  Quận/Huyện <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -328,21 +347,9 @@ export default function CheckoutPage() {
                   />
                   <span className="ml-2">Chuyển khoản ngân hàng</span>
                 </label>
-                <label className="flex cursor-pointer items-center rounded-md border border-gray-300 p-3 hover:border-black">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="momo"
-                    checked={formData.paymentMethod === "momo"}
-                    onChange={handleInputChange}
-                    className="h-4 w-4 text-black focus:ring-black"
-                    disabled={isSubmitting}
-                  />
-                  <span className="ml-2">Ví MoMo</span>
-                </label>
               </div>
             </div>
-          </form>
+          </div>
         </div>
 
         <div className="rounded-lg border border-gray-200 p-6">
@@ -427,6 +434,7 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+      </form>
     </div>
   )
 }
