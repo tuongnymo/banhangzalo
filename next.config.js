@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    appDir: true, // ✅ Quan trọng để App Router hoạt động
-  },
   eslint: {
     ignoreDuringBuilds: true,
   },
