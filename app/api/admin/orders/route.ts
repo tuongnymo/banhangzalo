@@ -8,12 +8,13 @@ const supabase = createClient(
 
 export async function GET() {
   const { data, error } = await supabase
-    .from('products')
-    .select('id, name, price, images');
+    .from('orders')
+    .select('id, status, total_price, created_at, email, name') // tuỳ theo bảng bạn có gì
+    .order('created_at', { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ products: data });
+  return NextResponse.json({ orders: data });
 }
