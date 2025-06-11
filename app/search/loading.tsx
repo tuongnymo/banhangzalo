@@ -1,3 +1,7 @@
 export default function Loading() {
-  return null
+  return (
+    <div className="p-8 text-center text-gray-500">
+      Đang tải kết quả tìm kiếm...
+    </div>
+  );
 }
