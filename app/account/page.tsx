@@ -46,6 +46,7 @@ useEffect(() => {
       const res = await fetch('/api/profile')
       if (!res.ok) throw new Error('Lỗi khi lấy profile')
       const data = await res.json()
+    console.log("🎯 Avatar URL sau khi fetch:", data.avatar_url) // 👈 thêm dòng này
       setProfile({
         full_name: data.full_name || '',
         phone: data.phone || '',
@@ -457,7 +458,7 @@ useEffect(() => {
                     Họ và tên
                   </label>
                   <input
-                    type="text"
+                    type="text" 
                     id="fullName"
                     value={profile.full_name}
                     onChange={(e) => setProfile((prev) => ({ ...prev, full_name: e.target.value }))}
