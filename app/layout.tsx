@@ -8,6 +8,7 @@ import { AuthProvider } from "@/context/AuthContext"
 import { CartProvider } from "@/context/CartContext"
 import { Toaster } from "@/components/ui/toaster"
 import CartIconBadge from "@/components/CartIconBadge"
+import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
@@ -30,8 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-    <script src="https://static.zalo.me/minigame/sdk.js"></script>
-  </head>
+        {/* ✅ Load Zalo Mini App SDK đúng cách */}
+        <Script
+          src="https://static.zalo.me/minigame/sdk.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className={`${inter.variable} font-sans`}>
         <AuthProvider>
           <CartProvider>
