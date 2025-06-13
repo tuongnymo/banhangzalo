@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import ProductCard from '@/components/ProductCard'
+import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -44,16 +45,17 @@ export default function CategorySlugPage() {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              image={product.images?.[0] || "/placeholder.svg"}
-              discount={product.discount}
-              category={product.category}
-            />
-          ))}
+  <Link key={product.id} href={`/product/${product.id}`} className="block">
+    <ProductCard
+      id={product.id}
+      name={product.name}
+      price={product.price}
+      image={product.images?.[0] || "/placeholder.svg"}
+      discount={product.discount}
+      category={product.category}
+    />
+  </Link>
+))}
         </div>
       )}
     </div>
