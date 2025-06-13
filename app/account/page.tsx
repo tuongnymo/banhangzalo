@@ -68,26 +68,50 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
 
   let uploadedUrl = profile.avatar_url;
 
+  // ✅ Bước 1: Kiểm tra và upload avatar nếu có
   if (avatarFile && user?.id) {
-  const { data, error } = await supabase.storage
-    .from('avatars')
-    .upload(`avatar-${user.id}`, avatarFile, {
-      upsert: true,
-      cacheControl: '3600',
-      metadata: {
-        owner: user.id  // 👈 Thêm dòng này
+    try {
+      // ✅ Lấy phiên đăng nhập
+      const sessionRes = await supabase.auth.getSession();
+      const currentUser = sessionRes.data.session?.user;
+
+      if (!currentUser) {
+        console.error("❌ Không có người dùng đăng nhập.");
+        setUpdateStatus('error');
+        return;
       }
-    });
 
-  if (error) {
-    console.error('Upload lỗi:', error);
-  } else {
-    uploadedUrl = supabase.storage
-      .from('avatars')
-      .getPublicUrl(data.path).data.publicUrl;
+      // ✅ Thực hiện upload
+      const { data, error } = await supabase.storage
+        .from('avatars')
+        .upload(`avatar-${user.id}`, avatarFile, {
+          upsert: true,
+          cacheControl: '3600',
+          metadata: {
+            owner: user.id
+          }
+        });
+
+      if (error) {
+        console.error('❌ Upload avatar lỗi:', error);
+        setUpdateStatus('error');
+        return;
+      }
+
+      // ✅ Lấy public URL
+      uploadedUrl = supabase.storage
+        .from('avatars')
+        .getPublicUrl(data.path).data.publicUrl;
+
+      console.log("✅ Upload thành công:", uploadedUrl);
+    } catch (err) {
+      console.error("❌ Lỗi khi xử lý upload avatar:", err);
+      setUpdateStatus('error');
+      return;
+    }
   }
-}
 
+  // ✅ Bước 2: Gửi dữ liệu cập nhật thông tin
   try {
     const res = await fetch('/api/profile', {
       method: 'PUT',
@@ -96,7 +120,7 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
       },
       body: JSON.stringify({
         ...profile,
-        avatar_url: uploadedUrl, // ✅ Gộp avatar vào đây
+        avatar_url: uploadedUrl,
       })
     })
 
@@ -104,10 +128,11 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
 
     setUpdateStatus('success')
   } catch (err) {
-    console.error(err)
+    console.error('❌ Lỗi khi cập nhật thông tin profile:', err);
     setUpdateStatus('error')
   }
 }
+
 // Kết thúc phần cập nhật thông tin cá nhân
 
 //Hiển thị thông báo cập nhật

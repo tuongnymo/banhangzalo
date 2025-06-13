@@ -115,12 +115,12 @@ export default function Header() {
                 <Link href="/account" className="text-gray-500 hover:text-black">
                   <span className="sr-only">Account</span>
                   <div className="h-6 w-6 overflow-hidden rounded-full bg-gray-200">
-                    {user?.avatar ? (
-                      <img
-                        src={user.avatar || "/placeholder.svg"}
-                        alt={user.name}
-                        className="h-full w-full object-cover"
-                      />
+                    {user?.user_metadata?.avatar_url ? (
+  <img
+    src={user.user_metadata.avatar_url || "/placeholder.svg"}
+    alt={user.user_metadata.full_name || "Avatar"}
+    className="h-full w-full object-cover"
+  />
                     ) : (
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
