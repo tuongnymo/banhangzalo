@@ -29,6 +29,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+    <script src="https://static.zalo.me/minigame/sdk.js"></script>
+  </head>
       <body className={`${inter.variable} font-sans`}>
         <AuthProvider>
           <CartProvider>

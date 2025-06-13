@@ -3,8 +3,49 @@ import Image from "next/image"
 import BannerCarousel from "@/components/BannerCarousel"
 import NewArrivals from "@/components/NewArrivals"
 import FeaturedProducts from "@/components/FeaturedProducts"
+import { useEffect, useState } from "react"
+
+declare global {
+  interface Window {
+    ZaloMiniApp: {
+      getUserInfo: (options: {
+        success: (data: any) => void
+        fail: (err: any) => void
+      }) => void
+      // Bạn có thể thêm các hàm khác nếu cần, ví dụ:
+      // openChat: (options: any) => void
+      // payOrder: (options: any) => void
+    }
+  }
+}
+
 
 export default function Home() {
+  const [userInfo, setUserInfo] = useState<any>(null)
+  const [sdkError, setSdkError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchUserInfo = () => {
+      if (typeof window !== "undefined" && window.ZaloMiniApp) {
+        window.ZaloMiniApp.getUserInfo({
+          success: (data: any) => {
+            console.log("User info:", data)
+            setUserInfo(data)
+          },
+          fail: (err: any) => {
+            console.error("getUserInfo failed", err)
+            setSdkError("Không lấy được thông tin người dùng")
+          },
+        })
+      } else {
+        setSdkError("Zalo SDK chưa sẵn sàng")
+        console.warn("ZaloMiniApp SDK chưa được load.")
+      }
+    }
+
+    fetchUserInfo()
+  }, []) 
+
   return (
     <div>
       {/* Hero Section */}
