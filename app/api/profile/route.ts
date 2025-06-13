@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
 
   const { data: profile, error } = await supabase
     .from('profiles')
-    .select('full_name, phone, birthday')
+    .select('full_name, phone, birthday, avatar_url') // 👈 thêm avatar_url
     .eq('id', user.id)
     .single()
 
@@ -38,11 +38,11 @@ export async function PUT(req: NextRequest) {
     return NextResponse.json({ error: 'Bạn chưa đăng nhập.' }, { status: 401 })
   }
 
-  const { full_name, phone, birthday } = await req.json()
+  const { full_name, phone, birthday, avatar_url } = await req.json() // 👈 nhận thêm avatar_url
 
   const { error } = await supabase
     .from('profiles')
-    .update({ full_name, phone, birthday })
+    .update({ full_name, phone, birthday, avatar_url }) // 👈 cập nhật cả avatar_url
     .eq('id', user.id)
 
   if (error) {

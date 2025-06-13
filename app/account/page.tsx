@@ -33,8 +33,12 @@ const [updateStatus, setUpdateStatus] = useState<null | 'success' | 'error'>(nul
 const [profile, setProfile] = useState({
   full_name: '',
   phone: '',
-  birthday: ''
+  birthday: '',
+  avatar_url: ''
 })
+
+const [avatarFile, setAvatarFile] = useState<File | null>(null);
+const [avatarPreview, setAvatarPreview] = useState<string>('');
 
 useEffect(() => {
   const fetchProfile = async () => {
@@ -45,7 +49,8 @@ useEffect(() => {
       setProfile({
         full_name: data.full_name || '',
         phone: data.phone || '',
-        birthday: data.birthday || ''
+        birthday: data.birthday || '',
+        avatar_url: data.avatar_url || ''
       })
     } catch (err) {
       console.error('Lỗi khi load profile:', err)
@@ -60,13 +65,32 @@ useEffect(() => {
 const handleProfileUpdate = async (e: React.FormEvent) => {
   e.preventDefault()
 
+  let uploadedUrl = profile.avatar_url;
+
+  if (avatarFile && user?.id) {
+    const { data, error } = await supabase.storage
+      .from('avatars')
+      .upload(`avatar-${user.id}`, avatarFile, { upsert: true });
+
+    if (error) {
+      console.error('Upload lỗi:', error);
+    } else {
+      uploadedUrl = supabase.storage
+        .from('avatars')
+        .getPublicUrl(data.path).data.publicUrl;
+    }
+  }
+
   try {
     const res = await fetch('/api/profile', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(profile)
+      body: JSON.stringify({
+        ...profile,
+        avatar_url: uploadedUrl, // ✅ Gộp avatar vào đây
+      })
     })
 
     if (!res.ok) throw new Error('Cập nhật thất bại')
@@ -308,20 +332,24 @@ useEffect(() => {
       </div>
 
       <div className="mb-8 flex items-center">
-        <div className="mr-4 h-16 w-16 overflow-hidden rounded-full bg-gray-200">
-          {user?.user_metadata?.avatar || "/placeholder.svg"? (
-            <img src={user?.user_metadata?.avatar || "/placeholder.svg"} alt={user?.user_metadata?.name?.charAt(0).toUpperCase() || "?"} className="h-full w-full object-cover" />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center bg-gray-300 text-xl font-bold text-gray-600">
-              {user?.user_metadata?.name?.charAt(0).toUpperCase() || "?".charAt(0).toUpperCase()}
-            </div>
-          )}
-        </div>
-        <div>
-          <h2 className="text-xl font-semibold">{user?.user_metadata?.name || "Người dùng"}</h2>
-          <p className="text-gray-600">{user.email}</p>
-        </div>
+  <div className="mr-4 h-16 w-16 overflow-hidden rounded-full bg-gray-200">
+    {profile.avatar_url ? (
+      <img
+        src={profile.avatar_url}
+        alt={profile.full_name?.charAt(0).toUpperCase() || "?"}
+        className="h-full w-full object-cover"
+      />
+    ) : (
+      <div className="flex h-full w-full items-center justify-center bg-gray-300 text-xl font-bold text-gray-600">
+        {profile.full_name?.charAt(0).toUpperCase() || "?"}
       </div>
+    )}
+  </div>
+  <div>
+    <h2 className="text-xl font-semibold">{profile.full_name || "Người dùng"}</h2>
+    <p className="text-gray-600">{user.email}</p>
+  </div>
+</div>
 
       <Tabs defaultValue="orders" className="w-full">
         <TabsList className="mb-6 grid w-full grid-cols-3 md:w-auto">
@@ -390,6 +418,28 @@ useEffect(() => {
         <TabsContent value="profile" className="space-y-4">
           <div className="rounded-lg border border-gray-200 p-6">
             <h3 className="mb-4 text-lg font-semibold">Thông tin cá nhân</h3>
+            <div>
+  <label className="mb-1 block text-sm font-medium">Ảnh đại diện</label>
+
+  {avatarPreview || profile.avatar_url ? (
+    <img
+      src={avatarPreview || profile.avatar_url}
+      alt="avatar"
+      className="mb-2 h-16 w-16 rounded-full object-cover"
+    />
+  ) : null}
+
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      setAvatarFile(file);
+      setAvatarPreview(URL.createObjectURL(file));
+    }}
+  />
+</div>
             <form className="space-y-4" onSubmit={handleProfileUpdate}>
               {updateStatus === 'success' && (
               <div className="rounded-md bg-green-100 px-4 py-2 text-green-700 text-sm">
