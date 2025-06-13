@@ -1,33 +1,28 @@
 // middleware.ts
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+  const res = NextResponse.next();
 
-  // Chặn nếu truy cập admin
-  if (pathname.startsWith('/admin')) {
-    const access_token = req.cookies.get('sb-access-token')?.value;
-    const refresh_token = req.cookies.get('sb-refresh-token')?.value;
+  // Tạo Supabase client với context từ middleware
+  const supabase = createMiddlewareClient({ req, res });
 
-    if (!access_token || !refresh_token) {
+  // Lấy session & user
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (req.nextUrl.pathname.startsWith('/admin')) {
+    if (!session) {
+      // Chưa đăng nhập → redirect
       return NextResponse.redirect(new URL('/', req.url));
     }
 
-    // Gọi Supabase Auth API với token
-    const { data: { user }, error } = await supabase.auth.getUser(access_token);
+    const { user } = session;
 
-    if (!user) {
-      return NextResponse.redirect(new URL('/', req.url));
-    }
-
-    // Lấy role từ bảng profiles
+    // Lấy profile để kiểm tra role
     const { data: profile } = await supabase
       .from('profiles')
       .select('role')
@@ -39,10 +34,9 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  return res;
 }
 
-// 💡 Khai báo matcher ở đây:
 export const config = {
   matcher: ['/admin/:path*'],
 };
