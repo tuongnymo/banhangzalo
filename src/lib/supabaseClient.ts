@@ -5,7 +5,7 @@ import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs"
 export const supabase = createPagesBrowserClient()
 
 // Tạo Supabase client cho client-side
-const createClientSide = () => {
+export const createClientSide = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
   

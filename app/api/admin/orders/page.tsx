@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClientSide } from '@/src/lib/supabaseClient'
 import { Toaster, toast } from 'react-hot-toast';
 
 type OrderItem = {
@@ -29,8 +31,41 @@ export default function AdminOrdersPage() {
   const [showModal, setShowModal] = useState(false);
   const [filterStatus, setFilterStatus] = useState('all');
   const [modalLoading, setModalLoading] = useState(false);
+  const [authChecking, setAuthChecking] = useState(true);
 
+  const router = useRouter();
+
+  // ✅ Kiểm tra quyền admin
   useEffect(() => {
+    async function checkAdmin() {
+      const supabase = createClientSide();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        router.push('/login');
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+      if (error || data?.role !== 'admin') {
+        router.push('/');
+      } else {
+        setAuthChecking(false);
+      }
+    }
+
+    checkAdmin();
+  }, []);
+
+  // ✅ Chỉ fetch khi đã xác minh là admin
+  useEffect(() => {
+    if (authChecking) return;
+
     setLoading(true);
     fetch(`/api/admin/orders?status=${filterStatus}`)
       .then(res => res.json())
@@ -41,7 +76,7 @@ export default function AdminOrdersPage() {
         setOrders(sorted);
       })
       .finally(() => setLoading(false));
-  }, [filterStatus]);
+  }, [filterStatus, authChecking]);
 
   async function handleViewDetail(orderId: string) {
     setModalLoading(true);
@@ -94,10 +129,14 @@ export default function AdminOrdersPage() {
     }
   }
 
+  // ✅ Hiển thị loading khi đang xác minh quyền
+  if (authChecking) {
+    return <div className="p-6">Đang kiểm tra quyền truy cập...</div>;
+  }
+
   return (
     <div className="p-6">
       <Toaster />
-
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-2xl font-bold">Quản lý đơn hàng</h1>
         <select
@@ -177,18 +216,10 @@ export default function AdminOrdersPage() {
               selectedOrder && (
                 <>
                   <h2 className="text-xl font-bold mb-4">Chi tiết đơn hàng</h2>
-                  <p>
-                    <strong>Mã đơn:</strong> {selectedOrder.id}
-                  </p>
-                  <p>
-                    <strong>Khách:</strong> {selectedOrder.name} - {selectedOrder.email}
-                  </p>
-                  <p>
-                    <strong>Trạng thái:</strong> {selectedOrder.status}
-                  </p>
-                  <p>
-                    <strong>Ngày đặt:</strong> {new Date(selectedOrder.created_at).toLocaleString()}
-                  </p>
+                  <p><strong>Mã đơn:</strong> {selectedOrder.id}</p>
+                  <p><strong>Khách:</strong> {selectedOrder.name} - {selectedOrder.email}</p>
+                  <p><strong>Trạng thái:</strong> {selectedOrder.status}</p>
+                  <p><strong>Ngày đặt:</strong> {new Date(selectedOrder.created_at).toLocaleString()}</p>
                   <hr className="my-4" />
                   <h3 className="font-semibold">Sản phẩm:</h3>
                   <ul className="mb-4">

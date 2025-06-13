@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { createClientSide } from '@/src/lib/supabaseClient';
 import { Toaster, toast } from 'react-hot-toast';
 
 export type User = {
@@ -15,10 +17,41 @@ export default function AdminUsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const [authChecking, setAuthChecking] = useState(true);
+
+  const router = useRouter();
+
+  // ✅ Kiểm tra đăng nhập và quyền admin
+  useEffect(() => {
+    async function checkAdmin() {
+      const supabase = createClientSide();
+      const { data: { user } } = await supabase.auth.getUser();
+
+      if (!user) {
+        router.push('/login');
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+      if (error || data?.role !== 'admin') {
+        router.push('/');
+      } else {
+        setAuthChecking(false); // ✅ là admin → cho phép tiếp tục
+      }
+    }
+
+    checkAdmin();
+  }, []);
 
   useEffect(() => {
+    if (authChecking) return;
     fetchUsers();
-  }, []);
+  }, [authChecking]);
 
   async function fetchUsers() {
     setLoading(true);
@@ -63,6 +96,10 @@ export default function AdminUsersPage() {
     } else {
       toast.error('Xoá thất bại');
     }
+  }
+
+  if (authChecking) {
+    return <div className="p-6">Đang kiểm tra quyền truy cập...</div>;
   }
 
   return (

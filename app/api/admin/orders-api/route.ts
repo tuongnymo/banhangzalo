@@ -76,6 +76,17 @@ export async function PUT(req: Request) {
 export async function POST(req: Request) {
   const supabase = createServerComponentClient({ cookies });
 
+  const { data: user, error: userError } = await supabase.auth.getUser();
+  if (userError || !user?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.user.id)
+    .single();
+
+  if (profile?.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
   const { orderId } = await req.json();
   if (!orderId) return NextResponse.json({ error: 'Thiếu orderId' }, { status: 400 });
 
