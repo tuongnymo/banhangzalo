@@ -69,18 +69,24 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
   let uploadedUrl = profile.avatar_url;
 
   if (avatarFile && user?.id) {
-    const { data, error } = await supabase.storage
-      .from('avatars')
-      .upload(`avatar-${user.id}`, avatarFile, { upsert: true });
+  const { data, error } = await supabase.storage
+    .from('avatars')
+    .upload(`avatar-${user.id}`, avatarFile, {
+      upsert: true,
+      cacheControl: '3600',
+      metadata: {
+        owner: user.id  // 👈 Thêm dòng này
+      }
+    });
 
-    if (error) {
-      console.error('Upload lỗi:', error);
-    } else {
-      uploadedUrl = supabase.storage
-        .from('avatars')
-        .getPublicUrl(data.path).data.publicUrl;
-    }
+  if (error) {
+    console.error('Upload lỗi:', error);
+  } else {
+    uploadedUrl = supabase.storage
+      .from('avatars')
+      .getPublicUrl(data.path).data.publicUrl;
   }
+}
 
   try {
     const res = await fetch('/api/profile', {
