@@ -97,15 +97,17 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
       }
 
       // ✅ Thực hiện upload
-      const { data, error } = await supabase.storage
-        .from('avatars')
-        .upload(`avatar-${user.id}`, avatarFile, {
-          upsert: true,
-          cacheControl: '3600',
-          metadata: {
-            owner: user.id
-          }
-        });
+      const filePath = `avatar-${user.id}`; // hoặc `${user.id}.png`
+
+const { data, error } = await supabase.storage
+  .from('avatars')
+  .upload(filePath, avatarFile, {
+    upsert: true,
+    cacheControl: '3600',
+    metadata: {
+      owner: user.id, // Chính là field `id` ở bảng profiles
+    },
+  });
 
       if (error) {
         console.error('❌ Upload avatar lỗi:', error);
