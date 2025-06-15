@@ -1,3 +1,4 @@
+// File: app/account/page.tsx
 "use client"
 
 import { useEffect, useState } from "react"
@@ -28,6 +29,9 @@ export default function AccountPage() {
 const [orders, setOrders] = useState<Order[]>([])
 const [loadingOrders, setLoadingOrders] = useState(true)
 const [updateStatus, setUpdateStatus] = useState<null | 'success' | 'error'>(null)
+const [avatarFile, setAvatarFile] = useState<File | null>(null);
+const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+const [isUpdating, setIsUpdating] = useState(false);
 
 // Khởi tạo state cho profile
 const [profile, setProfile] = useState({
@@ -36,9 +40,6 @@ const [profile, setProfile] = useState({
   birthday: '',
   avatar_url: ''
 })
-
-const [avatarFile, setAvatarFile] = useState<File | null>(null);
-const [avatarPreview, setAvatarPreview] = useState<string>('');
 
 useEffect(() => {
   const fetchProfile = async () => {
@@ -61,6 +62,20 @@ useEffect(() => {
   fetchProfile()
 }, [])
 //KẾT THÚC PHẦN Profile
+
+const fetchProfile = async () => {
+  try {
+    const res = await fetch('/api/profile')
+    const data = await res.json()
+    if (res.ok) {
+      setProfile(data)
+    } else {
+      console.error('❌ Lỗi khi fetch profile:', data.error)
+    }
+  } catch (err) {
+    console.error('❌ Lỗi mạng khi fetch profile:', err)
+  }
+} 
 
 // Hàm xử lý cập nhật thông tin cá nhân
 const handleProfileUpdate = async (e: React.FormEvent) => {
@@ -112,6 +127,7 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
   }
 
   // ✅ Bước 2: Gửi dữ liệu cập nhật thông tin
+    setIsUpdating(true);
   try {
     const res = await fetch('/api/profile', {
       method: 'PUT',
@@ -126,11 +142,16 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
 
     if (!res.ok) throw new Error('Cập nhật thất bại')
 
-    setUpdateStatus('success')
+    setUpdateStatus('success');
+    setAvatarFile(null);
+    setAvatarPreview(null);
+    fetchProfile();
   } catch (err) {
     console.error('❌ Lỗi khi cập nhật thông tin profile:', err);
     setUpdateStatus('error')
-  }
+  }finally {
+  setIsUpdating(false); // 👈 reset dù thành công hay lỗi
+}
 }
 
 // Kết thúc phần cập nhật thông tin cá nhân
@@ -526,11 +547,14 @@ useEffect(() => {
 
               <div className="flex justify-end">
                 <button
-                  type="submit"
-                  className="rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
-                >
-                  Lưu thay đổi
-                </button>
+  type="submit"
+  disabled={isUpdating}
+  className={`rounded-md px-4 py-2 text-sm font-medium text-white 
+    ${isUpdating ? 'bg-gray-400 cursor-not-allowed' : 'bg-black hover:bg-gray-800'}`}
+>
+  {isUpdating ? 'Đang lưu...' : 'Lưu thay đổi'}
+</button>
+
               </div>
             </form>
           </div>
