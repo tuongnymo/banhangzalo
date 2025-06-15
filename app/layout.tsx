@@ -33,7 +33,7 @@ export default function RootLayout({
       <head>
         {/* ✅ Load Zalo Mini App SDK đúng cách */}
         <Script
-          src="https://static.zalo.me/minigame/sdk.js"
+          src="https://sp.zalo.me/sdk.js"
           strategy="beforeInteractive"
         />
       </head>

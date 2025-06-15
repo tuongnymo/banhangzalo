@@ -2,8 +2,13 @@
   "appId": "3167508249860147713",
   "name": "Thời Trang Fullstore",
   "version": "1.0.0",
-  "main": "/",
+  "main": "https://fullstore.vercel.app/",
   "description": "Chuyên cung cấp các mặt hàng về giày dép, thời trang",
+  "host": {
+    "web": {
+      "baseURL": "https://banhangzalo.vercel.app/"
+    }
+  },
   "permissions": [
     "user.profile",
     "payment",
@@ -13,7 +18,7 @@
     "home": "/"
   },
   "developer": {
-  "name": "Fullstore Team",
-  "email": "tuongnymo@gmail.com"
-}
+    "name": "Fullstore Team",
+    "email": "tuongnymo@gmail.com"
+  }
 }
