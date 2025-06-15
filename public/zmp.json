@@ -2,7 +2,7 @@
   "appId": "3167508249860147713",
   "name": "Thời Trang Fullstore",
   "version": "1.0.0",
-  "main": "https://fullstore.vercel.app/",
+  "main": "https://banhangzalo.vercel.app/",
   "description": "Chuyên cung cấp các mặt hàng về giày dép, thời trang",
   "host": {
     "web": {
