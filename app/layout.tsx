@@ -1,24 +1,20 @@
-"use client"
+// app/layout.tsx
 
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
-import Link from "next/link"
-import MobileNavigation from "@/components/MobileNavigation"
-import { AuthProvider } from "@/context/AuthContext"
-import { CartProvider } from "@/context/CartContext"
-import { Toaster } from "@/components/ui/toaster"
-import CartIconBadge from "@/components/CartIconBadge"
 import Script from "next/script"
+import LayoutClient from "@/components/LayoutClient"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
   title: "Fashion Store",
   description: "Modern fashion e-commerce store",
-    generator: 'v0.dev'
+  generator: "v0.dev"
 }
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -33,215 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* ✅ Load Zalo Mini App SDK đúng cách */}
         <Script
           src="https://sp.zalo.me/sdk.js"
           strategy="beforeInteractive"
           onError={() => {
-    console.error("❌ Không thể load Zalo Mini App SDK.");
-  }}
+            console.error("❌ Không thể load Zalo Mini App SDK.")
+          }}
         />
       </head>
       <body className={`${inter.variable} font-sans`}>
-        <AuthProvider>
-          <CartProvider>
-            <header className="border-b border-gray-200">
-              <div className="container mx-auto flex items-center justify-between p-4">
-                <Link href="/" className="text-xl font-bold">
-                  FULLSTORE FASHION
-                </Link>
-                <nav className="hidden space-x-6 md:flex">
-                  <Link href="/" className="hover:text-gray-500">
-                    Trang Chủ
-                  </Link>
-                  <Link href="/category/shoes" className="hover:text-gray-500">
-                    Shop Nam
-                  </Link>
-                  <Link href="/category/clothing" className="hover:text-gray-500">
-                    Shop Nữ
-                  </Link>
-                  <Link href="/category/accessories" className="hover:text-gray-500">
-                    Túi Xách & Phụ Kiện
-                  </Link>
-                </nav>
-                <div className="flex items-center space-x-4">
-                  <Link href="/search" className="hover:text-gray-500 p-2 touch-manipulation">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <path d="m21 21-4.3-4.3"></path>
-                    </svg>
-                  </Link>
-                  <CartIconBadge />
-                  <Link href="/account" className="hover:text-gray-500 p-2 touch-manipulation">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                  </Link>
-                  <button className="md:hidden p-2 touch-manipulation">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="4" x2="20" y1="12" y2="12"></line>
-                      <line x1="4" x2="20" y1="6" y2="6"></line>
-                      <line x1="4" x2="20" y1="18" y2="18"></line>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </header>
-            <main className="pb-20 md:pb-0">{children}</main>
-            <footer className="bg-gray-100 py-12">
-              <div className="container mx-auto px-4">
-                <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-                  <div>
-                    <h3 className="mb-4 text-lg font-bold">FULLSTORE FASHION</h3>
-                    <p className="text-gray-600">
-                      Uy tín, Chất lượng tạo nên thương hiệu
-                    </p>
-                  </div>
-                  <div>
-                    <h3 className="mb-4 text-lg font-bold">Cửa Hàng</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>
-                        <Link href="/category/shoes" className="hover:text-black block py-1">
-                          Shop Nam
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/category/clothing" className="hover:text-black block py-1">
-                          Shop Nữ
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/category/accessories" className="hover:text-black block py-1">
-                          Túi Xách & Phụ Kiện
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/category/all" className="hover:text-black block py-1">
-                          Tất cả sản phẩm
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="mb-4 text-lg font-bold">Chăm Sóc Khách Hàng</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li>
-                        <Link href="/about" className="hover:text-black block py-1">
-                          Về chúng tôi
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/contact" className="hover:text-black block py-1">
-                          Liên hệ
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/terms" className="hover:text-black block py-1">
-                          Điều khoản và điều kiện
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/privacy" className="hover:text-black block py-1">
-                          Chính sách bảo mật
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="mb-4 text-lg font-bold">Liên Kết</h3>
-                    <div className="flex space-x-4">
-                      <a href="#" className="hover:text-gray-500 p-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                        </svg>
-                      </a>
-                      <a href="#" className="hover:text-gray-500 p-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                        </svg>
-                      </a>
-                      <a href="#" className="hover:text-gray-500 p-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-12 border-t border-gray-200 pt-8 text-center">
-                  <p className="text-gray-600">© 2025 FULLSTORE FASHION. All rights reserved.</p>
-                </div>
-              </div>
-            </footer>
-
-            {/* Mobile Navigation */}
-            <MobileNavigation />
-            <Toaster />
-          </CartProvider>
-        </AuthProvider>
+        <LayoutClient>{children}</LayoutClient>
       </body>
     </html>
   )
