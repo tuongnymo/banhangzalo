@@ -10,8 +10,13 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 export const metadata: Metadata = {
   title: "Fashion Store",
   description: "Modern fashion e-commerce store",
-  generator: "v0.dev"
+  generator: "v0.dev",
+other: {
+  "zalo-platform-site-verification": "VkIk3O_2DZ9Mr-GHqUH-53NlyYdPcIHpC38u"
 }
+}
+
+
 
 export const viewport: Viewport = {
   width: "device-width",
