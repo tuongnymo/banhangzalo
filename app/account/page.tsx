@@ -42,40 +42,37 @@ const [profile, setProfile] = useState({
 })
 
 useEffect(() => {
-  const fetchProfile = async () => {
-    try {
-      const res = await fetch('/api/profile')
-      if (!res.ok) throw new Error('Lỗi khi lấy profile')
-      const data = await res.json()
-    console.log("🎯 Avatar URL sau khi fetch:", data.avatar_url) // 👈 thêm dòng này
-      setProfile({
-        full_name: data.full_name || '',
-        phone: data.phone || '',
-        birthday: data.birthday || '',
-        avatar_url: data.avatar_url || ''
-      })
-    } catch (err) {
-      console.error('Lỗi khi load profile:', err)
-    }
-  }
-
   fetchProfile()
 }, [])
-//KẾT THÚC PHẦN Profile
 
 const fetchProfile = async () => {
   try {
     const res = await fetch('/api/profile')
+    if (!res.ok) throw new Error('Lỗi khi lấy profile')
+
     const data = await res.json()
-    if (res.ok) {
-      setProfile(data)
-    } else {
-      console.error('❌ Lỗi khi fetch profile:', data.error)
-    }
+if (!data || typeof data !== 'object') throw new Error('Dữ liệu profile không hợp lệ')
+
+const {
+  full_name = '',
+  phone = '',
+  birthday = '',
+  avatar_url = ''
+} = data
+
+    setProfile({ full_name, phone, birthday, avatar_url })
   } catch (err) {
-    console.error('❌ Lỗi mạng khi fetch profile:', err)
+    console.error('❌ Lỗi khi fetch profile:', err)
   }
-} 
+}
+
+useEffect(() => {
+  return () => {
+    if (typeof avatarPreview === 'string') {
+      URL.revokeObjectURL(avatarPreview)
+    }
+  }
+}, [avatarPreview])
 
 // Hàm xử lý cập nhật thông tin cá nhân
 const handleProfileUpdate = async (e: React.FormEvent) => {
@@ -97,7 +94,7 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
       }
 
       // ✅ Thực hiện upload
-      const filePath = `avatar-${user.id}`; // hoặc `${user.id}.png`
+      const filePath = `avatars/${user.id}/${Date.now()}-${avatarFile.name}`;
 
 const { data, error } = await supabase.storage
   .from('avatars')
@@ -255,6 +252,7 @@ const handleDeleteAddress = async (id: string) => {
     const res = await fetch(`/api/addresses?id=${id}`, {
       method: "DELETE",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`
       }
     });
