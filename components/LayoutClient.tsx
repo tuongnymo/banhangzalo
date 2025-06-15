@@ -7,10 +7,19 @@ import MobileNavigation from "@/components/MobileNavigation"
 import CartIconBadge from "@/components/CartIconBadge"
 import Link from "next/link"
 import { ReactNode } from "react"
+import Script from "next/script"
 
 export default function LayoutClient({ children }: { children: ReactNode }) {
   return (
-    <AuthProvider>
+    <>
+      <Script
+        src="https://sp.zalo.me/sdk.js"
+        strategy="beforeInteractive"
+        onError={() => {
+          console.error("❌ Không thể load Zalo Mini App SDK.")
+        }}
+      />
+      <AuthProvider>
       <CartProvider>
         <header className="border-b border-gray-200">
           <div className="container mx-auto flex items-center justify-between p-4">
@@ -99,5 +108,6 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         <Toaster />
       </CartProvider>
     </AuthProvider>
+    </>
   )
 }
