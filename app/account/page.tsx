@@ -105,7 +105,7 @@ const { data, error } = await supabase.storage
     upsert: true,
     cacheControl: '3600',
     metadata: {
-      owner: user.id, // Chính là field `id` ở bảng profiles
+      owner: String(user.id),
     },
   });
 
