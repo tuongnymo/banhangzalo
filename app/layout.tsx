@@ -35,6 +35,9 @@ export default function RootLayout({
         <Script
           src="https://sp.zalo.me/sdk.js"
           strategy="beforeInteractive"
+          onError={() => {
+    console.error("❌ Không thể load Zalo Mini App SDK.");
+  }}
         />
       </head>
       <body className={`${inter.variable} font-sans`}>

@@ -27,6 +27,25 @@ export default function Home() {
   const [sdkError, setSdkError] = useState<string | null>(null)
 
   useEffect(() => {
+  if (typeof window !== 'undefined' && window.ZaloMiniApp) {
+    console.log("✅ SDK đã load!");
+
+    window.ZaloMiniApp.getUserInfo({
+      success: (data: any) => {
+        console.log("User info:", data);
+        setUserInfo(data);
+      },
+      fail: (err: any) => {
+        console.error("Lỗi khi gọi getUserInfo:", err);
+        setSdkError("Lỗi khi lấy thông tin người dùng.");
+      },
+    });
+  } else {
+    console.warn("⚠️ SDK chưa sẵn sàng.");
+  }
+}, []);
+
+  useEffect(() => {
     const fetchUserInfo = () => {
       if (typeof window !== "undefined" && window.ZaloMiniApp) {
         window.ZaloMiniApp.getUserInfo({
