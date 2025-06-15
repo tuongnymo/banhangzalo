@@ -93,9 +93,22 @@ const handleProfileUpdate = async (e: React.FormEvent) => {
         return;
       }
 
-      // ✅ Thực hiện upload
-      const filePath = `avatars/${user.id}/${Date.now()}-${avatarFile.name}`;
+      // ✅ Kiểm tra user.id
+if (!user?.id) {
+  console.error('❌ Lỗi: user.id không tồn tại');
+  return;
+}
 
+// ✅ Kiểm tra avatarFile hợp lệ
+if (!((avatarFile as any) instanceof File || (avatarFile as any) instanceof Blob)) {
+  console.error('❌ avatarFile không hợp lệ:', avatarFile);
+  return;
+}
+
+// ✅ Đúng filePath (không có 'avatars/' ở đầu)
+const filePath = `${user.id}/${Date.now()}-${avatarFile.name}`;
+
+// ✅ Thực hiện upload
 const { data, error } = await supabase.storage
   .from('avatars')
   .upload(filePath, avatarFile, {
@@ -105,6 +118,13 @@ const { data, error } = await supabase.storage
       owner: String(user.id),
     },
   });
+
+if (error) {
+  console.error('❌ Upload avatar lỗi:', error);
+  setUpdateStatus('error');
+  return;
+}
+
 
       if (error) {
         console.error('❌ Upload avatar lỗi:', error);
