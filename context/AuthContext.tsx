@@ -11,7 +11,7 @@ type AuthContextType = {
   isLoading: boolean
   isAuthenticated: boolean
   signUp: (
-    email: string,
+    phone: string,
     password: string,
     fullName: string
   ) => Promise<{ error: any | null }>
@@ -60,9 +60,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => subscription.unsubscribe()
   }, [router])
 
-  const signUp = async (email: string, password: string, fullName: string) => {
+  const signUp = async (phone: string, password: string, fullName: string) => {
     const { error } = await supabase.auth.signUp({
-      email,
+      phone,
       password,
       options: {
         data: {
@@ -72,7 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     })
 
     if (!error) {
-      await supabase.auth.signInWithPassword({ email, password })
+      await supabase.auth.signInWithPassword({ phone, password })
       const {
         data: { user },
       } = await supabase.auth.getUser()
@@ -88,9 +88,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return { error }
   }
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (phone: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({
-      email,
+      phone,
       password,
     })
 

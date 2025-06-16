@@ -29,151 +29,60 @@ export default function AccountPage() {
 const [orders, setOrders] = useState<Order[]>([])
 const [loadingOrders, setLoadingOrders] = useState(true)
 const [updateStatus, setUpdateStatus] = useState<null | 'success' | 'error'>(null)
-const [avatarFile, setAvatarFile] = useState<File | null>(null);
-const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 const [isUpdating, setIsUpdating] = useState(false);
 
 // Khởi tạo state cho profile
 const [profile, setProfile] = useState({
   full_name: '',
   phone: '',
-  birthday: '',
-  avatar_url: ''
+  birthday: ''
 })
-
-useEffect(() => {
-  fetchProfile()
-}, [])
 
 const fetchProfile = async () => {
   try {
-    const res = await fetch('/api/profile')
-    if (!res.ok) throw new Error('Lỗi khi lấy profile')
+    const res = await fetch('/api/profile');
+    if (!res.ok) throw new Error('Lỗi khi lấy profile');
 
-    const data = await res.json()
-if (!data || typeof data !== 'object') throw new Error('Dữ liệu profile không hợp lệ')
+    const data = await res.json();
+    if (!data.profile) throw new Error('Dữ liệu profile không hợp lệ');
 
-const {
-  full_name = '',
-  phone = '',
-  birthday = '',
-  avatar_url = ''
-} = data
-
-    setProfile({ full_name, phone, birthday, avatar_url })
+    const { full_name = '', phone = '', birthday = '' } = data.profile;
+    setProfile({ full_name, phone, birthday });
   } catch (err) {
-    console.error('❌ Lỗi khi fetch profile:', err)
+    console.error('❌ Lỗi khi fetch profile:', err);
   }
-}
+};
 
-useEffect(() => {
-  return () => {
-    if (typeof avatarPreview === 'string') {
-      URL.revokeObjectURL(avatarPreview)
-    }
-  }
-}, [avatarPreview])
 
-// Hàm xử lý cập nhật thông tin cá nhân
+// Hàm xử lý cập nhật thông tin cá nhân (chỉ cập nhật tên, sđt, ngày sinh)
 const handleProfileUpdate = async (e: React.FormEvent) => {
-  e.preventDefault()
+  e.preventDefault();
+  setIsUpdating(true);
 
-  let uploadedUrl = profile.avatar_url;
-
-  // ✅ Bước 1: Kiểm tra và upload avatar nếu có
-  if (avatarFile && user?.id) {
-    try {
-      // ✅ Lấy phiên đăng nhập
-      const sessionRes = await supabase.auth.getSession();
-      const currentUser = sessionRes.data.session?.user;
-
-      if (!currentUser) {
-        console.error("❌ Không có người dùng đăng nhập.");
-        setUpdateStatus('error');
-        return;
-      }
-
-      // ✅ Kiểm tra user.id
-if (!user?.id) {
-  console.error('❌ Lỗi: user.id không tồn tại');
-  return;
-}
-
-// ✅ Kiểm tra avatarFile hợp lệ
-if (!((avatarFile as any) instanceof File || (avatarFile as any) instanceof Blob)) {
-  console.error('❌ avatarFile không hợp lệ:', avatarFile);
-  return;
-}
-
-// ✅ Đúng filePath (không có 'avatars/' ở đầu)
-const filePath = `${user.id}/${Date.now()}-${avatarFile.name}`;
-
-// ✅ Thực hiện upload
-const { data, error } = await supabase.storage
-  .from('avatars')
-  .upload(filePath, avatarFile, {
-    upsert: true,
-    cacheControl: '3600',
-    metadata: {
-      owner: String(user.id),
-    },
-  });
-
-if (error) {
-  console.error('❌ Upload avatar lỗi:', error);
-  setUpdateStatus('error');
-  return;
-}
-
-
-      if (error) {
-        console.error('❌ Upload avatar lỗi:', error);
-        setUpdateStatus('error');
-        return;
-      }
-
-      // ✅ Lấy public URL
-      uploadedUrl = supabase.storage
-        .from('avatars')
-        .getPublicUrl(data.path).data.publicUrl;
-
-      console.log("✅ Upload thành công:", uploadedUrl);
-    } catch (err) {
-      console.error("❌ Lỗi khi xử lý upload avatar:", err);
-      setUpdateStatus('error');
-      return;
-    }
-  }
-
-  // ✅ Bước 2: Gửi dữ liệu cập nhật thông tin
-    setIsUpdating(true);
   try {
     const res = await fetch('/api/profile', {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ...profile,
-        avatar_url: uploadedUrl,
-      })
-    })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(profile),
+    });
 
-    if (!res.ok) throw new Error('Cập nhật thất bại')
+    const result = await res.json();
+
+    if (!res.ok) throw new Error(result.error || 'Cập nhật thất bại');
+
+    if (result.profile) {
+      setProfile(result.profile);
+    }
 
     setUpdateStatus('success');
-    setAvatarFile(null);
-    setAvatarPreview(null);
-    fetchProfile();
   } catch (err) {
     console.error('❌ Lỗi khi cập nhật thông tin profile:', err);
-    setUpdateStatus('error')
-  }finally {
-  setIsUpdating(false); // 👈 reset dù thành công hay lỗi
-}
-}
+    setUpdateStatus('error');
+  } finally {
+    setIsUpdating(false);
+  }
+};
 
-// Kết thúc phần cập nhật thông tin cá nhân
 
 //Hiển thị thông báo cập nhật
 useEffect(() => {
@@ -405,18 +314,8 @@ useEffect(() => {
       </div>
 
       <div className="mb-8 flex items-center">
-  <div className="mr-4 h-16 w-16 overflow-hidden rounded-full bg-gray-200">
-    {profile.avatar_url ? (
-      <img
-        src={profile.avatar_url}
-        alt={profile.full_name?.charAt(0).toUpperCase() || "?"}
-        className="h-full w-full object-cover"
-      />
-    ) : (
-      <div className="flex h-full w-full items-center justify-center bg-gray-300 text-xl font-bold text-gray-600">
-        {profile.full_name?.charAt(0).toUpperCase() || "?"}
-      </div>
-    )}
+  <div className="mr-4 h-16 w-16 overflow-hidden rounded-full bg-gray-300 text-xl font-bold text-gray-600 flex items-center justify-center">
+    {profile.full_name?.charAt(0).toUpperCase() || "?"}
   </div>
   <div>
     <h2 className="text-xl font-semibold">{profile.full_name || "Người dùng"}</h2>
@@ -491,28 +390,6 @@ useEffect(() => {
         <TabsContent value="profile" className="space-y-4">
           <div className="rounded-lg border border-gray-200 p-6">
             <h3 className="mb-4 text-lg font-semibold">Thông tin cá nhân</h3>
-            <div>
-  <label className="mb-1 block text-sm font-medium">Ảnh đại diện</label>
-
-  {avatarPreview || profile.avatar_url ? (
-    <img
-      src={avatarPreview || profile.avatar_url}
-      alt="avatar"
-      className="mb-2 h-16 w-16 rounded-full object-cover"
-    />
-  ) : null}
-
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-      setAvatarFile(file);
-      setAvatarPreview(URL.createObjectURL(file));
-    }}
-  />
-</div>
             <form className="space-y-4" onSubmit={handleProfileUpdate}>
               {updateStatus === 'success' && (
               <div className="rounded-md bg-green-100 px-4 py-2 text-green-700 text-sm">

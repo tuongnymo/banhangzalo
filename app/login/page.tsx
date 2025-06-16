@@ -7,14 +7,17 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useAuth } from "@/context/AuthContext"
 import { useToast } from "@/components/ui/use-toast"
+import { Phone } from "lucide-react"
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
+
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const { signIn, isAuthenticated } = useAuth()
   const router = useRouter()
   const { toast } = useToast()
+  const [phone, setPhone] = useState('');
+
 
   // Nếu đã đăng nhập, chuyển hướng về trang chủ
   if (isAuthenticated) {
@@ -25,7 +28,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!email || !password) {
+    if (!phone || !password) {
       toast({
         title: "Lỗi",
         description: "Vui lòng nhập đầy đủ thông tin",
@@ -37,7 +40,12 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      const result = await signIn(email, password)
+      const normalizedPhone = phone.startsWith("0")
+  ? phone.replace(/^0/, "+84")
+  : phone
+
+const result = await signIn(normalizedPhone, password)
+
       
       console.log("🔐 Login result:", result)
 
@@ -77,16 +85,16 @@ if (!result.error) {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium">
-              Email
+            <label htmlFor="phone" className="mb-1 block text-sm font-medium">
+              Số điện thoại
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-              placeholder="Nhập email của bạn"
+              placeholder="Nhập số điện thoại của bạn"
               disabled={isLoading}
             />
           </div>

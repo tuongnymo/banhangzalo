@@ -1,53 +1,91 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createServerSupabaseClient } from '@/src/lib/supabaseServer'
+// app/api/profile/route.ts
+import { NextResponse } from "next/server";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
-// GET: lấy thông tin cá nhân
-export async function GET(req: NextRequest) {
-  const supabase = createServerSupabaseClient()
+// GET: Lấy thông tin user
+export async function GET() {
+  const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
-    error: authError,
-  } = await supabase.auth.getUser()
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (authError || !user) {
-    return NextResponse.json({ error: 'Bạn chưa đăng nhập.' }, { status: 401 })
+  if (userError || !user) {
+    return NextResponse.json({ error: "Không tìm thấy người dùng." }, { status: 401 });
   }
 
-  const { data: profile, error } = await supabase
-    .from('profiles')
-    .select('full_name, phone, birthday, avatar_url') // 👈 thêm avatar_url
-    .eq('id', user.id)
-    .single()
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
 
-  if (error) {
-    return NextResponse.json({ error: 'Không lấy được thông tin.' }, { status: 500 })
+  if (profileError) {
+    return NextResponse.json({ error: "Không tìm thấy hồ sơ người dùng." }, { status: 404 });
   }
 
-  return NextResponse.json(profile)
+  return NextResponse.json(profile);
 }
 
-// PUT: cập nhật thông tin cá nhân
-export async function PUT(req: NextRequest) {
-  const supabase = createServerSupabaseClient()
+// POST: Cập nhật thông tin user
+export async function POST(req: Request) {
+  const supabase = createServerComponentClient({ cookies });
   const {
     data: { user },
-    error: authError,
-  } = await supabase.auth.getUser()
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  if (authError || !user) {
-    return NextResponse.json({ error: 'Bạn chưa đăng nhập.' }, { status: 401 })
+  if (userError || !user) {
+    return NextResponse.json({ error: "Không xác thực được người dùng." }, { status: 401 });
   }
 
-  const { full_name, phone, birthday, avatar_url } = await req.json() // 👈 nhận thêm avatar_url
+  const { full_name, phone } = await req.json();
 
-  const { error } = await supabase
-    .from('profiles')
-    .update({ full_name, phone, birthday, avatar_url }) // 👈 cập nhật cả avatar_url
-    .eq('id', user.id)
+  const { error: updateError } = await supabase
+    .from("profiles")
+    .update({ full_name, phone })
+    .eq("id", user.id);
 
-  if (error) {
-    return NextResponse.json({ error: 'Cập nhật thất bại.' }, { status: 500 })
+  if (updateError) {
+    return NextResponse.json({ error: "Cập nhật thất bại." }, { status: 500 });
   }
 
-  return NextResponse.json({ success: true })
+  return NextResponse.json({ message: "Cập nhật thành công." });
+}
+
+// PUT: Cập nhật thông tin người dùng (full_name, phone, birthday)
+export async function PUT(req: Request) {
+  const supabase = createServerComponentClient({ cookies });
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return NextResponse.json({ error: "Không xác thực được người dùng." }, { status: 401 });
+  }
+
+  try {
+    const { full_name, phone, birthday } = await req.json();
+
+    const { error: updateError } = await supabase
+      .from("profiles")
+      .update({ full_name, phone, birthday })
+      .eq("id", user.id);
+
+    if (updateError) {
+      return NextResponse.json({ error: "Cập nhật thất bại." }, { status: 500 });
+    }
+
+    const { data: updatedProfile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+
+    return NextResponse.json({ profile: updatedProfile });
+  } catch (err) {
+    return NextResponse.json({ error: "Dữ liệu gửi lên không hợp lệ." }, { status: 400 });
+  }
 }

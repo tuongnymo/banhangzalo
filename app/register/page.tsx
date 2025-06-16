@@ -10,7 +10,7 @@ import { useToast } from "@/components/ui/use-toast"
 
 export default function RegisterPage() {
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -28,7 +28,7 @@ export default function RegisterPage() {
     e.preventDefault()
 
     // Kiểm tra dữ liệu nhập vào
-    if (!name || !email || !password || !confirmPassword) {
+    if (!name || !phone || !password || !confirmPassword) {
       toast({
         title: "Lỗi",
         description: "Vui lòng nhập đầy đủ thông tin",
@@ -58,7 +58,12 @@ export default function RegisterPage() {
     setIsLoading(true)
 
     try {
-      const result = await signUp(email, password, name)
+      const normalizedPhone = phone.startsWith("0")
+  ? phone.replace(/^0/, "+84")
+  : phone
+
+const result = await signUp(normalizedPhone, password, name)
+
 
 if (!result.error) {
   toast({
@@ -109,16 +114,16 @@ if (!result.error) {
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium">
-              Email
+            <label htmlFor="phone" className="mb-1 block text-sm font-medium">
+              Số điện thoại
             </label>
             <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              type="tel"
+              id="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-              placeholder="Nhập email của bạn"
+              placeholder="Nhập số điện thoại của bạn"
               disabled={isLoading}
             />
           </div>

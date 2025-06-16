@@ -94,7 +94,7 @@ export default function CheckoutPage() {
     e.preventDefault()
 
     // Kiểm tra dữ liệu nhập vào
-    const requiredFields = ["fullName", "email", "phone", "address", "city", "province", "paymentMethod"]
+    const requiredFields = ["fullName", "email", "phone", "address", "paymentMethod"]
     const emptyFields = requiredFields.filter((field) => !formData[field as keyof typeof formData])
 
     if (emptyFields.length > 0) {
@@ -150,13 +150,7 @@ setIsCheckingOut(true)
 clearCart()
 
 setTimeout(() => {
-  const redirectUrl =
-    formData.paymentMethod === "cod"
-      ? `/thankyou?orderCode=${orderCode}`
-      : formData.paymentMethod === "bank"
-      ? `/bankpayment?orderCode=${orderCode}`
-      : `/payment-status?orderCode=${orderCode}`
-
+  const redirectUrl = `/thankyou?orderCode=${orderCode}`
   router.push(redirectUrl)
 }, 0)
 
@@ -256,54 +250,7 @@ setTimeout(() => {
               />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-3">
-              <div>
-                <label htmlFor="province" className="mb-1 block text-sm font-medium">
-                  Tỉnh/Thành phố <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="province"
-                  name="province"
-                  value={formData.province}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                  placeholder="Tỉnh/Thành phố"
-                  disabled={isSubmitting}
-                />
-              </div>
-              <div>
-                <label htmlFor="district" className="mb-1 block text-sm font-medium">
-                  Quận/Huyện <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="district"
-                  name="district"
-                  value={formData.district}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                  placeholder="Quận/Huyện"
-                  disabled={isSubmitting}
-                />
-              </div>
-              <div>
-                <label htmlFor="city" className="mb-1 block text-sm font-medium">
-                  Phường/Xã <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border border-gray-300 px-4 py-2 focus:border-black focus:outline-none"
-                  placeholder="Phường/Xã"
-                  disabled={isSubmitting}
-                />
-              </div>
-            </div>
-
+            
             <div>
               <label htmlFor="notes" className="mb-1 block text-sm font-medium">
                 Ghi chú
@@ -334,18 +281,6 @@ setTimeout(() => {
                     disabled={isSubmitting}
                   />
                   <span className="ml-2">Thanh toán khi nhận hàng (COD)</span>
-                </label>
-                <label className="flex cursor-pointer items-center rounded-md border border-gray-300 p-3 hover:border-black">
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="bank"
-                    checked={formData.paymentMethod === "bank"}
-                    onChange={handleInputChange}
-                    className="h-4 w-4 text-black focus:ring-black"
-                    disabled={isSubmitting}
-                  />
-                  <span className="ml-2">Chuyển khoản ngân hàng</span>
                 </label>
               </div>
             </div>

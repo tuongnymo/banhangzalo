@@ -6,6 +6,7 @@ import BannerCarousel from "@/components/BannerCarousel"
 import NewArrivals from "@/components/NewArrivals"
 import FeaturedProducts from "@/components/FeaturedProducts"
 import { useEffect, useState } from "react"
+import FloatingButtons from "@/components/FloatingButtons"
 
 declare global {
   interface Window {
@@ -197,6 +198,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/*Nút phím tắt Zalo*/}
+      <FloatingButtons />
     </div>
   )
 }

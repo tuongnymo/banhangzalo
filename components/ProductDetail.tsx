@@ -18,6 +18,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined)
   const [selectedColor, setSelectedColor] = useState<any>(undefined)
   const [quantity, setQuantity] = useState(1)
+  const defaultImage = product.images?.[2] || "/placeholder.svg?height=600&width=600";
+  const [selectdImage, setSelectImage] = useState(defaultImage)
+  console.log("Product Detail", selectdImage)
 
   // ✅ NEW: Auto-select default size & color once product is available
   useEffect(() => {
@@ -33,47 +36,47 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   }
 
   const handleAddToCart = () => {
-  if (!selectedSize || !selectedColor) {
-    toast({
-      title: "Lỗi",
-      description: "Vui lòng chọn kích thước và màu sắc",
-      variant: "destructive",
-    })
-    return
-  }
+    if (!selectedSize || !selectedColor) {
+      toast({
+        title: "Lỗi",
+        description: "Vui lòng chọn kích thước và màu sắc",
+        variant: "destructive",
+      })
+      return
+    }
 
     const item = {
-    id: product.id,
-    name: product.name,
-    price: product.price,
-    image: product.images[0],
-    size: selectedSize,
-    color: selectedColor,
-    quantity,
-  }
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0],
+      size: selectedSize,
+      color: selectedColor,
+      quantity,
+    }
 
     addToCart(item)
     setQuantity(1)
 
     // Hiệu ứng bay vào giỏ hàng
-  const img = document.querySelector(`#product-image`)
-  const cart = document.querySelector(`#cart-icon`)
-  if (img && cart) {
-    const imgRect = img.getBoundingClientRect()
-    const cartRect = cart.getBoundingClientRect()
-    const dx = cartRect.left - imgRect.left
-    const dy = cartRect.top - imgRect.top
+    const img = document.querySelector(`#product-image`)
+    const cart = document.querySelector(`#cart-icon`)
+    if (img && cart) {
+      const imgRect = img.getBoundingClientRect()
+      const cartRect = cart.getBoundingClientRect()
+      const dx = cartRect.left - imgRect.left
+      const dy = cartRect.top - imgRect.top
 
-    const clone = img.cloneNode(true) as HTMLElement
-    clone.classList.add("fly-image")
-    clone.style.left = `${imgRect.left}px`
-    clone.style.top = `${imgRect.top}px`
-    clone.style.setProperty("--dx", `${dx}px`)
-    clone.style.setProperty("--dy", `${dy}px`)
+      const clone = img.cloneNode(true) as HTMLElement
+      clone.classList.add("fly-image")
+      clone.style.left = `${imgRect.left}px`
+      clone.style.top = `${imgRect.top}px`
+      clone.style.setProperty("--dx", `${dx}px`)
+      clone.style.setProperty("--dy", `${dy}px`)
 
-    document.body.appendChild(clone)
-    setTimeout(() => clone.remove(), 800)
-  }
+      document.body.appendChild(clone)
+      setTimeout(() => clone.remove(), 800)
+    }
 
     toast({
       title: "Thành công",
@@ -114,6 +117,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const increaseQuantity = () => {
     setQuantity(quantity + 1)
   }
+  console.log("Product Detail", product)
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -122,15 +126,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <div className="space-y-4">
           <div className="overflow-hidden rounded-lg bg-gray-100">
             <img
-              src={product.images[0] || "/placeholder.svg?height=600&width=600"}
-              alt={product.name}
+              src={selectdImage || "/placeholder.svg?height=600&width=600"}
+              alt="Ảnh sản phẩm lớn"
               className="h-full w-full object-cover object-center"
               id="product-image"
             />
           </div>
           <div className="grid grid-cols-4 gap-2">
             {product.images.map((image, index) => (
-              <div key={index} className="overflow-hidden rounded-md bg-gray-100">
+              <div
+                key={index}
+                className="overflow-hidden rounded-md bg-gray-100 cursor-pointer"
+                onClick={() => setSelectImage(image)}
+              >
                 <img
                   src={image || `/placeholder.svg?height=150&width=150&text=Image ${index + 1}`}
                   alt={`${product.name} ${index + 1}`}
@@ -154,20 +162,19 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <h3 className="text-sm font-medium">Kích thước</h3>
             <div className="mt-2 flex flex-wrap gap-2">
               {Array.isArray(product.sizes) &&
-              product.sizes.map((size) => (
-                <button
-                  key={size}
-                  type="button"
-                  className={`flex min-w-[3rem] items-center justify-center rounded-md border px-3 py-2 text-sm ${
-                    selectedSize === size
-                      ? "border-black bg-black text-white"
-                      : "border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
-                  }`}
-                  onClick={() => setSelectedSize(size)}
-                >
-                  {size}
-                </button>
-              ))}
+                product.sizes.map((size) => (
+                  <button
+                    key={size}
+                    type="button"
+                    className={`flex min-w-[3rem] items-center justify-center rounded-md border px-3 py-2 text-sm ${selectedSize === size
+                        ? "border-black bg-black text-white"
+                        : "border-gray-300 bg-white text-gray-900 hover:bg-gray-50"
+                      }`}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
             </div>
           </div>
 
@@ -176,26 +183,25 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <h3 className="text-sm font-medium">Màu sắc</h3>
             <div className="mt-2 flex flex-wrap gap-2">
               {Array.isArray(product.colors) &&
-              product.colors.map((color) => (
-                <button
-                  key={color.name}
-                  type="button"
-                  className={`relative flex h-10 w-10 items-center justify-center rounded-full border ${
-                    selectedColor?.name === color.name ? "border-black" : "border-gray-300"
-                  }`}
-                  onClick={() => setSelectedColor(color)}
-                >
-                  <span
-                    className="h-8 w-8 rounded-full"
-                    style={{ backgroundColor: color.hex }}
-                    aria-hidden="true"
-                  ></span>
-                  <span className="sr-only">{color.name}</span>
-                  {selectedColor?.name === color.name && (
-                    <span className="pointer-events-none absolute -inset-px rounded-full border-2 border-black"></span>
-                  )}
-                </button>
-              ))}
+                product.colors.map((color) => (
+                  <button
+                    key={color.name}
+                    type="button"
+                    className={`relative flex h-10 w-10 items-center justify-center rounded-full border ${selectedColor?.name === color.name ? "border-black" : "border-gray-300"
+                      }`}
+                    onClick={() => setSelectedColor(color)}
+                  >
+                    <span
+                      className="h-8 w-8 rounded-full"
+                      style={{ backgroundColor: color.hex }}
+                      aria-hidden="true"
+                    ></span>
+                    <span className="sr-only">{color.name}</span>
+                    {selectedColor?.name === color.name && (
+                      <span className="pointer-events-none absolute -inset-px rounded-full border-2 border-black"></span>
+                    )}
+                  </button>
+                ))}
             </div>
           </div>
 
