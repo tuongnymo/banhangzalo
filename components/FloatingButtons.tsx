@@ -23,7 +23,7 @@ export default function FloatingButtons() {
         className="w-12 h-12"
       >
         <Image
-          src="https://i.postimg.cc/pTyXpstb/logo-zalo-tron.jpg" // thay bằng ảnh zalo bạn muốn dùng
+          src="https://i.postimg.cc/pXPVjVvJ/t-1.webp" // thay bằng ảnh zalo bạn muốn dùng
           alt="Chat Zalo"
           width={48}
           height={48}
