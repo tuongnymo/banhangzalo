@@ -31,7 +31,7 @@ export default function RelatedProducts({ products }: RelatedProductsProps) {
         {visibleProducts.map((product) => (
           <ProductCard
             key={product.id}
-            id={product.id}
+            id={Number(product.id)}
             name={product.name}
             price={product.price}
             image={product.images[0]}
