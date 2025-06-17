@@ -17,7 +17,7 @@ const banners = [
   },
   {
     id: 3,
-    image: "https://i.postimg.cc/mkFhkmWp/4.webp",
+    image: "https://i.postimg.cc/zBCr3zC9/4-11zon.webp",
   },
 ]
 

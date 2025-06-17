@@ -81,7 +81,7 @@ export default function Home() {
             <Link href="/category/shoes" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="https://i.postimg.cc/qMskM4fL/41.jpg?height=300&width=300"
+                  src="https://i.postimg.cc/R0CswMxk/41webp.webp?height=300&width=300"
                   alt="Shoes"
                   fill
                   className="object-cover"
@@ -93,7 +93,7 @@ export default function Home() {
             <Link href="/category/clothing" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="https://i.postimg.cc/B66Y2qDL/43.jpg?height=300&width=300"
+                  src="https://i.postimg.cc/859Z8MfG/43webp.webp?height=300&width=300"
                   alt="Clothing"
                   fill
                   className="object-cover"
@@ -105,7 +105,7 @@ export default function Home() {
             <Link href="/category/accessories" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="https://i.postimg.cc/JhKYyyyC/42.jpg?height=300&width=300"
+                  src="https://i.postimg.cc/HxV6PBx3/44webp.webp?height=300&width=300"
                   alt="Accessories"
                   fill
                   className="object-cover"
@@ -117,7 +117,7 @@ export default function Home() {
             <Link href="/category/sale" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="https://i.postimg.cc/k4pjckFj/44.jpg?height=300&width=300"
+                  src="https://i.postimg.cc/LsyyTrHn/42webp.webp?height=300&width=300"
                   alt="Accessories"
                   fill
                   className="object-cover"
