@@ -7,7 +7,7 @@ export default function FloatingButtons() {
     <div className="fixed right-4 top-[70%] md:top-[80%] z-50 flex flex-col gap-4">
       {/* Phone Button */}
       <a
-        href="tel:0123456789"
+        href="tel"
         className="w-16 h-16 rounded-full bg-white/80 shadow-lg flex items-center justify-center animate-bounce hover:scale-110 transition-transform"
       >
         <Image
