@@ -85,7 +85,7 @@ export default function BannerCarousel() {
 
   return (
     <section
-      className="relative w-full aspect-[2/1] md:aspect-[16/7] overflow-hidden"
+      className="relative w-full aspect-[2/1] overflow-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
