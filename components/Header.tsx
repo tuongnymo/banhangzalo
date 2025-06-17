@@ -183,81 +183,8 @@ export default function Header() {
                 </span>
               )}
             </Link>
-
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="border-t border-gray-200 py-4 md:hidden">
-            <nav>
-              <ul className="space-y-4">
-                <li>
-                  <Link href="/" className="block hover:text-gray-600">
-                    Home
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/category/men" className="block hover:text-gray-600">
-                    Men
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/category/women" className="block hover:text-gray-600">
-                    Women
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/category/accessories" className="block hover:text-gray-600">
-                    Accessories
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/about" className="block hover:text-gray-600">
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/contact" className="block hover:text-gray-600">
-                    Contact
-                  </Link>
-                </li>
-                {isAuthenticated ? (
-                  <>
-                    <li>
-                      <Link href="/account" className="block hover:text-gray-600">
-                        Tài khoản của tôi
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/account/orders" className="block hover:text-gray-600">
-                        Đơn hàng của tôi
-                      </Link>
-                    </li>
-                    <li>
-                      <button onClick={logout} className="block text-red-600 hover:text-red-800">
-                        Đăng xuất
-                      </button>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <Link href="/login" className="block hover:text-gray-600">
-                        Đăng nhập
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/register" className="block hover:text-gray-600">
-                        Đăng ký
-                      </Link>
-                    </li>
-                  </>
-                )}
-              </ul>
-            </nav>
-          </div>
-        )}
       </div>
     </header>
   )
