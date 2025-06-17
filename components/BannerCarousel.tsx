@@ -9,28 +9,15 @@ import Image from "next/image"
 const banners = [
   {
     id: 1,
-    image: "https://i.postimg.cc/MKdBjr9B/bannerm.png",
-    link: "/category/shoes",
+    image: "https://i.postimg.cc/W3yhsQCJ/2.webp",
   },
   {
     id: 2,
-    image: "https://i.postimg.cc/NM46JPf1/4.jpg",
-    link: "/category/clothing",
+    image: "https://i.postimg.cc/0rRjw78k/3.webp",
   },
   {
     id: 3,
-    image: "https://i.postimg.cc/TwGjcXGd/6.jpg",
-    link: "/category/accessories",
-  },
-  {
-    id: 4,
-    image: "https://i.postimg.cc/ZRC84WXC/5.jpg",
-    link: "/category/accessories",
-  },
-  {
-    id: 5,
-    image: "https://i.postimg.cc/bJWQJzjL/3.jpg",
-    link: "/category/accessories",
+    image: "https://i.postimg.cc/mkFhkmWp/4.webp",
   },
 ]
 
@@ -119,15 +106,14 @@ export default function BannerCarousel() {
               <div className="relative h-full w-full min-w-full">
                 <Image
                   src={banner.image || "/placeholder.svg"}
-                  alt={banner.title}
+                  alt={`Banner ${banner.id}`}
                   fill
                   priority={index === 0}
                   sizes="100vw"
                   className="object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
-                  <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{banner.title}</h1>
-                  <p className="mb-6 text-base md:text-lg">{banner.subtitle}</p>
+                  <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{`Banner ${banner.id}`}</h1>
                 </div>
               </div>
             </div>
