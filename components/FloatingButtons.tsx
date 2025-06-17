@@ -4,7 +4,7 @@ import Image from "next/image"
 
 export default function FloatingButtons() {
   return (
-    <div className="fixed right-4 top-3/4 z-50 flex flex-col gap-4">
+    <div className="fixed right-4 top-4/6 z-50 flex flex-col gap-4">
       {/* Phone Button */}
       <a
         href="tel:0123456789"
