@@ -8,7 +8,7 @@ export default function FloatingButtons() {
       {/* Phone Button */}
       <a href="https://zalo.me/2997034025843763325" className="w-12 h-12">
         <Image
-          src="https://i.postimg.cc/fyVTBq3M/zalo1.png" // thay bằng đường dẫn ảnh bạn dùng, hoặc link trực tiếp
+          src="https://i.postimg.cc/YqWbB7ZY/zalo-1.webp" // thay bằng đường dẫn ảnh bạn dùng, hoặc link trực tiếp
           alt="Gọi điện"
           width={48}
           height={48}
@@ -23,7 +23,7 @@ export default function FloatingButtons() {
         className="w-12 h-12"
       >
         <Image
-          src="https://i.postimg.cc/gkpTyX1T/Icon-of-Zalo-svg.webp" // thay bằng ảnh zalo bạn muốn dùng
+          src="https://i.postimg.cc/dVcnqXcX/zalo.webp" // thay bằng ảnh zalo bạn muốn dùng
           alt="Chat Zalo"
           width={48}
           height={48}
