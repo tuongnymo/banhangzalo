@@ -136,7 +136,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Men's Collection */}
             <div className="relative h-80 w-full overflow-hidden rounded-lg">
-              <Image src="https://i.imgur.com/sK8hHdC.jpeg" alt="Shoes" fill className="object-cover object-[bottom]" />
+              <Image src="https://i.postimg.cc/90NCHxtM/1webp.webp" alt="Shoes" fill className="object-cover object-[bottom]" />
               <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
                 <h3 className="text-xl font-bold mb-2">Men's Collection</h3>
                 <p className="text-sm mb-4 px-4">Tối giản. Mạnh mẽ. Lôi cuốn</p>
@@ -151,7 +151,7 @@ export default function Home() {
             {/* Women's Collection */}
             <div className="relative h-80 w-full overflow-hidden rounded-lg">
               <Image
-                src="https://i.imgur.com/UnOqBkj.jpeg"
+                src="https://i.postimg.cc/Wp92Z3Lv/3webp.webp"
                 alt="Clothing"
                 fill
                 className="object-cover object-[bottom]"

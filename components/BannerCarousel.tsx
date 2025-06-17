@@ -9,11 +9,11 @@ import Image from "next/image"
 const banners = [
   {
     id: 1,
-    image: "https://i.postimg.cc/W3yhsQCJ/2.webp",
+    image: "https://i.postimg.cc/LsBS84BG/2.webp",
   },
   {
     id: 2,
-    image: "https://i.postimg.cc/0rRjw78k/3.webp",
+    image: "https://i.postimg.cc/260fnHtw/3.webp",
   },
   {
     id: 3,
