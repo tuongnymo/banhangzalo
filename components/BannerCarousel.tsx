@@ -112,9 +112,6 @@ export default function BannerCarousel() {
                   sizes="100vw"
                   className="object-cover w-full h-full"
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4">
-                  <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{`Banner ${banner.id}`}</h1>
-                </div>
               </div>
             </div>
           ))}
