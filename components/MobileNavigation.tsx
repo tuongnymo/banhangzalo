@@ -36,7 +36,7 @@ export default function MobileNavigation() {
       </Link>
 
       <Link
-        href="/category/all"
+        href="/category"
         className={`flex flex-col items-center p-2 touch-manipulation ${isActive("/category") ? "text-black" : "text-gray-500"}`}
       >
         <svg
