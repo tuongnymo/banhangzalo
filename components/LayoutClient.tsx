@@ -66,7 +66,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
                   <li><Link href="/category/shoes" className="hover:text-black block py-1">Shop Nam</Link></li>
                   <li><Link href="/category/clothing" className="hover:text-black block py-1">Shop Nữ</Link></li>
                   <li><Link href="/category/accessories" className="hover:text-black block py-1">Túi Xách & Phụ Kiện</Link></li>
-                  <li><Link href="/category/all" className="hover:text-black block py-1">Tất cả sản phẩm</Link></li>
+                  <li><Link href="/category" className="hover:text-black block py-1">Tất cả sản phẩm</Link></li>
                 </ul>
               </div>
               <div>

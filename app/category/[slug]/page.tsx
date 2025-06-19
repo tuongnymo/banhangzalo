@@ -41,12 +41,7 @@ export default function CategorySlugPage() {
     <div className="p-4">
       <h1 className="text-2xl font-bold mb-4 capitalize">Danh mục: {slug}</h1>
       {products.length === 0 ? (
-        <p>
-    Không có sản phẩm nào trong danh mục này.{' '}
-    <Link href="/category" className="text-blue-500 underline">
-      Xem tất cả sản phẩm
-    </Link>
-  </p>
+        <p>Không có sản phẩm nào trong danh mục này.</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {products.map((product) => (
