@@ -102,11 +102,11 @@ export default function Home() {
               <p className="mt-4 text-base font-semibold text-gray-800 group-hover:text-black">Giày Nữ</p>
             </Link>
 
-            <Link href="/category/accessories" className="flex flex-col items-center group">
+            <Link href="/category/bags" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src="https://i.postimg.cc/HxV6PBx3/44webp.webp?height=300&width=300"
-                  alt="Accessories"
+                  alt="Bags"
                   fill
                   className="object-cover"
                 />
@@ -114,7 +114,7 @@ export default function Home() {
               <p className="mt-4 text-base font-semibold text-gray-800 group-hover:text-black">Túi xách</p>
             </Link>
 
-            <Link href="/category/sale" className="flex flex-col items-center group">
+            <Link href="/category/accessories" className="flex flex-col items-center group">
               <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src="https://i.postimg.cc/LsyyTrHn/42webp.webp?height=300&width=300"

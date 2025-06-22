@@ -14,6 +14,12 @@ export default function CategorySlugPage() {
   const { slug } = useParams() as { slug: string }
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const categoryNameMap: Record<string, string> = {
+  shoes: 'Giày Nam',
+  clothing: 'Giày Nữ',
+  bags: 'Túi xách',
+  accessories: 'Phụ kiện',
+}
 
   useEffect(() => {
     if (!slug) return
@@ -39,7 +45,7 @@ export default function CategorySlugPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4 capitalize">Danh mục: {slug}</h1>
+      <h1 className="text-2xl font-bold mb-4">Danh mục: {categoryNameMap[slug] || slug}</h1>
       {products.length === 0 ? (
         <p>Không có sản phẩm nào trong danh mục này.</p>
       ) : (
