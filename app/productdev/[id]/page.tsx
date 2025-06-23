@@ -54,18 +54,22 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
           <div className="mt-2 flex items-center">
             {product.discount ? (
-              <>
-                <span className="text-xl font-bold text-gray-900">
-                  ${(product.price * (1 - product.discount / 100)).toFixed(2)}
-                </span>
-                <span className="ml-2 text-lg text-gray-500 line-through">${product.price.toFixed(2)}</span>
-                <span className="ml-2 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
-                  {product.discount}% OFF
-                </span>
-              </>
-            ) : (
-              <span className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
-            )}
+  <>
+    <span className="text-xl font-bold text-red-500">
+      {(product.price * (1 - product.discount / 100)).toLocaleString("vi-VN")}đ
+    </span>
+    <span className="ml-2 text-lg text-gray-500 line-through">
+      {product.price.toLocaleString("vi-VN")}đ
+    </span>
+    <span className="ml-2 rounded-md bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
+      -{product.discount}%
+    </span>
+  </>
+) : (
+  <span className="text-xl font-bold text-gray-900">
+    {product.price.toLocaleString("vi-VN")}đ
+  </span>
+)}
           </div>
 
           <div className="mt-6">
