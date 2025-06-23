@@ -22,7 +22,6 @@ declare global {
   }
 }
 
-
 export default function Home() {
   const [userInfo, setUserInfo] = useState<any>(null)
   const [sdkError, setSdkError] = useState<string | null>(null)
