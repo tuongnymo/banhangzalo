@@ -67,7 +67,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   </>
 ) : (
   <span className="text-xl font-bold text-gray-900">
-    {product.price.toLocaleString("vi-VN")}đ
+    {Number(product.price).toLocaleString("vi-VN")}đ
   </span>
 )}
           </div>
