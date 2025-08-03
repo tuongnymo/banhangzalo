@@ -78,7 +78,7 @@ export default function Home() {
       <section className="bg-white py-12">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-10 text-3xl font-bold">Bộ Sưu Tập</h2>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {/* Men's Collection */}
             <div className="relative h-80 w-full overflow-hidden rounded-lg">
               <Image src="https://i.postimg.cc/Wp92Z3Lv/3webp.webp" alt="Shoes" fill className="object-cover object-[bottom]" />
