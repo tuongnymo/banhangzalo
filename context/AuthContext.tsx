@@ -16,7 +16,7 @@ type AuthContextType = {
     phone: string,
     password: string,
     fullName: string
-  ) => Promise<{ error: any | null }>
+  ) => Promise<{ error: any | null; success?: boolean }>
   signIn: (
     email: string,
     password: string
@@ -63,32 +63,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [router])
 
   const signUp = async (phone: string, password: string, fullName: string) => {
-    const { error } = await supabase.auth.signUp({
-      phone,
-      password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
+  const { data, error } = await supabase.auth.signUp({
+    phone,
+    password,
+    options: {
+      data: {
+        full_name: fullName,
       },
-    })
+    },
+  })
 
-    if (!error) {
-      await supabase.auth.signInWithPassword({ phone, password })
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
-
-      if (user) {
-        await supabase.from('user_profiles').insert({
-          user_id: user.id,
-          full_name: fullName,
-        })
-      }
-    }
-
+  if (error) {
     return { error }
   }
+
+  // Tự động đăng nhập ngay sau khi đăng ký
+  const signInRes = await supabase.auth.signInWithPassword({ phone, password })
+
+  if (signInRes.error) {
+    return { error: signInRes.error }
+  }
+
+  const userRes = await supabase.auth.getUser()
+  const user = userRes.data.user
+
+  if (user) {
+    await supabase.from('user_profiles').insert({
+      user_id: user.id,
+      full_name: fullName,
+    })
+  }
+
+  return { error: null, success: true }
+}
+
 
   const signIn = async (phone: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({

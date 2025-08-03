@@ -63,9 +63,9 @@ export default function RegisterPage() {
   : phone
 
 const result = await signUp(normalizedPhone, password, name)
+console.log("Kết quả đăng ký:", result)
 
-
-if (!result.error) {
+if (result.success) {
   toast({
     title: "Đăng ký thành công",
     description: "Tài khoản của bạn đã được tạo thành công!",
@@ -74,10 +74,11 @@ if (!result.error) {
 } else {
   toast({
     title: "Đăng ký thất bại",
-    description: result.error.message,
+    description: result.error?.message || "Có lỗi xảy ra",
     variant: "destructive",
   })
 }
+
     } catch (error) {
       toast({
         title: "Lỗi",
