@@ -13,23 +13,22 @@ function generateOrderCode() {
 
 // Schema kiểm tra dữ liệu đơn hàng
 const OrderSchema = z.object({
-  id: z.string(),
-  userId: z.string(),
+  user_id: z.string(),
   items: z.array(z.any()),
   total: z.number(),
-  shipping: z.number(),
+  shipping_fee: z.number(),
   status: z.string(),
-  paymentMethod: z.string(),
-  paymentStatus: z.string(),
-  shippingInfo: z.object({
+  payment_method: z.string(),
+  payment_status: z.string(),
+  shipping_info: z.object({
     fullName: z.string(),
     email: z.string().email(),
     phone: z.string(),
     address: z.string(),
     notes: z.string().optional(),
   }),
-  createdAt: z.string(),
 })
+
 
 // GET: Lấy chi tiết đơn hàng theo ID
 export async function GET(req: Request, { params }: { params: { id: string } }) {
