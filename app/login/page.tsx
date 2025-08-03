@@ -26,54 +26,78 @@ export default function LoginPage() {
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    if (!phone || !password) {
+  if (!phone || !password) {
+    toast({
+      title: "Lỗi",
+      description: "Vui lòng nhập đầy đủ thông tin",
+      variant: "destructive",
+    })
+    return
+  }
+
+  setIsLoading(true)
+
+  try {
+    const normalizedPhone = phone.startsWith("0")
+      ? phone.replace(/^0/, "+84")
+      : phone
+
+    const result = await signIn(normalizedPhone, password)
+
+    console.log("🔐 Login result:", result)
+
+    if (!result.error) {
+      const supabase = useAuth().supabase // 👈 Nếu bạn đã expose supabase từ AuthContext
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      const { data: profile, error } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user?.id)
+        .single()
+
+      if (error || !profile) {
+        toast({
+          title: "Lỗi",
+          description: "Không thể lấy thông tin người dùng",
+          variant: "destructive",
+        })
+        return
+      }
+
       toast({
-        title: "Lỗi",
-        description: "Vui lòng nhập đầy đủ thông tin",
+        title: "Đăng nhập thành công",
+        description: "Chào mừng bạn quay trở lại!",
+      })
+
+      if (profile.role === "admin") {
+        router.push("/admin/orders")
+      } else {
+        router.push("/account")
+      }
+    } else {
+      toast({
+        title: "Đăng nhập thất bại",
+        description: result.error?.message || "Sai email hoặc mật khẩu",
         variant: "destructive",
       })
-      return
     }
-
-    setIsLoading(true)
-
-    try {
-      const normalizedPhone = phone.startsWith("0")
-  ? phone.replace(/^0/, "+84")
-  : phone
-
-const result = await signIn(normalizedPhone, password)
-
-      
-      console.log("🔐 Login result:", result)
-
-if (!result.error) {
-  toast({
-    title: "Đăng nhập thành công",
-    description: "Chào mừng bạn quay trở lại!",
-  })
-  router.push("/account")
-} else {
-  toast({
-    title: "Đăng nhập thất bại",
-    description: result.error?.message || "Sai email hoặc mật khẩu",
-    variant: "destructive",
-  })
-}
-    } catch (error) {
-  console.error("🔥 Đăng nhập lỗi:", error)
-  toast({
-    title: "Lỗi hệ thống",
-    description: "Không thể đăng nhập lúc này. Vui lòng thử lại sau.",
-    variant: "destructive",
-  })
-}
-    finally {
-      setIsLoading(false)
-    }
+  } catch (error) {
+    console.error("🔥 Đăng nhập lỗi:", error)
+    toast({
+      title: "Lỗi hệ thống",
+      description: "Không thể đăng nhập lúc này. Vui lòng thử lại sau.",
+      variant: "destructive",
+    })
+  } finally {
+    setIsLoading(false)
   }
+}
+
 
   return (
     <div className="container mx-auto flex min-h-[70vh] items-center justify-center px-4 py-8">

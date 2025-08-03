@@ -4,12 +4,14 @@ import { createContext, useContext, useEffect, useState } from 'react'
 import { Session, User } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
+import { SupabaseClient } from '@supabase/supabase-js'
 
 type AuthContextType = {
   user: User | null
   session: Session | null
   isLoading: boolean
   isAuthenticated: boolean
+  supabase: SupabaseClient
   signUp: (
     phone: string,
     password: string,
@@ -122,6 +124,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     session,
     isLoading,
     isAuthenticated: !!user,
+    supabase,
     signUp,
     signIn,
     signOut,
