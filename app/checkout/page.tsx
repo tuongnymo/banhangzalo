@@ -122,9 +122,9 @@ export default function CheckoutPage() {
       email: formData.email,
       phone: formData.phone,
       address: formData.address,
-      city: formData.city,
-      district: formData.district,
-      province: formData.province,
+      city: 'Không rõ',         // ✅ giá trị mặc định
+      district: 'Không rõ',     // ✅ giá trị mặc định
+      province: 'Không rõ',     // ✅ giá trị mặc định
       notes: formData.notes,
     },
   }
