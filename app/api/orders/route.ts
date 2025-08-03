@@ -88,9 +88,16 @@ export async function POST(req: Request) {
     shipping_info,
   } = body
 
-  if (!items || !total || !shipping_fee || !payment_method || !payment_status || !shipping_info) {
-    return NextResponse.json({ error: "Thiếu thông tin bắt buộc" }, { status: 400 })
-  }
+  if (
+  !items?.length ||
+  typeof total !== "number" ||
+  typeof shipping_fee !== "number" ||
+  typeof payment_method !== "string" ||
+  typeof payment_status !== "string" ||
+  typeof shipping_info !== "object"
+) {
+  return NextResponse.json({ error: "Thiếu thông tin bắt buộc" }, { status: 400 })
+}
 
   const orderCode = generateOrderCode()
 
