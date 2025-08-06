@@ -19,60 +19,169 @@ export default function Home() {
       <BannerCarousel />
 
       {/* Categories */}
-      <section className="bg-gray-100 pt-2 pb-6">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-12 text-3xl font-bold">Danh mục sản phẩm</h2>
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4 place-items-center">
-            <Link href="/category/shoes" className="flex flex-col items-center group">
-              <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
-                <Image
-                  src="https://i.postimg.cc/R0CswMxk/41webp.webp?height=300&width=300"
-                  alt="Shoes"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-4 text-base font-semibold text-gray-800 group-hover:text-black">Giày Nam</p>
-            </Link>
-
-            <Link href="/category/clothing" className="flex flex-col items-center group">
-              <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
-                <Image
-                  src="https://i.postimg.cc/859Z8MfG/43webp.webp?height=300&width=300"
-                  alt="Clothing"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-4 text-base font-semibold text-gray-800 group-hover:text-black">Giày Nữ</p>
-            </Link>
-
-            <Link href="/category/bags" className="flex flex-col items-center group">
-              <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
-                <Image
-                  src="https://i.postimg.cc/HxV6PBx3/44webp.webp?height=300&width=300"
-                  alt="Bags"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-4 text-base font-semibold text-gray-800 group-hover:text-black">Túi xách</p>
-            </Link>
-
-            <Link href="/category/accessories" className="flex flex-col items-center group">
-              <div className="relative w-32 h-32 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
-                <Image
-                  src="https://i.postimg.cc/LsyyTrHn/42webp.webp?height=300&width=300"
-                  alt="Accessories"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-4 text-base font-semibold text-gray-800 group-hover:text-black">Phụ kiện</p>
-            </Link>
-          </div>
+<section className="bg-gray-100 pt-2 pb-6">
+  <div className="container mx-auto px-4 text-center">
+    <h2 className="mb-12 text-3xl font-bold">Danh mục sản phẩm</h2>
+    <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4 place-items-center">
+      {/* Danh mục 1 */}
+      <Link href="/category/giay-cong-so-nam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg"
+            alt="Giày công sở nam"
+            fill
+            className="object-cover"
+          />
         </div>
-      </section>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày công sở nam</p>
+      </Link>
+
+      {/* Danh mục 2 */}
+      <Link href="/category/giay-the-thao-nam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/tC7MdNq8/giay-the-thao-nam.jpg"
+            alt="Giày thể thao nam"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày thể thao nam</p>
+      </Link>
+
+      {/* Danh mục 3 */}
+      <Link href="/category/giay-luoi" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/5yQrHbDh/giay-luoi.jpg"
+            alt="Giày lười"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày lười</p>
+      </Link>
+
+      {/* Danh mục 4 */}
+      <Link href="/category/giay-mlb" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/fL8CFmSx/giay-mlb.jpg"
+            alt="Giày MLB"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày MLB</p>
+      </Link>
+
+      {/* Danh mục 5 */}
+      <Link href="/category/giay-boot-nam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/wvwvDFYw/giay-boot-nam.jpg"
+            alt="Giày boot nam"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày boot nam</p>
+      </Link>
+
+      {/* Danh mục 6 */}
+      <Link href="/category/giay-custom-nu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/kXYGrVpr/giay-custom-nu.jpg"
+            alt="Giày custom nữ"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày custom nữ</p>
+      </Link>
+
+      {/* Danh mục 7 */}
+      <Link href="/category/giay-sneaker-nu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/xTw34pxY/giay-sneaker-nu.jpg"
+            alt="Giày sneaker nữ"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày sneaker nữ</p>
+      </Link>
+
+      {/* Danh mục 8 */}
+      <Link href="/category/giay-boot-nu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/8CN1bYjb/giay-boot-nu.jpg"
+            alt="Giày boot nữ"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày boot nữ</p>
+      </Link>
+
+      {/* Danh mục 9 */}
+      <Link href="/category/giay-cao-got" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/Y9gVtdB9/giay-cao-got.jpg"
+            alt="Giày cao gót"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày cao gót</p>
+      </Link>
+
+      {/* Danh mục 10 */}
+      <Link href="/category/dep-sandal-nu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/L8d08x8k/dep-sandal-nu.jpg"
+            alt="Dép sandal nữ"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Dép sandal nữ</p>
+      </Link>
+
+      {/* Danh mục 11 */}
+      <Link href="/category/phu-kien" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Phụ kiện</p>
+      </Link>
+
+      {/* Danh mục 12 */}
+      <Link href="/category/tui-xach" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/FsMsc6Yj/tui-xach.jpg"
+            alt="Túi xách"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Túi xách</p>
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       {/* Featured Collections */}
       <section className="bg-white py-12">
