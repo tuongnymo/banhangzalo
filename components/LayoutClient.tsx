@@ -23,7 +23,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       <AuthProvider>
       <CartProvider>
   <header className="border-b border-gray-200">
-  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 overflow-hidden"> {/* 👈 dùng max-w cụ thể */}
+  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 overflow-visible"> {/* 👈 dùng max-w cụ thể */}
     
     {/* Logo + Icons */}
     <div className="flex items-center justify-between">
@@ -39,7 +39,6 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         <Link href="/account" className="hover:text-red-500 p-2">👤</Link>
       </div>
     </div>
-
 
     {/* Menu chia 2 hàng - 5 cột và căn giữa */}
     <nav className="mt-6 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 text-sm font-semibold"> {/* 👈 mx-auto + max-w */}
