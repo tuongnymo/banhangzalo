@@ -21,35 +21,144 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       />
       <AuthProvider>
       <CartProvider>
-        <header className="border-b border-gray-200">
-          <div className="container mx-auto flex items-center justify-between p-4">
-            <Link href="/" className="text-xl font-bold">
-              FULLSTORE FASHION
-            </Link>
-            <nav className="hidden space-x-6 md:flex">
-              <Link href="/" className="hover:text-gray-500">Trang Chủ</Link>
-              <Link href="/category/shoes" className="hover:text-gray-500">Shop Nam</Link>
-              <Link href="/category/clothing" className="hover:text-gray-500">Shop Nữ</Link>
-              <Link href="/category/accessories" className="hover:text-gray-500">Túi Xách & Phụ Kiện</Link>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <Link href="/search" className="hover:text-gray-500 p-2 touch-manipulation">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <path d="m21 21-4.3-4.3" />
-                </svg>
-              </Link>
-              <CartIconBadge />
-              <Link href="/account" className="hover:text-gray-500 p-2 touch-manipulation">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </Link>
+  <header className="border-b border-gray-200">
+    <div className="container mx-auto flex items-center justify-between p-4">
+      
+      {/* Menu chính */}
+      <nav className="hidden md:flex space-x-6">
+        {/* Trang Chủ */}
+        <Link href="/" className="hover:text-gray-500">
+          Trang Chủ
+        </Link>
 
-            </div>
+        {/* Giày Nam */}
+        <div className="relative group">
+          <Link href="/category/giay-nam" className="hover:text-gray-500">
+            Giày Nam
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/giay-cong-so" className="block px-4 py-2 hover:bg-gray-100">Giày công sở</Link></li>
+              <li><Link href="/category/giay-the-thao" className="block px-4 py-2 hover:bg-gray-100">Giày thể thao</Link></li>
+              <li><Link href="/category/giay-luoi" className="block px-4 py-2 hover:bg-gray-100">Giày lười</Link></li>
+              <li><Link href="/category/giay-mlb" className="block px-4 py-2 hover:bg-gray-100">Giày MLB</Link></li>
+              <li><Link href="/category/boot-nam" className="block px-4 py-2 hover:bg-gray-100">Boot nam</Link></li>
+            </ul>
           </div>
-        </header>
+        </div>
+
+        {/* Giày Nữ */}
+        <div className="relative group">
+          <Link href="/category/giay-nu" className="hover:text-gray-500">
+            Giày Nữ
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/giay-custom" className="block px-4 py-2 hover:bg-gray-100">Giày custom</Link></li>
+              <li><Link href="/category/giay-sneaker" className="block px-4 py-2 hover:bg-gray-100">Giày sneaker</Link></li>
+              <li><Link href="/category/boot-nu" className="block px-4 py-2 hover:bg-gray-100">Boot nữ</Link></li>
+              <li><Link href="/category/giay-cao-got" className="block px-4 py-2 hover:bg-gray-100">Giày cao gót</Link></li>
+              <li><Link href="/category/sandal-nu" className="block px-4 py-2 hover:bg-gray-100">Dép sandal nữ</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Quần Nam */}
+        <div className="relative group">
+          <Link href="/category/quan-nam" className="hover:text-gray-500">
+            Quần Nam
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/quan-tay-nam" className="block px-4 py-2 hover:bg-gray-100">Quần tây</Link></li>
+              <li><Link href="/category/quan-bo-nam" className="block px-4 py-2 hover:bg-gray-100">Quần bò</Link></li>
+              <li><Link href="/category/quan-short-nam" className="block px-4 py-2 hover:bg-gray-100">Quần short</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Áo Nam */}
+        <div className="relative group">
+          <Link href="/category/ao-nam" className="hover:text-gray-500">
+            Áo Nam
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/ao-so-mi-nam" className="block px-4 py-2 hover:bg-gray-100">Áo sơ mi</Link></li>
+              <li><Link href="/category/ao-polo-nam" className="block px-4 py-2 hover:bg-gray-100">Áo polo</Link></li>
+              <li><Link href="/category/ao-phong-nam" className="block px-4 py-2 hover:bg-gray-100">Áo phông</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Quần Nữ */}
+        <div className="relative group">
+          <Link href="/category/quan-nu" className="hover:text-gray-500">
+            Quần Nữ
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/quan-tay-nu" className="block px-4 py-2 hover:bg-gray-100">Quần tây</Link></li>
+              <li><Link href="/category/quan-bo-nu" className="block px-4 py-2 hover:bg-gray-100">Quần bò</Link></li>
+              <li><Link href="/category/vay-nu" className="block px-4 py-2 hover:bg-gray-100">Váy nữ</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Áo Nữ */}
+        <div className="relative group">
+          <Link href="/category/ao-nu" className="hover:text-gray-500">
+            Áo Nữ
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/ao-so-mi-nu" className="block px-4 py-2 hover:bg-gray-100">Áo sơ mi</Link></li>
+              <li><Link href="/category/ao-phong-nu" className="block px-4 py-2 hover:bg-gray-100">Áo phông</Link></li>
+              <li><Link href="/category/ao-khoac-nu" className="block px-4 py-2 hover:bg-gray-100">Áo khoác</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Quần Áo Trẻ Em */}
+        <div className="relative group">
+          <Link href="/category/tre-em" className="hover:text-gray-500">
+            Quần Áo Trẻ Em
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-56 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/tre-em-nam" className="block px-4 py-2 hover:bg-gray-100">Bộ quần áo nam</Link></li>
+              <li><Link href="/category/tre-em-nu" className="block px-4 py-2 hover:bg-gray-100">Bộ quần áo nữ</Link></li>
+              <li><Link href="/category/vay-be-gai" className="block px-4 py-2 hover:bg-gray-100">Váy bé gái</Link></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Túi Xách */}
+        <div className="relative group">
+          <Link href="/category/tui-xach" className="hover:text-gray-500">
+            Túi Xách
+          </Link>
+          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
+            <ul className="py-2">
+              <li><Link href="/category/tui-xach-nam" className="block px-4 py-2 hover:bg-gray-100">Túi xách nam</Link></li>
+              <li><Link href="/category/tui-xach-nu" className="block px-4 py-2 hover:bg-gray-100">Túi xách nữ</Link></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      {/* Icons bên phải */}
+      <div className="flex items-center space-x-4">
+        <Link href="/search" className="hover:text-gray-500 p-2 touch-manipulation">
+          🔍
+        </Link>
+        <CartIconBadge />
+        <Link href="/account" className="hover:text-gray-500 p-2 touch-manipulation">
+          👤
+        </Link>
+      </div>
+    </div>
+  </header>
 
         <main className="pb-20 md:pb-0">{children}</main>
 
