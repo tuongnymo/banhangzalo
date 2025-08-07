@@ -22,7 +22,7 @@ export default function Home() {
 <section className="bg-gray-100 pt-2 pb-6">
   <div className="container mx-auto px-4 text-center">
     <h2 className="mb-12 text-3xl font-bold">Danh mục sản phẩm</h2>
-    <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-4 place-items-center">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 place-items-center">
       {/* Danh mục 1 */}
       <Link href="/category/giay-cong-so-nam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
