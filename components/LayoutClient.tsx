@@ -25,16 +25,26 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
     <div className="container mx-auto flex items-center justify-between p-4">
       
       {/* Menu chính */}
-      <nav className="hidden md:flex space-x-6">
+      <nav className="hidden md:flex space-x-6 font-semibold">
+        
         {/* Trang Chủ */}
-        <Link href="/" className="hover:text-gray-500">
+        <Link
+          href="/"
+          className="hover:text-red-500 transition-colors duration-200"
+        >
           Trang Chủ
         </Link>
 
         {/* Giày Nam */}
         <div className="relative group">
-          <Link href="/category/giay-nam" className="hover:text-gray-500">
+          <Link
+            href="/category/giay-nam"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Giày Nam
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -49,8 +59,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Giày Nữ */}
         <div className="relative group">
-          <Link href="/category/giay-nu" className="hover:text-gray-500">
+          <Link
+            href="/category/giay-nu"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Giày Nữ
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -65,8 +81,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Quần Nam */}
         <div className="relative group">
-          <Link href="/category/quan-nam" className="hover:text-gray-500">
+          <Link
+            href="/category/quan-nam"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Quần Nam
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -79,8 +101,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Áo Nam */}
         <div className="relative group">
-          <Link href="/category/ao-nam" className="hover:text-gray-500">
+          <Link
+            href="/category/ao-nam"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Áo Nam
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -93,8 +121,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Quần Nữ */}
         <div className="relative group">
-          <Link href="/category/quan-nu" className="hover:text-gray-500">
+          <Link
+            href="/category/quan-nu"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Quần Nữ
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -107,8 +141,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Áo Nữ */}
         <div className="relative group">
-          <Link href="/category/ao-nu" className="hover:text-gray-500">
+          <Link
+            href="/category/ao-nu"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Áo Nữ
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -121,8 +161,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Quần Áo Trẻ Em */}
         <div className="relative group">
-          <Link href="/category/tre-em" className="hover:text-gray-500">
+          <Link
+            href="/category/tre-em"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Quần Áo Trẻ Em
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-56 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -135,8 +181,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Túi Xách */}
         <div className="relative group">
-          <Link href="/category/tui-xach" className="hover:text-gray-500">
+          <Link
+            href="/category/tui-xach"
+            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
+          >
             Túi Xách
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+            </svg>
           </Link>
           <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
             <ul className="py-2">
@@ -145,15 +197,16 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
             </ul>
           </div>
         </div>
+
       </nav>
 
       {/* Icons bên phải */}
       <div className="flex items-center space-x-4">
-        <Link href="/search" className="hover:text-gray-500 p-2 touch-manipulation">
+        <Link href="/search" className="hover:text-red-500 p-2 touch-manipulation">
           🔍
         </Link>
         <CartIconBadge />
-        <Link href="/account" className="hover:text-gray-500 p-2 touch-manipulation">
+        <Link href="/account" className="hover:text-red-500 p-2 touch-manipulation">
           👤
         </Link>
       </div>
