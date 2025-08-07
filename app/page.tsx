@@ -21,8 +21,10 @@ export default function Home() {
       {/* Categories */}
 <section className="bg-gray-100 pt-2 pb-6">
   <div className="container mx-auto px-4 text-center">
-    <h2 className="mb-12 text-3xl font-bold">Danh mục sản phẩm</h2>
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 place-items-center">
+    <h2 className="mb-6 text-2xl font-bold">Danh mục sản phẩm</h2>
+
+    <div className="overflow-x-auto">
+      <div className="grid grid-rows-2 grid-flow-col min-w-[768px] gap-4 px-2 py-2">
       {/* Danh mục 1 */}
       <Link href="/category/giay-cong-so-nam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
@@ -179,6 +181,7 @@ export default function Home() {
         <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Túi xách</p>
       </Link>
     </div>
+  </div>
   </div>
 </section>
 
