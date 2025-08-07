@@ -23,15 +23,16 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       <CartProvider>
   <header className="border-b border-gray-200">
     <div className="container mx-auto flex items-center justify-between p-4">
+
+      {/* Logo trung tâm */}
+      <div className="flex-1 text-center text-2xl font-bold text-red-700">
+        <Link href="/">THOITRANGNEW</Link>
+      </div>
       
       {/* Menu chính */}
-      <nav className="hidden md:flex space-x-6 font-semibold">
-        
+      <nav className="hidden md:flex flex-1 justify-center space-x-6 font-semibold">
         {/* Trang Chủ */}
-        <Link
-          href="/"
-          className="hover:text-red-500 transition-colors duration-200"
-        >
+        <Link href="/" className="hover:text-red-500 transition-colors duration-200">
           Trang Chủ
         </Link>
 
@@ -200,8 +201,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
       </nav>
 
-      {/* Icons bên phải */}
-      <div className="flex items-center space-x-4">
+       {/* Icons bên phải */}
+      <div className="flex-1 flex justify-end items-center space-x-4">
         <Link href="/search" className="hover:text-red-500 p-2 touch-manipulation">
           🔍
         </Link>
@@ -212,6 +213,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       </div>
     </div>
   </header>
+
+
 
         <main className="pb-20 md:pb-0">{children}</main>
 
