@@ -23,20 +23,23 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       <AuthProvider>
       <CartProvider>
   <header className="border-b border-gray-200">
-  <div className="container mx-auto px-2 md:px-4 py-4 overflow-hidden"> {/* 👈 fix tràn icon mobile */}
-
+  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 overflow-hidden"> {/* 👈 dùng max-w cụ thể */}
+    
     {/* Logo + Icons */}
     <div className="flex items-center justify-between">
-      <div className="flex-1" /> {/* Giữ logo ở giữa */}
-      <div className="text-4xl font-bold text-red-700 text-center">
+      <div className="flex-1 min-w-0" /> {/* 👈 đảm bảo không chiếm chỗ cố định */}
+      
+      <div className="text-2xl sm:text-4xl font-bold text-red-700 text-center truncate">
         <Link href="/">THOITRANGNEW</Link>
       </div>
-      <div className="flex-1 flex justify-end items-center space-x-2 md:space-x-4"> {/* 👈 space nhỏ hơn ở mobile */}
+      
+      <div className="flex-1 flex justify-end items-center gap-1 sm:gap-4 flex-shrink-0">
         <Link href="/search" className="hover:text-red-500 p-2">🔍</Link>
         <CartIconBadge />
         <Link href="/account" className="hover:text-red-500 p-2">👤</Link>
       </div>
     </div>
+
 
     {/* Menu chia 2 hàng - 5 cột và căn giữa */}
     <nav className="mt-6 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 text-sm font-semibold"> {/* 👈 mx-auto + max-w */}
