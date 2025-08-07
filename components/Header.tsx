@@ -21,40 +21,100 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            <ul className="flex space-x-8">
-              <li>
-                <Link href="/" className="hover:text-gray-600">
-                  Trang Chủ
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/men" className="hover:text-gray-600">
-                  Shop Nam
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/women" className="hover:text-gray-600">
-                  Shop Nữ
-                </Link>
-              </li>
-              <li>
-                <Link href="/category/accessories" className="hover:text-gray-600">
-                  Túi xách & Phụ Kiện
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-gray-600">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-gray-600">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
+<nav className="hidden md:block">
+  <ul className="flex space-x-8">
+    {/* Trang chủ */}
+    <li>
+      <Link href="/" className="hover:text-gray-600">
+        Trang Chủ
+      </Link>
+    </li>
+
+    {/* Giày nam */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Giày Nam</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/giay-cong-so" className="block px-4 py-2 hover:bg-gray-100">Giày công sở</Link></li>
+        <li><Link href="/category/giay-the-thao" className="block px-4 py-2 hover:bg-gray-100">Giày thể thao</Link></li>
+        <li><Link href="/category/giay-luoi" className="block px-4 py-2 hover:bg-gray-100">Giày lười</Link></li>
+        <li><Link href="/category/giay-mlb" className="block px-4 py-2 hover:bg-gray-100">Giày MLB</Link></li>
+        <li><Link href="/category/boot-nam" className="block px-4 py-2 hover:bg-gray-100">Boot nam</Link></li>
+      </ul>
+    </li>
+
+    {/* Giày nữ */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Giày Nữ</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/giay-custom" className="block px-4 py-2 hover:bg-gray-100">Giày custom</Link></li>
+        <li><Link href="/category/giay-sneaker" className="block px-4 py-2 hover:bg-gray-100">Giày sneaker</Link></li>
+        <li><Link href="/category/boot-nu" className="block px-4 py-2 hover:bg-gray-100">Boot nữ</Link></li>
+        <li><Link href="/category/giay-cao-got" className="block px-4 py-2 hover:bg-gray-100">Giày cao gót</Link></li>
+        <li><Link href="/category/dep-sandal-nu" className="block px-4 py-2 hover:bg-gray-100">Dép sandal nữ</Link></li>
+      </ul>
+    </li>
+
+    {/* Quần nam */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Quần Nam</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/quan-tay-nam" className="block px-4 py-2 hover:bg-gray-100">Quần tây</Link></li>
+        <li><Link href="/category/quan-bo-nam" className="block px-4 py-2 hover:bg-gray-100">Quần bò</Link></li>
+        <li><Link href="/category/quan-short-nam" className="block px-4 py-2 hover:bg-gray-100">Quần short</Link></li>
+      </ul>
+    </li>
+
+    {/* Áo nam */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Áo Nam</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/ao-so-mi-nam" className="block px-4 py-2 hover:bg-gray-100">Áo sơ mi</Link></li>
+        <li><Link href="/category/ao-polo-nam" className="block px-4 py-2 hover:bg-gray-100">Áo polo</Link></li>
+        <li><Link href="/category/ao-phong-nam" className="block px-4 py-2 hover:bg-gray-100">Áo phông</Link></li>
+      </ul>
+    </li>
+
+    {/* Quần nữ */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Quần Nữ</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/quan-tay-nu" className="block px-4 py-2 hover:bg-gray-100">Quần tây</Link></li>
+        <li><Link href="/category/quan-bo-nu" className="block px-4 py-2 hover:bg-gray-100">Quần bò</Link></li>
+        <li><Link href="/category/vay-nu" className="block px-4 py-2 hover:bg-gray-100">Váy nữ</Link></li>
+      </ul>
+    </li>
+
+    {/* Áo nữ */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Áo Nữ</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/ao-so-mi-nu" className="block px-4 py-2 hover:bg-gray-100">Áo sơ mi</Link></li>
+        <li><Link href="/category/ao-phong-nu" className="block px-4 py-2 hover:bg-gray-100">Áo phông</Link></li>
+        <li><Link href="/category/ao-khoac-nu" className="block px-4 py-2 hover:bg-gray-100">Áo khoác</Link></li>
+      </ul>
+    </li>
+
+    {/* Quần áo trẻ em */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Quần Áo Trẻ Em</Link>
+      <ul className="absolute left-0 mt-2 hidden w-56 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/bo-quan-ao-nam-tre-em" className="block px-4 py-2 hover:bg-gray-100">Bộ quần áo nam</Link></li>
+        <li><Link href="/category/bo-quan-ao-nu-tre-em" className="block px-4 py-2 hover:bg-gray-100">Bộ quần áo nữ</Link></li>
+        <li><Link href="/category/vay-be-gai" className="block px-4 py-2 hover:bg-gray-100">Váy bé gái</Link></li>
+      </ul>
+    </li>
+
+    {/* Túi xách */}
+    <li className="relative group">
+      <Link href="#" className="hover:text-gray-600">Túi Xách</Link>
+      <ul className="absolute left-0 mt-2 hidden w-48 bg-white shadow-lg group-hover:block">
+        <li><Link href="/category/tui-xach-nam" className="block px-4 py-2 hover:bg-gray-100">Túi xách nam</Link></li>
+        <li><Link href="/category/tui-xach-nu" className="block px-4 py-2 hover:bg-gray-100">Túi xách nữ</Link></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
 
           {/* Actions */}
           <div className="flex items-center space-x-4">
