@@ -8,6 +8,7 @@ import CartIconBadge from "@/components/CartIconBadge"
 import Link from "next/link"
 import { ReactNode } from "react"
 import Script from "next/script"
+import MenuDropdown from './ui/MenuDropdown'
 
 export default function LayoutClient({ children }: { children: ReactNode }) {
   return (
@@ -22,198 +23,81 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       <AuthProvider>
       <CartProvider>
   <header className="border-b border-gray-200">
-    <div className="container mx-auto flex items-center justify-between p-4">
+    <div className="container mx-auto px-4 py-4">
 
-      {/* Logo trung tâm */}
-      <div className="flex-1 text-center text-2xl font-bold text-red-700">
-        <Link href="/">THOITRANGNEW</Link>
+      {/* Logo + Icons */}
+      <div className="flex items-center justify-between">
+        <div className="flex-1" /> {/* Giữ logo ở giữa */}
+        <div className="text-4xl font-bold text-red-700 text-center">
+          <Link href="/">THOITRANGNEW</Link>
+        </div>
+        <div className="flex-1 flex justify-end items-center space-x-4">
+          <Link href="/search" className="hover:text-red-500 p-2">🔍</Link>
+          <CartIconBadge />
+          <Link href="/account" className="hover:text-red-500 p-2">👤</Link>
+        </div>
       </div>
-      
-      {/* Menu chính */}
-      <nav className="hidden md:flex flex-1 justify-center space-x-6 font-semibold">
-        {/* Trang Chủ */}
-        <Link href="/" className="hover:text-red-500 transition-colors duration-200">
-          Trang Chủ
-        </Link>
 
-        {/* Giày Nam */}
-        <div className="relative group">
-          <Link
-            href="/category/giay-nam"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Giày Nam
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/giay-cong-so" className="block px-4 py-2 hover:bg-gray-100">Giày công sở</Link></li>
-              <li><Link href="/category/giay-the-thao" className="block px-4 py-2 hover:bg-gray-100">Giày thể thao</Link></li>
-              <li><Link href="/category/giay-luoi" className="block px-4 py-2 hover:bg-gray-100">Giày lười</Link></li>
-              <li><Link href="/category/giay-mlb" className="block px-4 py-2 hover:bg-gray-100">Giày MLB</Link></li>
-              <li><Link href="/category/boot-nam" className="block px-4 py-2 hover:bg-gray-100">Boot nam</Link></li>
-            </ul>
-          </div>
-        </div>
+      {/* Menu chia 2 cột */}
+      <nav className="mt-6 grid grid-cols-2 md:grid-cols-5 gap-6 text-sm font-semibold">
+        
+        {/* Cột 1 */}
+        <Link href="/" className="hover:text-red-500 transition">Trang chủ</Link>
+        <Link href="/contact" className="hover:text-red-500 transition">Liên hệ</Link>
 
-        {/* Giày Nữ */}
-        <div className="relative group">
-          <Link
-            href="/category/giay-nu"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Giày Nữ
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/giay-custom" className="block px-4 py-2 hover:bg-gray-100">Giày custom</Link></li>
-              <li><Link href="/category/giay-sneaker" className="block px-4 py-2 hover:bg-gray-100">Giày sneaker</Link></li>
-              <li><Link href="/category/boot-nu" className="block px-4 py-2 hover:bg-gray-100">Boot nữ</Link></li>
-              <li><Link href="/category/giay-cao-got" className="block px-4 py-2 hover:bg-gray-100">Giày cao gót</Link></li>
-              <li><Link href="/category/sandal-nu" className="block px-4 py-2 hover:bg-gray-100">Dép sandal nữ</Link></li>
-            </ul>
-          </div>
-        </div>
+        {/* Cột 2 */}
+        <MenuDropdown title="Giày nam" items={[
+          { label: "Giày công sở", href: "/category/giay-cong-so" },
+          { label: "Giày thể thao", href: "/category/giay-the-thao" },
+          { label: "Giày lười", href: "/category/giay-luoi" },
+          { label: "Giày MLB", href: "/category/giay-mlb" },
+          { label: "Boot nam", href: "/category/boot-nam" }
+        ]} />
+        <MenuDropdown title="Giày nữ" items={[
+          { label: "Giày custom", href: "/category/giay-custom" },
+          { label: "Giày sneaker", href: "/category/giay-sneaker" },
+          { label: "Boot nữ", href: "/category/boot-nu" },
+          { label: "Giày cao gót", href: "/category/giay-cao-got" },
+          { label: "Dép sandal nữ", href: "/category/sandal-nu" }
+        ]} />
 
-        {/* Quần Nam */}
-        <div className="relative group">
-          <Link
-            href="/category/quan-nam"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Quần Nam
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/quan-tay-nam" className="block px-4 py-2 hover:bg-gray-100">Quần tây</Link></li>
-              <li><Link href="/category/quan-bo-nam" className="block px-4 py-2 hover:bg-gray-100">Quần bò</Link></li>
-              <li><Link href="/category/quan-short-nam" className="block px-4 py-2 hover:bg-gray-100">Quần short</Link></li>
-            </ul>
-          </div>
-        </div>
+        {/* Cột 3 */}
+        <MenuDropdown title="Quần nam" items={[
+          { label: "Quần tây", href: "/category/quan-tay-nam" },
+          { label: "Quần bò", href: "/category/quan-bo-nam" },
+          { label: "Quần short", href: "/category/quan-short-nam" }
+        ]} />
+        <MenuDropdown title="Quần nữ" items={[
+          { label: "Quần tây", href: "/category/quan-tay-nu" },
+          { label: "Quần bò", href: "/category/quan-bo-nu" },
+          { label: "Váy nữ", href: "/category/vay-nu" }
+        ]} />
 
-        {/* Áo Nam */}
-        <div className="relative group">
-          <Link
-            href="/category/ao-nam"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Áo Nam
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/ao-so-mi-nam" className="block px-4 py-2 hover:bg-gray-100">Áo sơ mi</Link></li>
-              <li><Link href="/category/ao-polo-nam" className="block px-4 py-2 hover:bg-gray-100">Áo polo</Link></li>
-              <li><Link href="/category/ao-phong-nam" className="block px-4 py-2 hover:bg-gray-100">Áo phông</Link></li>
-            </ul>
-          </div>
-        </div>
+        {/* Cột 4 */}
+        <MenuDropdown title="Áo nam" items={[
+          { label: "Áo sơ mi", href: "/category/ao-so-mi-nam" },
+          { label: "Áo polo", href: "/category/ao-polo-nam" },
+          { label: "Áo phông", href: "/category/ao-phong-nam" }
+        ]} />
+        <MenuDropdown title="Áo nữ" items={[
+          { label: "Áo sơ mi", href: "/category/ao-so-mi-nu" },
+          { label: "Áo phông", href: "/category/ao-phong-nu" },
+          { label: "Áo khoác", href: "/category/ao-khoac-nu" }
+        ]} />
 
-        {/* Quần Nữ */}
-        <div className="relative group">
-          <Link
-            href="/category/quan-nu"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Quần Nữ
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/quan-tay-nu" className="block px-4 py-2 hover:bg-gray-100">Quần tây</Link></li>
-              <li><Link href="/category/quan-bo-nu" className="block px-4 py-2 hover:bg-gray-100">Quần bò</Link></li>
-              <li><Link href="/category/vay-nu" className="block px-4 py-2 hover:bg-gray-100">Váy nữ</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Áo Nữ */}
-        <div className="relative group">
-          <Link
-            href="/category/ao-nu"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Áo Nữ
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/ao-so-mi-nu" className="block px-4 py-2 hover:bg-gray-100">Áo sơ mi</Link></li>
-              <li><Link href="/category/ao-phong-nu" className="block px-4 py-2 hover:bg-gray-100">Áo phông</Link></li>
-              <li><Link href="/category/ao-khoac-nu" className="block px-4 py-2 hover:bg-gray-100">Áo khoác</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Quần Áo Trẻ Em */}
-        <div className="relative group">
-          <Link
-            href="/category/tre-em"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Quần Áo Trẻ Em
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-56 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/tre-em-nam" className="block px-4 py-2 hover:bg-gray-100">Bộ quần áo nam</Link></li>
-              <li><Link href="/category/tre-em-nu" className="block px-4 py-2 hover:bg-gray-100">Bộ quần áo nữ</Link></li>
-              <li><Link href="/category/vay-be-gai" className="block px-4 py-2 hover:bg-gray-100">Váy bé gái</Link></li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Túi Xách */}
-        <div className="relative group">
-          <Link
-            href="/category/tui-xach"
-            className="flex items-center gap-1 hover:text-red-500 transition-colors duration-200"
-          >
-            Túi Xách
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </Link>
-          <div className="absolute left-0 mt-2 hidden w-48 rounded-md bg-white shadow-lg group-hover:block">
-            <ul className="py-2">
-              <li><Link href="/category/tui-xach-nam" className="block px-4 py-2 hover:bg-gray-100">Túi xách nam</Link></li>
-              <li><Link href="/category/tui-xach-nu" className="block px-4 py-2 hover:bg-gray-100">Túi xách nữ</Link></li>
-            </ul>
-          </div>
-        </div>
-
+        {/* Cột 5 */}
+        <MenuDropdown title="Quần áo trẻ em" items={[
+          { label: "Bộ quần áo nam", href: "/category/tre-em-nam" },
+          { label: "Bộ quần áo nữ", href: "/category/tre-em-nu" },
+          { label: "Váy bé gái", href: "/category/vay-be-gai" }
+        ]} />
+        <MenuDropdown title="Túi xách" items={[
+          { label: "Túi xách nam", href: "/category/tui-xach-nam" },
+          { label: "Túi xách nữ", href: "/category/tui-xach-nu" }
+        ]} />
       </nav>
-
-       {/* Icons bên phải */}
-      <div className="flex-1 flex justify-end items-center space-x-4">
-        <Link href="/search" className="hover:text-red-500 p-2 touch-manipulation">
-          🔍
-        </Link>
-        <CartIconBadge />
-        <Link href="/account" className="hover:text-red-500 p-2 touch-manipulation">
-          👤
-        </Link>
-      </div>
     </div>
   </header>
-
 
 
         <main className="pb-20 md:pb-0">{children}</main>
