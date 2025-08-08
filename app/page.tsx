@@ -26,7 +26,7 @@ export default function Home() {
     <div className="overflow-x-auto">
       <div className="grid grid-rows-2 grid-flow-col min-w-[768px] gap-4 px-2 py-2">
       {/* Danh mục 1 */}
-      <Link href="/category/giay-cong-so-nam" className="flex flex-col items-center group">
+      <Link href="/category/giaycongsonam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg"
@@ -39,7 +39,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 2 */}
-      <Link href="/category/giay-the-thao-nam" className="flex flex-col items-center group">
+      <Link href="/category/giaythethaonam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/tC7MdNq8/giay-the-thao-nam.jpg"
@@ -52,7 +52,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 3 */}
-      <Link href="/category/giay-luoi" className="flex flex-col items-center group">
+      <Link href="/category/giayluoinam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/5yQrHbDh/giay-luoi.jpg"
@@ -61,11 +61,11 @@ export default function Home() {
             className="object-cover"
           />
         </div>
-        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày lười</p>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày lười nam</p>
       </Link>
 
       {/* Danh mục 4 */}
-      <Link href="/category/giay-mlb" className="flex flex-col items-center group">
+      <Link href="/category/giaymlb" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/fL8CFmSx/giay-mlb.jpg"
@@ -78,7 +78,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 5 */}
-      <Link href="/category/giay-boot-nam" className="flex flex-col items-center group">
+      <Link href="/category/bootnam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/wvwvDFYw/giay-boot-nam.jpg"
@@ -87,11 +87,11 @@ export default function Home() {
             className="object-cover"
           />
         </div>
-        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày boot nam</p>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Boot nam</p>
       </Link>
 
       {/* Danh mục 6 */}
-      <Link href="/category/giay-custom-nu" className="flex flex-col items-center group">
+      <Link href="/category/giaycustomnu" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/kXYGrVpr/giay-custom-nu.jpg"
@@ -104,7 +104,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 7 */}
-      <Link href="/category/giay-sneaker-nu" className="flex flex-col items-center group">
+      <Link href="/category/giaysneakernu" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/xTw34pxY/giay-sneaker-nu.jpg"
@@ -117,7 +117,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 8 */}
-      <Link href="/category/giay-boot-nu" className="flex flex-col items-center group">
+      <Link href="/category/bootnu" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/8CN1bYjb/giay-boot-nu.jpg"
@@ -126,11 +126,11 @@ export default function Home() {
             className="object-cover"
           />
         </div>
-        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Giày boot nữ</p>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Boot nữ</p>
       </Link>
 
       {/* Danh mục 9 */}
-      <Link href="/category/giay-cao-got" className="flex flex-col items-center group">
+      <Link href="/category/giaycaogot" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/Y9gVtdB9/giay-cao-got.jpg"
@@ -143,7 +143,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 10 */}
-      <Link href="/category/dep-sandal-nu" className="flex flex-col items-center group">
+      <Link href="/category/depsandalnu" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/L8d08x8k/dep-sandal-nu.jpg"
@@ -156,7 +156,7 @@ export default function Home() {
       </Link>
 
       {/* Danh mục 11 */}
-      <Link href="/category/phu-kien" className="flex flex-col items-center group">
+      <Link href="/category/quantaynam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
@@ -165,11 +165,11 @@ export default function Home() {
             className="object-cover"
           />
         </div>
-        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Phụ kiện</p>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Quần tây nam</p>
       </Link>
 
       {/* Danh mục 12 */}
-      <Link href="/category/tui-xach" className="flex flex-col items-center group">
+      <Link href="/category/quanbonam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
           <Image
             src="https://i.postimg.cc/FsMsc6Yj/tui-xach.jpg"
@@ -178,8 +178,204 @@ export default function Home() {
             className="object-cover"
           />
         </div>
-        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Túi xách</p>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Quần bò nam</p>
       </Link>
+
+      {/* Danh mục 13 */}
+      <Link href="/category/quanshortnam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Quần short nam</p>
+      </Link>
+
+      {/* Danh mục 14 */}
+      <Link href="/category/aosominam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Áo sơ mi nam</p>
+      </Link>
+
+      {/* Danh mục 15 */}
+      <Link href="/category/aopolonam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Áo polo nam</p>
+      </Link>
+
+      {/* Danh mục 16 */}
+      <Link href="/category/aophongnam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Áo phông nam</p>
+      </Link>
+
+{/* Danh mục 17 */}
+      <Link href="/category/quantaynu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Quần tây nữ</p>
+      </Link>
+
+{/* Danh mục 18 */}
+      <Link href="/category/quanbonu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Quần bò nữ</p>
+      </Link>
+
+{/* Danh mục 19 */}
+      <Link href="/category/vaynu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Váy nữ</p>
+      </Link>
+
+      {/* Danh mục 20 */}
+      <Link href="/category/aosominu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Áo sơ mi nữ</p>
+      </Link>
+
+      {/* Danh mục 21 */}
+      <Link href="/category/aophongnu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Áo phông nữ</p>
+      </Link>
+
+      {/* Danh mục 22 */}
+      <Link href="/category/aokhoac" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Áo khoác</p>
+      </Link>
+
+      {/* Danh mục 23 */}
+      <Link href="/category/bobetrai" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Bộ bé trai</p>
+      </Link>
+
+      {/* Danh mục 24 */}
+      <Link href="/category/bobegai" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Bộ bé gái</p>
+      </Link>
+
+      {/* Danh mục 25 */}
+      <Link href="/category/vaybegai" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Váy bé gái</p>
+      </Link>
+
+      {/* Danh mục 26 */}
+      <Link href="/category/tuinam" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Túi nam</p>
+      </Link>
+
+      {/* Danh mục 27 */}
+      <Link href="/category/tuinu" className="flex flex-col items-center group">
+        <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+          <Image
+            src="https://i.postimg.cc/mgCVs9mN/phu-kien.jpg"
+            alt="Phụ kiện"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">Túi nữ</p>
+      </Link>
+
     </div>
   </div>
   </div>
