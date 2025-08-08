@@ -24,7 +24,7 @@ export default function Home() {
     <h2 className="mb-6 text-2xl font-bold">Danh mục sản phẩm</h2>
 
     <div className="overflow-x-auto">
-      <div className="grid grid-rows-2 grid-flow-col min-w-[768px] gap-4 px-2 py-2">
+      <div className="grid grid-rows-2 grid-flow-col min-w-[768px] gap-6 px-2 py-2">
       {/* Danh mục 1 */}
       <Link href="/category/giaycongsonam" className="flex flex-col items-center group">
         <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
