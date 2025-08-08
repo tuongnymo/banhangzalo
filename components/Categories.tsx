@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
 
 const categories = [
   {
@@ -208,24 +210,24 @@ export default function CategorySection() {
   };
 
   return (
-    <section className="bg-gray-100 pt-2 pb-6 relative">
+    <section className="bg-gray-100 py-4 relative">
       <div className="container mx-auto px-4 text-center">
         <h2 className="mb-6 text-2xl font-bold">Danh mục sản phẩm</h2>
 
         {/* Nút trái */}
         <button
           onClick={scrollLeft}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hidden md:block"
+          className="absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur shadow-md p-2 rounded-full hidden md:block"
         >
-          ◀
+          <ChevronLeft className="w-5 h-5" />
         </button>
 
         {/* Nút phải */}
         <button
           onClick={scrollRight}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white shadow p-2 rounded-full hidden md:block"
+          className="absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur shadow-md p-2 rounded-full hidden md:block"
         >
-          ▶
+          <ChevronRight className="w-5 h-5" />
         </button>
 
         {/* Danh mục */}
@@ -237,7 +239,7 @@ export default function CategorySection() {
                 key={index}
                 className="flex flex-col items-center group"
               >
-                <div className="relative w-24 h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-full bg-gray-200 group-hover:scale-105 transition-transform duration-300">
                   <Image
                     src={item.src}
                     alt={item.label}
@@ -245,7 +247,7 @@ export default function CategorySection() {
                     className="object-cover"
                   />
                 </div>
-                <p className="mt-3 text-sm font-medium text-gray-800 group-hover:text-black">
+                <p className="mt-2 text-xs md:text-sm font-medium text-gray-800 group-hover:text-black text-center">
                   {item.label}
                 </p>
               </Link>
