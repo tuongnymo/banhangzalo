@@ -84,12 +84,13 @@ export default function BannerCarousel() {
   }, [])
 
   return (
-    <section
-      className="relative w-full aspect-[2/1] overflow-hidden"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
+  <section
+    className="w-full bg-white py-4"
+    onTouchStart={handleTouchStart}
+    onTouchMove={handleTouchMove}
+    onTouchEnd={handleTouchEnd}
+  >
+    <div className="mx-auto max-w-[1200px] px-4 relative aspect-[3/1] overflow-hidden rounded-md shadow-sm">
       {loading ? (
         <div className="flex h-full w-full items-center justify-center bg-gray-200 animate-pulse">
           <div className="h-16 w-16 rounded-full border-4 border-gray-300 border-t-gray-800 animate-spin"></div>
@@ -103,14 +104,14 @@ export default function BannerCarousel() {
                 index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
             >
-              <div className="relative h-full w-full min-w-full">
+              <div className="relative h-full w-full">
                 <Image
                   src={banner.image || "/placeholder.svg"}
                   alt={`Banner ${banner.id}`}
                   fill
                   priority={index === 0}
-                  sizes="100vw"
-                  className="object-cover w-full h-full"
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="object-cover rounded-md"
                 />
               </div>
             </div>
@@ -119,7 +120,7 @@ export default function BannerCarousel() {
           {/* Navigation arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 text-black shadow-md hover:bg-white touch-manipulation"
+            className="absolute left-2 top-1/2 z-20 -translate-y-1/2 rounded-full bg-white/80 p-2 text-black shadow-md hover:bg-white touch-manipulation"
             aria-label="Previous slide"
           >
             <svg
@@ -158,7 +159,7 @@ export default function BannerCarousel() {
           </button>
 
           {/* Dots indicator */}
-          <div className="absolute bottom-4 left-0 right-0 z-20 flex justify-center space-x-2">
+          <div className="absolute bottom-2 left-0 right-0 z-20 flex justify-center space-x-2">
             {banners.map((_, index) => (
               <button
                 key={index}
@@ -170,6 +171,7 @@ export default function BannerCarousel() {
           </div>
         </>
       )}
+    </div>
     </section>
   )
 }
