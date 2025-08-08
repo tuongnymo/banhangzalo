@@ -111,7 +111,7 @@ export default function BannerCarousel() {
                   fill
                   priority={index === 0}
                   sizes="(max-width: 768px) 100vw, 1200px"
-                  className="object-cover rounded-md"
+                  className="object-contain rounded-md"
                 />
               </div>
             </div>
