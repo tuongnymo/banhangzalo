@@ -217,7 +217,7 @@ export default function CategorySection() {
         {/* Nút trái */}
         <button
           onClick={scrollLeft}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md md:flex hidden"
+          className="absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur shadow-md p-2 rounded-full hidden md:block"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -225,7 +225,7 @@ export default function CategorySection() {
         {/* Nút phải */}
         <button
           onClick={scrollRight}
-         className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md md:flex hidden"
+          className="absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur shadow-md p-2 rounded-full hidden md:block"
         >
           <ChevronRight className="w-5 h-5" />
         </button>
