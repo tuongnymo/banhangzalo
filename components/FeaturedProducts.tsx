@@ -82,7 +82,7 @@ function FeaturedProductCard({ product }: { product: any }) {
   >
     <Link href={`/product/${product.id}`}>
       {/* Khung ảnh */}
-      <div className="relative w-full aspect-square overflow-hidden bg-gray-100">
+      <div className="relative w-full pb-[100%] overflow-hidden bg-gray-100">
         <Image
           src={product.images?.[0] || "/placeholder.svg"}
           alt={product.name}
