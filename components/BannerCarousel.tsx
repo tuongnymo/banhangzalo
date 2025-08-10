@@ -90,7 +90,7 @@ export default function BannerCarousel() {
     onTouchMove={handleTouchMove}
     onTouchEnd={handleTouchEnd}
   >
-    <div className="mx-auto max-w-[1200px] px-4 relative aspect-[3/1] overflow-hidden rounded-md shadow-sm">
+    <div className="mx-auto max-w-[1200px] px-4 relative aspect-[2.2/1] overflow-hidden rounded-md shadow-sm">
       {loading ? (
         <div className="flex h-full w-full items-center justify-center bg-gray-200 animate-pulse">
           <div className="h-16 w-16 rounded-full border-4 border-gray-300 border-t-gray-800 animate-spin"></div>
