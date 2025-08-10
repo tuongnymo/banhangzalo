@@ -42,15 +42,11 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
     {/* Menu chia 2 hàng - 5 cột và căn giữa */}
     <nav className="mt-6 max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-6 text-sm font-semibold justify-items-center text-center">
-  <div className="flex items-center justify-center h-full">
-    <Link href="/" className="hover:text-red-500 transition">Trang chủ</Link>
-  </div>
-  <div className="flex items-center justify-center h-full">
-    <Link href="/contact" className="hover:text-red-500 transition">Liên hệ</Link>
-  </div>
+  {/* Cột 1 */}
+  <Link href="/" className="hover:text-red-500 transition">Trang chủ</Link>
+  <Link href="/contact" className="hover:text-red-500 transition">Liên hệ</Link>
 
         {/* Cột 2 */}
-        <div className="flex items-center justify-center h-full">
         <MenuDropdown title="Giày nam" items={[
           { label: "Giày công sở", href: "/category/giay-cong-so" },
           { label: "Giày thể thao", href: "/category/giay-the-thao" },
@@ -65,10 +61,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Giày cao gót", href: "/category/giay-cao-got" },
           { label: "Dép sandal nữ", href: "/category/sandal-nu" }
         ]} />
-        </div>
 
         {/* Cột 3 */}
-        <div className="flex items-center justify-center h-full">
         <MenuDropdown title="Quần nam" items={[
           { label: "Quần tây", href: "/category/quan-tay-nam" },
           { label: "Quần bò", href: "/category/quan-bo-nam" },
@@ -79,10 +73,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Quần bò", href: "/category/quan-bo-nu" },
           { label: "Váy nữ", href: "/category/vay-nu" }
         ]} />
-        </div>
 
         {/* Cột 4 */}
-        <div className="flex items-center justify-center h-full">
         <MenuDropdown title="Áo nam" items={[
           { label: "Áo sơ mi", href: "/category/ao-so-mi-nam" },
           { label: "Áo polo", href: "/category/ao-polo-nam" },
@@ -93,10 +85,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Áo phông", href: "/category/ao-phong-nu" },
           { label: "Áo khoác", href: "/category/ao-khoac-nu" }
         ]} />
-        </div>
 
         {/* Cột 5 */}
-        <div className="flex items-center justify-center h-full">
         <MenuDropdown title="Quần áo trẻ em" items={[
           { label: "Bộ quần áo nam", href: "/category/tre-em-nam" },
           { label: "Bộ quần áo nữ", href: "/category/tre-em-nu" },
@@ -106,7 +96,6 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Túi xách nam", href: "/category/tui-xach-nam" },
           { label: "Túi xách nữ", href: "/category/tui-xach-nu" }
         ]} />
-        </div>
       </nav>
     </div>
   </header>
