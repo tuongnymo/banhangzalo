@@ -81,13 +81,13 @@ function FeaturedProductCard({ product }: { product: any }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <Link href={`/product/${product.id}`}>
-        <div className="relative aspect-square w-full overflow-hidden bg-gray-100">
+        <div className="aspect-square w-full overflow-hidden bg-gray-100">
           <Image
             src={product.images?.[0] || "/placeholder.svg"}
             alt={product.name}
             fill
             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
-            className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+            className="object-cover"
           />
           <motion.div
             className="absolute inset-0 flex items-center justify-center bg-black/5"
