@@ -48,30 +48,30 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 2 */}
         <MenuDropdown title="Giày nam" items={[
-          { label: "Giày công sở", href: "/category/giay-cong-so" },
-          { label: "Giày thể thao", href: "/category/giay-the-thao" },
-          { label: "Giày lười", href: "/category/giay-luoi" },
-          { label: "Giày MLB", href: "/category/giay-mlb" },
-          { label: "Boot nam", href: "/category/boot-nam" }
+          { label: "Giày công sở", href: "/category/giaycongsonam" },
+          { label: "Giày thể thao", href: "/category/giaythethaonam" },
+          { label: "Giày lười", href: "/category/giayluoinam" },
+          { label: "Giày MLB", href: "/category/giaymlbnam" },
+          { label: "Boot nam", href: "/category/bootnam" }
         ]} />
         <MenuDropdown title="Giày nữ" items={[
-          { label: "Giày custom", href: "/category/giay-custom" },
-          { label: "Giày sneaker", href: "/category/giay-sneaker" },
-          { label: "Boot nữ", href: "/category/boot-nu" },
-          { label: "Giày cao gót", href: "/category/giay-cao-got" },
-          { label: "Dép sandal nữ", href: "/category/sandal-nu" }
+          { label: "Giày custom", href: "/category/giaycustomnu" },
+          { label: "Giày sneaker", href: "/category/giaysneakernu" },
+          { label: "Boot nữ", href: "/category/bootnu" },
+          { label: "Giày cao gót", href: "/category/giaycaogot" },
+          { label: "Dép sandal nữ", href: "/category/depsandalnu" }
         ]} />
 
         {/* Cột 3 */}
         <MenuDropdown title="Quần nam" items={[
-          { label: "Quần tây", href: "/category/quan-tay-nam" },
-          { label: "Quần bò", href: "/category/quan-bo-nam" },
-          { label: "Quần short", href: "/category/quan-short-nam" }
+          { label: "Quần tây", href: "/category/quantaynam" },
+          { label: "Quần bò", href: "/category/quanbonam" },
+          { label: "Quần short", href: "/category/quanshortnam" }
         ]} />
         <MenuDropdown title="Quần nữ" items={[
-          { label: "Quần tây", href: "/category/quan-tay-nu" },
-          { label: "Quần bò", href: "/category/quan-bo-nu" },
-          { label: "Váy nữ", href: "/category/vay-nu" }
+          { label: "Quần tây", href: "/category/quantaynu" },
+          { label: "Quần bò", href: "/category/quanbonu" },
+          { label: "Váy nữ", href: "/category/vaynu" }
         ]} />
 
         {/* Cột 4 */}
