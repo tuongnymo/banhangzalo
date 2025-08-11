@@ -21,7 +21,7 @@ export async function GET() {
 
     const shuffled = [...(data || [])].sort(() => 0.5 - Math.random())
     const newProducts = shuffled.slice(0, 6)
-    const bestSellers = shuffled.slice(6, 10)
+    const bestSellers = shuffled.slice(6, 11)
 
     return NextResponse.json({ newProducts, bestSellers })
   } catch (err) {
