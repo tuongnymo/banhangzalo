@@ -39,7 +39,7 @@ export default function FeaturedProducts() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
          {products.map((product) => (
   <Link key={product.id} href={`/product/${product.id}`}>
     <ClickableProductCard
