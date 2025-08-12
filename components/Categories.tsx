@@ -79,42 +79,42 @@ const categories = [
 
   {
     href: "/category/quantaynam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/rw5CxkRS/qu-n-t-y-nam.jpg",
     alt: "Quần tây nam",
     label: "Quần tây nam",
   },
 
   {
     href: "/category/quanbonam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/NFV77Gxx/qu-n-b-nam.jpg",
     alt: "Quần bò nam",
     label: "Quần bò nam",
   },
 
   {
     href: "/category/quanshortnam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/PrgQCxJX/qu-n-short-nam.jpg",
     alt: "Quần short nam",
     label: "Quần short nam",
   },
 
   {
     href: "/category/aosominam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/7PQVyXyT/o-s-mi-nam.jpg",
     alt: "Áo sơ mi nam",
     label: "Áo sơ mi nam",
   },
 
   {
     href: "/category/aopolonam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/QtfqCJ9w/o-polo-nam.jpg",
     alt: "Áo polo nam",
     label: "Áo polo nam",
   },
 
   {
     href: "/category/aophongnam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/cC6BntfH/o-ph-ng-nam.webp",
     alt: "Áo phông nam",
     label: "Áo phông nam",
   },
