@@ -23,27 +23,30 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       <AuthProvider>
       <CartProvider>
   <header className="relative z-[9999]">
-  {/* Ảnh banner */}
-  <img
-    src="https://i.postimg.cc/B66GjsQg/banner.jpg" // link ảnh của bạn
-    alt="Header Banner"
-    className="w-full h-auto"
+  {/* Background image (absolute) */}
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{
+      backgroundImage: "url('/images/header-banner.jpg')",
+    }}
+    aria-hidden="true"
   />
 
-  {/* Lớp phủ mờ để chữ dễ đọc */}
-  <div className="absolute inset-0 bg-black/30"></div>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
 
   {/* Nội dung header */}
-  <div className="absolute inset-0 flex items-center justify-between max-w-screen-xl mx-auto px-4 sm:px-8 z-10">
-    {/* Logo */}
-    <div className="text-2xl sm:text-4xl font-bold text-white">
-      <Link href="/">THOITRANGNEW</Link>
+  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 relative z-10">
+    <div className="flex items-center justify-between">
+      <div className="flex-1 min-w-0" />
+      <div className="text-2xl sm:text-4xl font-bold text-white text-center truncate">
+        <Link href="/">THOITRANGNEW</Link>
+      </div>
     </div>
 
-    {/* Menu icon */}
-    <div className="flex gap-4 items-center">
+    <div className="flex-1 flex justify-end items-center gap-1 sm:gap-4 flex-shrink-0">
       <Link href="/search" className="text-white hover:text-gray-200 p-2">🔍</Link>
-      <CartIconBadge /> {/* Giữ nguyên badge giỏ hàng */}
+      <CartIconBadge />
       <Link href="/account" className="text-white hover:text-gray-200 p-2">👤</Link>
     </div>
 
