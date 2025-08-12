@@ -24,45 +24,51 @@ export default function Home() {
 
   
       {/* Featured Collections */}
-      <section className="bg-white py-12">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-10 text-3xl font-bold">Bộ Sưu Tập</h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {/* Men's Collection */}
-            <div className="relative h-80 w-full overflow-hidden rounded-lg">
-              <Image src="https://i.postimg.cc/Wp92Z3Lv/3webp.webp" alt="Shoes" fill className="object-cover object-[bottom]" />
-              <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
-                <h3 className="text-xl font-bold mb-2">Men's Collection</h3>
-                <p className="text-sm mb-4 px-4">Tối giản. Mạnh mẽ. Lôi cuốn</p>
-                <Link href="/category/shoes">
-                  <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
-                    Shop Now
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Women's Collection */}
-            <div className="relative h-80 w-full overflow-hidden rounded-lg">
-              <Image
-                src="https://i.postimg.cc/90NCHxtM/1webp.webp"
-                alt="Clothing"
-                fill
-                className="object-cover object-[bottom]"
-              />
-              <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
-                <h3 className="text-xl font-bold mb-2">Women's Collection</h3>
-                <p className="text-sm mb-4 px-4">Đẹp nhẹ nhàng, cuốn hút tự nhiên</p>
-                <Link href="/category/clothing">
-                  <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
-                    Shop Now
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
+<section className="bg-white py-12">
+  <div className="container mx-auto px-4 text-center">
+    <h2 className="mb-10 text-3xl font-bold">Bộ Sưu Tập</h2>
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 place-items-center">
+      {/* Men's Collection */}
+      <div className="relative w-full max-w-[600px] aspect-[4/5] overflow-hidden rounded-lg">
+        <Image
+          src="https://i.postimg.cc/Wp92Z3Lv/3webp.webp"
+          alt="Shoes"
+          fill
+          className="object-cover object-[bottom]"
+        />
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+          <h3 className="text-xl font-bold mb-2">Men's Collection</h3>
+          <p className="text-sm mb-4 px-4">Tối giản. Mạnh mẽ. Lôi cuốn</p>
+          <Link href="/category/shoes">
+            <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
+              Shop Now
+            </button>
+          </Link>
         </div>
-      </section>
+      </div>
+
+      {/* Women's Collection */}
+      <div className="relative w-full max-w-[600px] aspect-[4/5] overflow-hidden rounded-lg">
+        <Image
+          src="https://i.postimg.cc/90NCHxtM/1webp.webp"
+          alt="Clothing"
+          fill
+          className="object-cover object-[bottom]"
+        />
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
+          <h3 className="text-xl font-bold mb-2">Women's Collection</h3>
+          <p className="text-sm mb-4 px-4">Đẹp nhẹ nhàng, cuốn hút tự nhiên</p>
+          <Link href="/category/clothing">
+            <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
+              Shop Now
+            </button>
+          </Link>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
       {/* NewArrivals */}
       <NewArrivals />
