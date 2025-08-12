@@ -9,70 +9,70 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const categories = [
   {
     href: "/category/giaycongsonam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/yx22GHPV/gi-y-c-ng-s-nam.jpg",
     alt: "Giày công sở nam",
     label: "Giày công sở nam",
   },
   
   {
     href: "/category/giayluoinam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/RZ72g2nB/gi-y-l-i-nam.jpg",
     alt: "Giày lười nam",
     label: "Giày lười nam",
   },
 
   {
     href: "/category/giaymlbnam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/6QBggzdG/gi-y-mlb-nam.jpg",
     alt: "Giày MLB nam",
     label: "Giày MLB nam",
   },
 
   {
     href: "/category/bootnam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/0yRLd9jn/boot-nam.jpg",
     alt: "Boot nam",
     label: "Boot nam",
   },
 
   {
     href: "/category/giaythethaonam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/cHHj4Hkx/gi-y-th-thao-nam.jpg",
     alt: "Giày thể thao nam",
     label: "Giày thể thao nam",
   },
 
   {
     href: "/category/giaycustomnu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/MKjCQn6X/gi-y-custom-n.jpg",
     alt: "Giày custom nữ",
     label: "Giày custom nữ",
   },
 
   {
     href: "/category/giaysneakernu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/8Cw9SWHX/gi-y-sneaker-n.webp",
     alt: "Giày sneaker nữ",
     label: "Giày sneaker nữ",
   },
 
   {
     href: "/category/bootnu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/d1Hb8dZZ/boot-n.jpg",
     alt: "Boot nữ",
     label: "Boot nữ",
   },
 
   {
     href: "/category/giaycaogot",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/7Pcvh3yp/gi-y-cao-g-t.jpg",
     alt: "Giày cao gót",
     label: "Giày cao gót",
   },
 
   {
     href: "/category/depsandalnu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/vT4pXB5q/d-p-sandal-n.webp",
     alt: "Dép sandal nữ",
     label: "Dép sandal nữ",
   },
