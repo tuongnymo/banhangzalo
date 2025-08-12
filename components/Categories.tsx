@@ -121,42 +121,42 @@ const categories = [
 
   {
     href: "/category/quantaynu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/g2BsGDh7/qu-n-t-y-n.jpg",
     alt: "Quần tây nữ",
     label: "Quần tây nữ",
   },
 
   {
     href: "/category/quanbonu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/tgKzx42t/qu-n-b-n.webp",
     alt: "Quần bò nữ",
     label: "Quần bò nữ",
   },
 
   {
     href: "/category/vaynu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/7ZLXvc57/v-y-n.webp",
     alt: "Váy nữ",
     label: "Váy nữ",
   },
 
   {
     href: "/category/aosominu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/02PcnrxV/o-s-mi-n.webp",
     alt: "Áo sơ mi nữ",
     label: "Áo sơ mi nữ",
   },
 
   {
     href: "/category/aophongnu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/zX7pc5G8/o-ph-ng-n.webp",
     alt: "Áo phông nữ",
     label: "Áo phông nữ",
   },
 
   {
     href: "/category/aokhoac",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/8CJHc6Bz/o-kho-c-n.jpg",
     alt: "Áo khoác",
     label: "Áo khoác",
   },
