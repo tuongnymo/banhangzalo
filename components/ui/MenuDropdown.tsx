@@ -27,7 +27,7 @@ const MenuDropdown = ({ title, items }) => {
       onClick={() => setIsOpen((prev) => !prev)}
     >
       {/* Tiêu đề dropdown */}
-      <div className="flex items-center gap-1 cursor-pointer hover:text-red-500">
+      <div className="flex items-center gap-1 cursor-pointer hover:text-red-500 text-lg font-semibold">
         {title}
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ const MenuDropdown = ({ title, items }) => {
             <li key={index}>
               <Link
                 href={item.href}
-                className="block px-4 py-2 hover:bg-gray-100"
+                className="block px-4 py-2 text-base hover:bg-gray-100"
                 onClick={() => setIsOpen(false)} // Đóng khi click item trên mobile
               >
                 {item.label}
