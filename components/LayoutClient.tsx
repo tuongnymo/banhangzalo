@@ -22,28 +22,29 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       />
       <AuthProvider>
       <CartProvider>
-  <header className="relative"> 
-  {/* Background image (absolute) */}
-  <div
-    className="absolute inset-0 bg-cover bg-center"
-    style={{ backgroundImage: "url('https://i.postimg.cc/B66GjsQg/banner.jpg')" }}
-    aria-hidden="true"
+  <header className="relative w-full">
+  {/* Ảnh banner */}
+  <img
+    src="https://i.postimg.cc/B66GjsQg/banner.jpg" // link ảnh của bạn
+    alt="Header Banner"
+    className="w-full h-auto"
   />
-  {/* Overlay để chữ đọc được */}
-  <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
 
-  {/* Nội dung header (trên overlay) */}
-  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 relative z-10">
-    <div className="flex items-center justify-between">
-      <div className="flex-1 min-w-0" />
-      <div className="text-2xl sm:text-4xl font-bold text-white text-center truncate">
-        <Link href="/">THOITRANGNEW</Link>
-      </div>
-      <div className="flex-1 flex justify-end items-center gap-1 sm:gap-4 flex-shrink-0">
-        <Link href="/search" className="text-white hover:text-gray-200 p-2">🔍</Link>
-        <CartIconBadge /> {/* có thể cần chỉnh màu badge */}
-        <Link href="/account" className="text-white hover:text-gray-200 p-2">👤</Link>
-      </div>
+  {/* Lớp phủ mờ để chữ dễ đọc */}
+  <div className="absolute inset-0 bg-black/30"></div>
+
+  {/* Nội dung header */}
+  <div className="absolute inset-0 flex items-center justify-between max-w-screen-xl mx-auto px-4 sm:px-8 z-10">
+    {/* Logo */}
+    <div className="text-2xl sm:text-4xl font-bold text-white">
+      <Link href="/">THOITRANGNEW</Link>
+    </div>
+
+    {/* Menu icon */}
+    <div className="flex gap-4 items-center">
+      <Link href="/search" className="text-white hover:text-gray-200 p-2">🔍</Link>
+      <CartIconBadge /> {/* Giữ nguyên badge giỏ hàng */}
+      <Link href="/account" className="text-white hover:text-gray-200 p-2">👤</Link>
     </div>
 
     {/* Menu chia 2 hàng - 5 cột và căn giữa */}
