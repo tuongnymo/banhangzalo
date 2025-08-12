@@ -22,7 +22,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       />
       <AuthProvider>
       <CartProvider>
-  <header className="relative w-full">
+  <header className="relative z-[9999]">
   {/* Ảnh banner */}
   <img
     src="https://i.postimg.cc/B66GjsQg/banner.jpg" // link ảnh của bạn
