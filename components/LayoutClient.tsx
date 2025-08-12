@@ -22,21 +22,27 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       />
       <AuthProvider>
       <CartProvider>
-  <header className="border-b border-gray-200">
-  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 overflow-visible"> {/* 👈 dùng max-w cụ thể */}
-    
-    {/* Logo + Icons */}
+  <header className="relative"> 
+  {/* Background image (absolute) */}
+  <div
+    className="absolute inset-0 bg-cover bg-center"
+    style={{ backgroundImage: "url('https://i.postimg.cc/B66GjsQg/banner.jpg')" }}
+    aria-hidden="true"
+  />
+  {/* Overlay để chữ đọc được */}
+  <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
+
+  {/* Nội dung header (trên overlay) */}
+  <div className="max-w-screen-xl mx-auto px-2 sm:px-4 py-4 relative z-10">
     <div className="flex items-center justify-between">
-      <div className="flex-1 min-w-0" /> {/* 👈 đảm bảo không chiếm chỗ cố định */}
-      
-      <div className="text-2xl sm:text-4xl font-bold text-red-700 text-center truncate">
+      <div className="flex-1 min-w-0" />
+      <div className="text-2xl sm:text-4xl font-bold text-white text-center truncate">
         <Link href="/">THOITRANGNEW</Link>
       </div>
-      
       <div className="flex-1 flex justify-end items-center gap-1 sm:gap-4 flex-shrink-0">
-        <Link href="/search" className="hover:text-red-500 p-2">🔍</Link>
-        <CartIconBadge />
-        <Link href="/account" className="hover:text-red-500 p-2">👤</Link>
+        <Link href="/search" className="text-white hover:text-gray-200 p-2">🔍</Link>
+        <CartIconBadge /> {/* có thể cần chỉnh màu badge */}
+        <Link href="/account" className="text-white hover:text-gray-200 p-2">👤</Link>
       </div>
     </div>
 
