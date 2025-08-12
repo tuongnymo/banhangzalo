@@ -29,7 +29,7 @@ export default function Home() {
     <h2 className="mb-10 text-3xl font-bold">Bộ Sưu Tập</h2>
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2 place-items-center">
       {/* Men's Collection */}
-      <div className="relative w-full max-w-[600px] aspect-[3/4] overflow-hidden rounded-lg">
+      <div className="relative w-full max-w-[600px] h-[400px] overflow-hidden rounded-lg">
         <Image
           src="https://i.postimg.cc/Wp92Z3Lv/3webp.webp"
           alt="Shoes"
@@ -48,7 +48,7 @@ export default function Home() {
       </div>
 
       {/* Women's Collection */}
-      <div className="relative w-full max-w-[600px] aspect-[3/4] overflow-hidden rounded-lg">
+      <div className="relative w-full max-w-[600px] h-[400px] overflow-hidden rounded-lg">
         <Image
           src="https://i.postimg.cc/90NCHxtM/1webp.webp"
           alt="Clothing"
