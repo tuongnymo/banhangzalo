@@ -163,35 +163,35 @@ const categories = [
 
   {
     href: "/category/bobetrai",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/YSYd8F4y/b-b-trai.jpg",
     alt: "Bộ bé trai",
     label: "Bộ bé trai",
   },
 
   {
     href: "/category/bobegai",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/Z51frHqd/b-b-g-i.webp",
     alt: "Bộ bé gái",
     label: "Bộ bé gái",
   },
 
   {
     href: "/category/vaybegai",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/C10m2KkM/v-y-b-g-i.webp",
     alt: "Váy bé gái",
     label: "Váy bé gái",
   },
 
   {
     href: "/category/tuinam",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/wMTF6bwS/t-i-nam.jpg",
     alt: "Túi nam",
     label: "Túi nam",
   },
 
   {
     href: "/category/tuinu",
-    src: "https://i.postimg.cc/Y9Nzn9ZL/giay-cong-so-nam.jpg",
+    src: "https://i.postimg.cc/k4yfPdvQ/t-i-n.jpg",
     alt: "Túi nữ",
     label: "Túi nữ",
   },
