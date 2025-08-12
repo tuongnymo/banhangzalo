@@ -49,7 +49,7 @@ export default function CategorySlugPage() {
       {products.length === 0 ? (
         <p>Không có sản phẩm nào trong danh mục này.</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
           {products.map((product) => (
   <Link key={product.id} href={`/product/${product.id}`} className="block">
     <ProductCard
