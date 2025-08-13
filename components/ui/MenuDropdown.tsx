@@ -4,7 +4,16 @@ import Link from 'next/link'
 
 const MenuDropdown = ({ title, items }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Xác định mobile/desktop
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Đóng dropdown khi click ra ngoài
   useEffect(() => {
@@ -23,8 +32,9 @@ const MenuDropdown = ({ title, items }) => {
     <div
       ref={containerRef}
       className="relative group"
-      // Mobile: toggle khi click
-      onClick={() => setIsOpen((prev) => !prev)}
+      onClick={() => {
+        if (isMobile) setIsOpen((prev) => !prev) // chỉ toggle ở mobile
+      }}
     >
       {/* Tiêu đề dropdown */}
       <div className="flex items-center gap-1 cursor-pointer hover:text-red-500 text-lg font-semibold">
@@ -33,7 +43,7 @@ const MenuDropdown = ({ title, items }) => {
           xmlns="http://www.w3.org/2000/svg"
           className={`w-4 h-4 transition-transform duration-200 ${
             isOpen ? 'rotate-180' : ''
-          } group-hover:rotate-180`}
+          } ${!isMobile ? 'group-hover:rotate-180' : ''}`}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -45,8 +55,8 @@ const MenuDropdown = ({ title, items }) => {
       {/* Dropdown menu */}
       <div
         className={`absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50
-        ${isOpen ? 'block' : 'hidden'} 
-        group-hover:block`}
+          ${isMobile ? (isOpen ? 'block' : 'hidden') : 'hidden group-hover:block'}
+        `}
       >
         <ul className="py-2">
           {items.map((item, index) => (
@@ -54,7 +64,7 @@ const MenuDropdown = ({ title, items }) => {
               <Link
                 href={item.href}
                 className="block px-4 py-2 text-base hover:bg-gray-100"
-                onClick={() => setIsOpen(false)} // Đóng khi click item trên mobile
+                onClick={() => setIsOpen(false)} // đóng ở mobile
               >
                 {item.label}
               </Link>
