@@ -42,19 +42,13 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
     {/* Menu chia 2 hàng - 5 cột và căn giữa */}
     <nav className="
-    mt-6 max-w-5xl mx-auto grid grid-cols-2 gap-x-6 gap-y-6
-    text-lg font-semibold
-    md:grid-cols-6 md:gap-y-4
-
-    /* Mobile: odd căn phải, even căn trái */
-    [&>*:nth-child(odd)]:justify-self-end
-    [&>*:nth-child(even)]:justify-self-start
-
-    /* Desktop: tất cả giữa, trừ cột 1 và cột cuối */
-    md:[&>*]:justify-self-center
-    md:[&>*:first-child]:justify-self-start
-    md:[&>*:last-child]:justify-self-end
-  "
+  mt-6 max-w-5xl mx-auto grid grid-cols-2 gap-x-6 gap-y-6 
+  text-lg font-semibold text-center 
+  md:grid-cols-6 md:gap-y-4
+  [@media(max-width:767px)]:[&>a:nth-child(odd)]:justify-self-end 
+  [@media(max-width:767px)]:[&>a:nth-child(even)]:justify-self-start 
+  md:[&>a]:justify-self-center
+"
 >
   {/* Cột 1 */}
   <Link href="/" className="hover:text-red-500 transition">Trang chủ</Link>
