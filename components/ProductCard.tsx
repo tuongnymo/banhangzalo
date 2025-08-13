@@ -34,7 +34,7 @@ export default function ProductCard({ id, name, price, image, discount, category
     >
       <div className="aspect-square w-full overflow-hidden bg-gray-100">
         <motion.div animate={{ scale: isHovered ? 1.05 : 1 }} transition={{ duration: 0.3 }}>
-          <div className="relative h-64 w-full">
+          <div className="relative w-full aspect-[3/4] sm:aspect-square bg-white">
             <Image
               src={image || "/placeholder.svg"}
               alt={name}
