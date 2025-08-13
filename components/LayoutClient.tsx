@@ -48,6 +48,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 2 */}
         <MenuDropdown title="Giày nam" items={[
+          { label: "Giày cao cấp", href: "/category/giaycaocapnam" },
           { label: "Giày công sở", href: "/category/giaycongsonam" },
           { label: "Giày thể thao", href: "/category/giaythethaonam" },
           { label: "Giày lười", href: "/category/giayluoinam" },
@@ -56,6 +57,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           
         ]} />
         <MenuDropdown title="Giày nữ" items={[
+          { label: "Giày cao cấp", href: "/category/giaycaocapnu" },
           { label: "Boot nữ", href: "/category/bootnu" },
           { label: "Giày cao gót", href: "/category/giaycaogot" },
           { label: "Giày custom", href: "/category/giaycustomnu" },
@@ -65,11 +67,13 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 3 */}
         <MenuDropdown title="Quần nam" items={[
+          { label: "Quần cao cấp", href: "/category/quancaocapnam" },
           { label: "Quần tây", href: "/category/quantaynam" },
           { label: "Quần bò", href: "/category/quanbonam" },
           { label: "Quần short", href: "/category/quanshortnam" }
         ]} />
         <MenuDropdown title="Quần & váy nữ" items={[
+          { label: "Quần cao cấp", href: "/category/quancaocapnu" },
           { label: "Quần tây", href: "/category/quantaynu" },
           { label: "Quần bò", href: "/category/quanbonu" },
           { label: "Váy nữ", href: "/category/vaynu" }
@@ -77,11 +81,13 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 4 */}
         <MenuDropdown title="Áo nam" items={[
+          { label: "Áo cao cấp", href: "/category/aocaocapnam" },
           { label: "Áo sơ mi", href: "/category/aosominam" },
           { label: "Áo polo", href: "/category/aopolonam" },
           { label: "Áo phông", href: "/category/aophongnam" }
         ]} />
         <MenuDropdown title="Áo nữ" items={[
+          { label: "Áo cao cấp", href: "/category/aocaocapnu" },
           { label: "Áo sơ mi", href: "/category/aosominu" },
           { label: "Áo phông", href: "/category/aophongnu" },
           { label: "Áo khoác", href: "/category/aokhoacnu" }
@@ -89,11 +95,13 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 5 */}
         <MenuDropdown title="Quần áo trẻ em" items={[
+          { label: "Bộ trẻ em cao cấp", href: "/category/botremcaocap" },
           { label: "Bộ bé trai", href: "/category/bobetrai" },
           { label: "Bộ bé gái", href: "/category/bobegai" },
           { label: "Váy bé gái", href: "/category/vaybegai" }
         ]} />
         <MenuDropdown title="Túi xách" items={[
+          { label: "Túi cao cấp", href: "/category/tuicaocap" },
           { label: "Túi nam", href: "/category/tuinam" },
           { label: "Túi nữ", href: "/category/tuinu" },
           { label: "Vali", href: "/category/vali" }
@@ -101,6 +109,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 6 */}
         <MenuDropdown title="Phụ kiện" items={[
+          { label: "Phụ kiện cao cấp", href: "/category/phukiencaocap" },
           { label: "Kính nam", href: "/category/kinhnam" },
           { label: "Kính nữ", href: "/category/kinhnu" },
           { label: "Mũ nam", href: "/category/vaybegai" },
