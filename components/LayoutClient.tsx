@@ -94,8 +94,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Váy bé gái", href: "/category/vaybegai" }
         ]} />
         <MenuDropdown title="Túi xách" items={[
-          { label: "Túi xách nam", href: "/category/tuixachnam" },
-          { label: "Túi xách nữ", href: "/category/tuixachnu" },
+          { label: "Túi nam", href: "/category/tuinam" },
+          { label: "Túi nữ", href: "/category/tuinu" },
           { label: "Vali", href: "/category/vali" }
         ]} />
 
