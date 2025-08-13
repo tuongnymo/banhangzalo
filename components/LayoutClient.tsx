@@ -51,15 +51,16 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Giày công sở", href: "/category/giaycongsonam" },
           { label: "Giày thể thao", href: "/category/giaythethaonam" },
           { label: "Giày lười", href: "/category/giayluoinam" },
-          { label: "Giày MLB", href: "/category/giaymlbnam" },
-          { label: "Boot nam", href: "/category/bootnam" }
+          { label: "Boot nam", href: "/category/bootnam" },
+          { label: "Dép Nam", href: "/category/depnam" }
+          
         ]} />
         <MenuDropdown title="Giày nữ" items={[
-          { label: "Giày custom", href: "/category/giaycustomnu" },
-          { label: "Giày sneaker", href: "/category/giaysneakernu" },
           { label: "Boot nữ", href: "/category/bootnu" },
           { label: "Giày cao gót", href: "/category/giaycaogot" },
-          { label: "Dép sandal nữ", href: "/category/depsandalnu" }
+          { label: "Dép nữ", href: "/category/depsandalnu" },
+          { label: "Giày custom", href: "/category/giaycustomnu" },
+          { label: "Giày sneaker", href: "/category/giaysneakernu" }, 
         ]} />
 
         {/* Cột 3 */}
@@ -68,7 +69,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Quần bò", href: "/category/quanbonam" },
           { label: "Quần short", href: "/category/quanshortnam" }
         ]} />
-        <MenuDropdown title="Quần nữ" items={[
+        <MenuDropdown title="Quần & váy nữ" items={[
           { label: "Quần tây", href: "/category/quantaynu" },
           { label: "Quần bò", href: "/category/quanbonu" },
           { label: "Váy nữ", href: "/category/vaynu" }
@@ -76,30 +77,41 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 4 */}
         <MenuDropdown title="Áo nam" items={[
-          { label: "Áo sơ mi", href: "/category/ao-so-mi-nam" },
-          { label: "Áo polo", href: "/category/ao-polo-nam" },
-          { label: "Áo phông", href: "/category/ao-phong-nam" }
+          { label: "Áo sơ mi", href: "/category/aosominam" },
+          { label: "Áo polo", href: "/category/aopolonam" },
+          { label: "Áo phông", href: "/category/aophongnam" }
         ]} />
         <MenuDropdown title="Áo nữ" items={[
-          { label: "Áo sơ mi", href: "/category/ao-so-mi-nu" },
-          { label: "Áo phông", href: "/category/ao-phong-nu" },
-          { label: "Áo khoác", href: "/category/ao-khoac-nu" }
+          { label: "Áo sơ mi", href: "/category/aosominu" },
+          { label: "Áo phông", href: "/category/aophongnu" },
+          { label: "Áo khoác", href: "/category/aokhoacnu" }
         ]} />
 
         {/* Cột 5 */}
         <MenuDropdown title="Quần áo trẻ em" items={[
-          { label: "Bộ quần áo nam", href: "/category/tre-em-nam" },
-          { label: "Bộ quần áo nữ", href: "/category/tre-em-nu" },
-          { label: "Váy bé gái", href: "/category/vay-be-gai" }
+          { label: "Bộ bé trai", href: "/category/bobetrai" },
+          { label: "Bộ bé gái", href: "/category/bobegai" },
+          { label: "Váy bé gái", href: "/category/vaybegai" }
         ]} />
         <MenuDropdown title="Túi xách" items={[
-          { label: "Túi xách nam", href: "/category/tui-xach-nam" },
-          { label: "Túi xách nữ", href: "/category/tui-xach-nu" }
+          { label: "Túi xách nam", href: "/category/tuixachnam" },
+          { label: "Túi xách nữ", href: "/category/tuixachnu" }
+        ]} />
+
+        {/* Cột 6 */}
+        <MenuDropdown title="Phụ kiện" items={[
+          { label: "Kính nam", href: "/category/kinhnam" },
+          { label: "Kính nữ", href: "/category/kinhnu" },
+          { label: "Mũ nam", href: "/category/vaybegai" },
+          { label: "Mũ nữ", href: "/category/munu" },
+        ]} />
+        <MenuDropdown title="Hàng cao cấp" items={[
+          { label: "Giày nam cao cấp", href: "/category/giaynamcaocap" },
+          { label: "Giày nữ cao cấp", href: "/category/giaynucaocap" }
         ]} />
       </nav>
     </div>
   </header>
-
 
         <main className="pb-20 md:pb-0">{children}</main>
 
