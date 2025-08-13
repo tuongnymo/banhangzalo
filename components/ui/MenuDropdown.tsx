@@ -6,6 +6,8 @@ const MenuDropdown = ({ title, items }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [alignRight, setAlignRight] = useState(false)
+
 
   // Xác định mobile hay PC
   useEffect(() => {
@@ -67,7 +69,9 @@ const MenuDropdown = ({ title, items }) => {
       {/* Menu con */}
       {isOpen && (
         <div
-          className="absolute left-0 top-full mt-0 min-w-[12rem] max-w-[80vw] bg-white rounded-md shadow-lg z-50"
+          className={`absolute top-full mt-0 min-w-[12rem] max-w-[80vw] bg-white rounded-md shadow-lg z-50 ${
+            alignRight ? 'right-0' : 'left-0'
+          }`}
         >
           <ul className="py-2">
             {items.map((item, index) => (
