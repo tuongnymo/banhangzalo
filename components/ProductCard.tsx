@@ -40,7 +40,7 @@ export default function ProductCard({ id, name, price, image, discount, category
               alt={name}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 25vw"
-              className="object-cover"
+              className="object-contain bg-white"
             />
             {discount && (
               <div className="absolute left-0 top-0 bg-red-500 px-2 py-1 text-xs font-bold text-white">
