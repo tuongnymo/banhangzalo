@@ -58,9 +58,9 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         <MenuDropdown title="Giày nữ" items={[
           { label: "Boot nữ", href: "/category/bootnu" },
           { label: "Giày cao gót", href: "/category/giaycaogot" },
-          { label: "Dép nữ", href: "/category/depsandalnu" },
           { label: "Giày custom", href: "/category/giaycustomnu" },
           { label: "Giày sneaker", href: "/category/giaysneakernu" }, 
+          { label: "Dép nữ", href: "/category/depsandalnu" }
         ]} />
 
         {/* Cột 3 */}
@@ -95,7 +95,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         ]} />
         <MenuDropdown title="Túi xách" items={[
           { label: "Túi xách nam", href: "/category/tuixachnam" },
-          { label: "Túi xách nữ", href: "/category/tuixachnu" }
+          { label: "Túi xách nữ", href: "/category/tuixachnu" },
+          { label: "Vali", href: "/category/vali" }
         ]} />
 
         {/* Cột 6 */}
