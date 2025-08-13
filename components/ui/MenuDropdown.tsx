@@ -67,14 +67,14 @@ const MenuDropdown = ({ title, items }) => {
       {/* Menu con */}
       {isOpen && (
         <div
-          className="absolute left-0 top-full mt-0 w-48 bg-white rounded-md shadow-lg z-50"
+          className="absolute left-0 top-full mt-0 min-w-[12rem] max-w-[80vw] bg-white rounded-md shadow-lg z-50"
         >
           <ul className="py-2">
             {items.map((item, index) => (
               <li key={index}>
                 <Link
                   href={item.href}
-                  className="block px-4 py-2 text-base hover:bg-gray-100"
+                  className="block px-4 py-2 text-base hover:bg-gray-100 whitespace-normal break-words"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
