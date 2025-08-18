@@ -30,7 +30,7 @@ export default function ThankYouPage() {
         <p><strong>⏳ Xử lý:</strong> Đơn hàng sẽ được xác nhận và xử lý trong vòng 24 giờ.</p>
         <p><strong>🚚 Giao hàng:</strong> Thời gian dự kiến từ 2 – 5 ngày làm việc.</p>
         <p><strong>📨 Thông báo:</strong> Bạn sẽ nhận được email và tin nhắn khi đơn hàng được giao đi.</p>
-        <p><strong>📞 Cần hỗ trợ?</strong> Vui lòng liên hệ qua <Link href="https://zalo.me/2997034025843763325" className="text-blue-600 underline" target="_blank">Zalo Official</Link>.</p>
+        <p><strong>📞 Cần hỗ trợ?</strong> Vui lòng liên hệ qua <Link href="https://zalo.me/354268795269709851" className="text-blue-600 underline" target="_blank">Zalo Official</Link>.</p>
       </div>
 
       <Link
