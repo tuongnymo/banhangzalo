@@ -12,7 +12,7 @@ export default function ThankYouPage() {
     <div className="container mx-auto max-w-2xl px-4 py-16 text-center">
       <CheckCircle className="mx-auto text-green-600 mb-4" size={48} />
       <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800">
-        Cảm ơn bạn đã đặt hàng tại FULLSTORE FASHION!
+        Cảm ơn bạn đã đặt hàng tại THOITRANGNEW !
       </h1>
 
       <p className="text-base text-gray-600 mb-6">
@@ -28,9 +28,9 @@ export default function ThankYouPage() {
 
       <div className="text-left text-gray-700 space-y-4 mb-8">
         <p><strong>⏳ Xử lý:</strong> Đơn hàng sẽ được xác nhận và xử lý trong vòng 24 giờ.</p>
-        <p><strong>🚚 Giao hàng:</strong> Thời gian dự kiến từ 2 – 5 ngày làm việc.</p>
+        <p><strong>🚚 Giao hàng:</strong> Thời gian dự kiến từ 5 – 7 ngày làm việc.</p>
         <p><strong>📨 Thông báo:</strong> Bạn sẽ nhận được email và tin nhắn khi đơn hàng được giao đi.</p>
-        <p><strong>📞 Cần hỗ trợ?</strong> Vui lòng liên hệ qua <Link href="https://zalo.me/354268795269709851" className="text-blue-600 underline" target="_blank">Zalo Official</Link>.</p>
+        <p><strong>📞 Cần hỗ trợ?</strong> Bạn vui lòng liên hệ để xem chi tiết, theo dõi đơn hàng qua <Link href="https://zalo.me/354268795269709851" className="text-blue-600 underline" target="_blank">Zalo Official</Link>.</p>
       </div>
 
       <Link
