@@ -20,7 +20,7 @@ export default function FloatingButtons() {
 
       {/* Zalo Button */}
       <a
-        href="https://zalo.me/2997034025843763325"
+        href="https://zalo.me/354268795269709851"
         target="_blank"
         rel="noopener noreferrer"
         className="w-16 h-16 rounded-full bg-white/80 shadow-lg flex items-center justify-center animate-pulse hover:scale-110 transition-transform"
