@@ -183,28 +183,25 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           {/* Color Selection */}
           <div className="mt-6">
             <h3 className="text-sm font-medium">Màu sắc</h3>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {Array.isArray(product.colors) &&
-                product.colors.map((color) => (
-                  <button
-                    key={color.name}
-                    type="button"
-                    className={`relative flex h-10 w-10 items-center justify-center rounded-full border ${selectedColor?.name === color.name ? "border-black" : "border-gray-300"
-                      }`}
-                    onClick={() => setSelectedColor(color)}
-                  >
-                    <span
-                      className="h-8 w-8 rounded-full"
-                      style={{ backgroundColor: color.hex }}
-                      aria-hidden="true"
-                    ></span>
-                    <span className="sr-only">{color.name}</span>
-                    {selectedColor?.name === color.name && (
-                      <span className="pointer-events-none absolute -inset-px rounded-full border-2 border-black"></span>
-                    )}
-                  </button>
-                ))}
-            </div>
+            <div className="mt-2 flex flex-wrap gap-4">
+  {Array.isArray(product.colors) &&
+    product.colors.map((color) => (
+      <button
+        key={color.name}
+        type="button"
+        className={`flex flex-col items-center p-2 rounded-md ${
+          selectedColor?.name === color.name ? "border-2 border-black" : "border border-gray-300"
+        }`}
+        onClick={() => setSelectedColor(color)}
+      >
+        <span className="text-sm font-medium">{color.name}</span>
+        <div
+          className="mt-1 h-8 w-8 rounded-full border"
+          style={{ backgroundColor: color.hex }}
+        />
+      </button>
+    ))}
+</div>
           </div>
 
           {/* Quantity */}
