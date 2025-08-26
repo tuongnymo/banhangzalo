@@ -50,7 +50,7 @@ const categories = [
   },
 
   {
-    href: "/category/giaycaoconam",
+    href: "/category/giaycaoco",
     src: "https://i.postimg.cc/0yRLd9jn/boot-nam.jpg",
     alt: "Giày cao cổ",
     label: "Giày cao cổ",
