@@ -50,10 +50,10 @@ const categories = [
   },
 
   {
-    href: "/category/bootnam",
+    href: "/category/giaycaoconam",
     src: "https://i.postimg.cc/0yRLd9jn/boot-nam.jpg",
-    alt: "Boot nam",
-    label: "Boot nam",
+    alt: "Giày cao cổ",
+    label: "Giày cao cổ",
   },
 
   {
