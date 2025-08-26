@@ -43,10 +43,10 @@ const categories = [
   },
 
   {
-    href: "/category/giaycustomnu",
+    href: "/category/giaybupbe",
     src: "https://i.postimg.cc/MKjCQn6X/gi-y-custom-n.jpg",
-    alt: "Giày custom nữ",
-    label: "Giày custom nữ",
+    alt: "Giày búp bê",
+    label: "Giày búp bê",
   },
 
   {
