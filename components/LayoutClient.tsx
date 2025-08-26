@@ -60,7 +60,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Giày công sở", href: "/category/giaycongsonam" },
           { label: "Giày thể thao", href: "/category/giaythethaonam" },
           { label: "Giày lười", href: "/category/giayluoinam" },
-          { label: "Boot nam", href: "/category/bootnam" },
+          { label: "Giày cao cổ", href: "/category/giaycaoco" },
           { label: "Dép Nam", href: "/category/depnam" }
           
         ]} />
