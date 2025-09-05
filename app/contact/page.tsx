@@ -14,9 +14,9 @@ export default function ContactPage() {
             <div>
               <h3 className="text-lg font-medium">Địa Chỉ</h3>
               <p className="text-gray-600">
-                83 Đền Lừ
+                
                 <br />
-                Quận Hoàng Mai
+                
                 <br />
                 TP. Hà Nội
               </p>
@@ -25,16 +25,16 @@ export default function ContactPage() {
             <div>
               <h3 className="text-lg font-medium">Email</h3>
               <p className="text-gray-600">
-                info@fashionstore.com
+                info@thoitrangnew.com
                 <br />
-                support@fashionstore.com
+                support@thoitrangnew.com
               </p>
             </div>
 
             <div>
               <h3 className="text-lg font-medium">Phone</h3>
               <p className="text-gray-600">
-                0922.399.666
+                09xx.xxx.xxx
               </p>
             </div>
 
