@@ -68,9 +68,9 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Giày cao cấp", href: "/category/giaycaocapnu" },
           { label: "Boot nữ", href: "/category/bootnu" },
           { label: "Giày cao gót", href: "/category/giaycaogot" },
-          { label: "Giày custom", href: "/category/giaycustomnu" },
+          { label: "Giày búp bê", href: "/category/giaybupbe" },
           { label: "Giày sneaker", href: "/category/giaysneakernu" }, 
-          { label: "Dép nữ", href: "/category/depsandalnu" }
+          { label: "Dép nữ", href: "/category/depnu" }
         ]} />
 
         {/* Cột 3 */}
