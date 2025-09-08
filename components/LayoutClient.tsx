@@ -81,7 +81,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Quần short", href: "/category/quanshortnam" }
         ]} />
         <MenuDropdown title="Quần & váy nữ" items={[
-          { label: "Quần cao cấp", href: "/category/quancaocapnu" },
+          { label: "Váy cao cấp", href: "/category/vaycaocap" },
           { label: "Quần tây", href: "/category/quantaynu" },
           { label: "Quần bò", href: "/category/quanbonu" },
           { label: "Váy nữ", href: "/category/vaynu" }
