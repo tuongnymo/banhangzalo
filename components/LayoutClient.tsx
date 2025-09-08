@@ -103,7 +103,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
         {/* Cột 5 */}
         <MenuDropdown title="Quần áo trẻ em" items={[
-          { label: "Bộ trẻ em cao cấp", href: "/category/botremcaocap" },
+          { label: "Bộ trẻ em cao cấp", href: "/category/botreemcaocap" },
           { label: "Bộ bé trai", href: "/category/bobetrai" },
           { label: "Bộ bé gái", href: "/category/bobegai" },
           { label: "Váy bé gái", href: "/category/vaybegai" }
