@@ -115,7 +115,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Túi nữ", href: "/category/tuinu" },
           { label: "Ví nữ", href: "/category/vinu" },
           { label: "Vali", href: "/category/vali" },
-          { label: "Ô Dù Cao Cấp", href: "/category/odu" }
+          { label: "Ô Dù Cao Cấp", href: "/category/oducaocap" }
         ]} />
 
         {/* Cột 6 */}
