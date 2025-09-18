@@ -121,8 +121,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         {/* Cột 6 */}
         <MenuDropdown title="Phụ kiện" items={[
           { label: "Phụ kiện cao cấp", href: "/category/phukiencaocap" },
-          { label: "Kính nam", href: "/category/kinhnam" },
-          { label: "Kính nữ", href: "/category/kinhnu" },
+          { label: "Khăn cổ", href: "/category/khanco" },
+          { label: "Mũ", href: "/category/mu" },
           { label: "Thắt lưng", href: "/category/thatlung" },
         ]} />
         <MenuDropdown title="Hàng cao cấp" items={[
