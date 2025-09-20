@@ -39,7 +39,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
           <h3 className="text-xl font-bold mb-2">Men's Collection</h3>
           <p className="text-sm mb-4 px-4">Tối giản. Mạnh mẽ. Lôi cuốn</p>
-          <Link href="/category/shoes">
+          <Link href="/category/giaycongsonam">
             <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
               Shop Now
             </button>
@@ -58,7 +58,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white">
           <h3 className="text-xl font-bold mb-2">Women's Collection</h3>
           <p className="text-sm mb-4 px-4">Đẹp nhẹ nhàng, cuốn hút tự nhiên</p>
-          <Link href="/category/clothing">
+          <Link href="/category/bootnu">
             <button className="px-4 py-2 bg-white text-black rounded-md font-medium hover:bg-gray-100 transition">
               Shop Now
             </button>
