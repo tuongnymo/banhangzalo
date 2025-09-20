@@ -40,13 +40,14 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       </div>
     </div>
 
-    {/* Menu chia 3 cột - 5 hàng, không căn giữa */}
+   {/* Menu chia 3 hàng - 5 cột và không căn giữa */}
 <nav className="
-  mt-6 max-w-5xl mx-auto grid grid-cols-3 gap-x-6 gap-y-6 
+  mt-6 max-w-5xl mx-auto grid grid-cols-5 gap-x-6 gap-y-6 
   text-lg font-semibold text-left 
-  md:grid-cols-3 md:gap-y-4
+  md:grid-cols-5 md:gap-y-4
   [@media(max-width:767px)]:[&>a]:justify-self-start
 ">
+
 
 
   {/* Cột 1 */}
