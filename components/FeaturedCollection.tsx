@@ -71,7 +71,7 @@ export default function FeaturedCollection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button asChild className="bg-white text-black hover:bg-gray-200">
-                  <Link href="/category/clothing">Shop Now</Link>
+                  <Link href="/category/giaycongsonam">Shop Now</Link>
                 </Button>
               </motion.div>
             </div>
@@ -122,7 +122,7 @@ export default function FeaturedCollection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Button asChild className="bg-white text-black hover:bg-gray-200">
-                  <Link href="/category/clothing">Shop Now</Link>
+                  <Link href="/category/bootnu">Shop Now</Link>
                 </Button>
               </motion.div>
             </div>
