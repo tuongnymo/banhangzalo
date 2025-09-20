@@ -40,15 +40,15 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
       </div>
     </div>
 
-   {/* Menu chia 3 hàng - 5 cột và không căn giữa */}
+   {/* Menu chia 5 cột 3 hàng trên desktop và 2 cột 7 hàng trên mobile */}
 <nav className="
   mt-6 max-w-5xl mx-auto grid grid-cols-5 gap-x-6 gap-y-6 
   text-lg font-semibold text-left 
   md:grid-cols-5 md:gap-y-4
+  [@media(max-width:767px)]:grid-cols-2 
+  [@media(max-width:767px)]:grid-rows-7 
   [@media(max-width:767px)]:[&>a]:justify-self-start
 ">
-
-
 
   {/* Cột 1 */}
   <Link href="/" className="hover:text-red-500 transition">Trang chủ</Link>
