@@ -50,7 +50,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
 
   <Link href="/account" className="p-2 hover:opacity-80 transition">
     <Image 
-      src="hhttps://i.postimg.cc/x8NBmTfN/account.png" 
+      src="https://i.postimg.cc/x8NBmTfN/account.png" 
       alt="Account" 
       width={24} 
       height={24} 
