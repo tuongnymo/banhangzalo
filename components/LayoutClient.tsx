@@ -9,6 +9,8 @@ import Link from "next/link"
 import { ReactNode } from "react"
 import Script from "next/script"
 import MenuDropdown from './ui/MenuDropdown'
+import Image from "next/image";
+
 
 export default function LayoutClient({ children }: { children: ReactNode }) {
   return (
@@ -33,11 +35,29 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
         <Link href="/">THOITRANGNEW</Link>
       </div>
       
-      <div className="flex-1 flex justify-end items-center gap-1 sm:gap-4 flex-shrink-0">
-        <Link href="/search" className="hover:text-red-500 p-2">🔍</Link>
-        <CartIconBadge />
-        <Link href="/account" className="hover:text-red-500 p-2">👤</Link>
-      </div>
+      <div className="flex-1 flex justify-end items-center gap-2 sm:gap-4 flex-shrink-0">
+  <Link href="/search" className="p-2 hover:opacity-80 transition">
+    <Image 
+      src="https://i.postimg.cc/43JC0g5j/kinhlup.png" 
+      alt="Search" 
+      width={24} 
+      height={24} 
+      className="w-5 h-5 sm:w-6 sm:h-6"
+    />
+  </Link>
+
+  <CartIconBadge />
+
+  <Link href="/account" className="p-2 hover:opacity-80 transition">
+    <Image 
+      src="hhttps://i.postimg.cc/x8NBmTfN/account.png" 
+      alt="Account" 
+      width={24} 
+      height={24} 
+      className="w-5 h-5 sm:w-6 sm:h-6"
+    />
+  </Link>
+</div>
     </div>
 
    {/* Menu chia 5 cột 3 hàng trên desktop và 2 cột 7 hàng trên mobile */}
