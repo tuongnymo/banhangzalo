@@ -114,11 +114,15 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Ví nam", href: "/category/vinam" },
           { label: "Túi nữ", href: "/category/tuinu" },
           { label: "Ví nữ", href: "/category/vinu" },
+        ]} />
+
+        {/* Cột 6 */}
+        <MenuDropdown title="Vali cao cấp " items={[
           { label: "Vali", href: "/category/vali" },
           { label: "Ô Dù Cao Cấp", href: "/category/oducaocap" }
         ]} />
 
-        {/* Cột 6 */}
+        {/* Cột 7 */}
         <MenuDropdown title="Phụ kiện" items={[
           { label: "Phụ kiện cao cấp", href: "/category/phukiencaocap" },
           { label: "Khăn quàng cổ", href: "/category/khanco" },
@@ -126,6 +130,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
           { label: "Thắt lưng nam", href: "/category/thatlungnam" },
           { label: "Thắt lưng nữ", href: "/category/thatlungnu" },
         ]} />
+
         <MenuDropdown title="Hàng cao cấp" items={[
           { label: "Giày nam cao cấp", href: "/category/giaynamcaocap" },
           { label: "Giày nữ cao cấp", href: "/category/giaynucaocap" }
