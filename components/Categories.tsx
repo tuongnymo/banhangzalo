@@ -44,7 +44,7 @@ const categories = [
 
   {
     href: "/category/giaybupbe",
-    src: "https://i.postimg.cc/MKjCQn6X/gi-y-custom-n.jpg",
+    src: "https://i.postimg.cc/V6LhQJgn/logo-gi-y-b-p-b-n.jpg",
     alt: "Giày búp bê",
     label: "Giày búp bê",
   },
@@ -85,10 +85,10 @@ const categories = [
   },
 
   {
-    href: "/category/quantaynu",
-    src: "https://i.postimg.cc/g2BsGDh7/qu-n-t-y-n.jpg",
-    alt: "Quần tây nữ",
-    label: "Quần tây nữ",
+    href: "/category/bovestnu",
+    src: "https://i.postimg.cc/0QWB89X3/logo-b-vest-n.webp",
+    alt: "Bộ vest nữ",
+    label: "Bộ vest nữ",
   },
 
   {
@@ -232,17 +232,17 @@ const categories = [
   },
 
   {
-    href: "/category/munam",
-    src: "https://i.postimg.cc/gc3pdkMP/m-nam.jpg",
-    alt: "Mũ nam",
-    label: "Mũ nam",
+    href: "/category/mu",
+    src: "https://i.postimg.cc/ydt2mVhR/m.jpg",
+    alt: "Mũ",
+    label: "Mũ",
   },
 
   {
-    href: "/category/munu",
-    src: "https://i.postimg.cc/7YVyGt8s/m-n.jpg",
-    alt: "Mũ nữ",
-    label: "Mũ nữ",
+    href: "/category/khanco",
+    src: "https://i.postimg.cc/NFXSbWbz/kh-n-qu-ng-c.jpg",
+    alt: "Khăn quàng cổ",
+    label: "Khăn quàng cổ",
   },
   
 ];
