@@ -31,10 +31,10 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {/* Product Images */}
-        <div className="space-y-4 w-full md:w-1/2 md:max-w-md">
-  <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-100">
-    <div className="h-full w-full bg-gray-200"></div>
-  </div>
+        <div className="space-y-4">
+          <div className="relative aspect-square overflow-hidden rounded-xl bg-gray-100">
+            <div className="h-full w-full bg-gray-200"></div>
+          </div>
 
           <div className="flex gap-2 overflow-x-auto pb-2">
             {[1, 2, 3, 4].map((index) => (
