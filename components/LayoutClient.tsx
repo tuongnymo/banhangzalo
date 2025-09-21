@@ -171,9 +171,9 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
               <div>
                 <h3 className="mb-4 text-lg font-bold">Cửa Hàng</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li><Link href="/category/shoes" className="hover:text-black block py-1">Shop Nam</Link></li>
-                  <li><Link href="/category/clothing" className="hover:text-black block py-1">Shop Nữ</Link></li>
-                  <li><Link href="/category/accessories" className="hover:text-black block py-1">Túi Xách & Phụ Kiện</Link></li>
+                  <li><Link href="/category/giayluoinam" className="hover:text-black block py-1">Shop Nam</Link></li>
+                  <li><Link href="/category/vaynu" className="hover:text-black block py-1">Shop Nữ</Link></li>
+                  <li><Link href="/category/tuinu" className="hover:text-black block py-1">Túi Xách & Phụ Kiện</Link></li>
                   <li><Link href="/category" className="hover:text-black block py-1">Tất cả sản phẩm</Link></li>
                 </ul>
               </div>
@@ -182,8 +182,8 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
                 <ul className="space-y-2 text-gray-600">
                   <li><Link href="/about" className="hover:text-black block py-1">Về chúng tôi</Link></li>
                   <li><Link href="/contact" className="hover:text-black block py-1">Liên hệ</Link></li>
-                  <li><Link href="/terms" className="hover:text-black block py-1">Điều khoản và điều kiện</Link></li>
-                  <li><Link href="/privacy" className="hover:text-black block py-1">Chính sách bảo mật</Link></li>
+                  <li><Link href="/" className="hover:text-black block py-1">Điều khoản và điều kiện</Link></li>
+                  <li><Link href="/" className="hover:text-black block py-1">Chính sách bảo mật</Link></li>
                 </ul>
               </div>
               <div>
@@ -191,7 +191,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
                 <div className="flex space-x-4">
                   {["facebook", "instagram", "twitter"].map((item, idx) => (
                     <a key={idx} href="#" className="hover:text-gray-500 p-2">
-                      {/* bạn có thể nhúng svg tương ứng */}
+                      {/*có thể nhúng svg tương ứng */}
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="12" r="10" />
                       </svg>
@@ -201,7 +201,7 @@ export default function LayoutClient({ children }: { children: ReactNode }) {
               </div>
             </div>
             <div className="mt-12 border-t border-gray-200 pt-8 text-center">
-              <p className="text-gray-600">© 2025 FULLSTORE FASHION. All rights reserved.</p>
+              <p className="text-gray-600">© 2025 THOITRANGNEW. All rights reserved.</p>
             </div>
           </div>
         </footer>
