@@ -76,7 +76,8 @@ export default function SearchPage() {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">Không tìm thấy sản phẩm nào.</p>
+        <p className="text-gray-500">Không tìm thấy sản phẩm nào.
+      Nhận tìm kiếm sản phẩm theo yêu cầu</p>
       )}
     </div>
   );
