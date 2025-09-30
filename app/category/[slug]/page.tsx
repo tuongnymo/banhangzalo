@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import ProductCard from '@/components/ProductCard'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
@@ -14,10 +14,14 @@ const PAGE_SIZE = 35
 
 export default function CategorySlugPage() {
   const { slug } = useParams() as { slug: string }
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  // 🔥 đọc page từ query (mặc định 1)
+  const currentPage = Number(searchParams.get("page") || 1)
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-  const [page, setPage] = useState(1) // 🔥 trang hiện tại
-  const [total, setTotal] = useState(0) // 🔥 tổng số sản phẩm
+  const [total, setTotal] = useState(0)
 
   const categoryNameMap: Record<string, string> = {
     shoes: 'Giày Nam',
@@ -32,14 +36,12 @@ export default function CategorySlugPage() {
     const fetchProducts = async () => {
       setLoading(true)
 
-      // Tính offset
-      const from = (page - 1) * PAGE_SIZE
+      const from = (currentPage - 1) * PAGE_SIZE
       const to = from + PAGE_SIZE - 1
 
-      // Lấy dữ liệu + đếm tổng
       const { data, error, count } = await supabase
         .from('products')
-        .select('*', { count: 'exact' }) // count để biết tổng số sp
+        .select('*', { count: 'exact' })
         .ilike('category', `%${slug}%`)
         .range(from, to)
 
@@ -53,11 +55,15 @@ export default function CategorySlugPage() {
     }
 
     fetchProducts()
-  }, [slug, page])
+  }, [slug, currentPage])
 
   if (loading) return <p className="p-4">Đang tải sản phẩm...</p>
 
   const totalPages = Math.ceil(total / PAGE_SIZE)
+
+  const goToPage = (p: number) => {
+    router.push(`/category/${slug}?page=${p}`)
+  }
 
   return (
     <div className="p-4">
@@ -71,7 +77,11 @@ export default function CategorySlugPage() {
         <>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
             {products.map((product) => (
-              <Link key={product.id} href={`/product/${product.id}`} className="block">
+              <Link
+                key={product.id}
+                href={`/product/${product.id}?page=${currentPage}`} // giữ page khi vào chi tiết
+                className="block"
+              >
                 <ProductCard
                   id={product.id}
                   name={product.name}
@@ -87,18 +97,18 @@ export default function CategorySlugPage() {
           {/* Pagination */}
           <div className="flex justify-center items-center gap-4 mt-6">
             <button
-              onClick={() => setPage((p) => Math.max(p - 1, 1))}
-              disabled={page === 1}
+              onClick={() => goToPage(Math.max(currentPage - 1, 1))}
+              disabled={currentPage === 1}
               className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
             >
               Trang trước
             </button>
             <span>
-              Trang {page} / {totalPages}
+              Trang {currentPage} / {totalPages}
             </span>
             <button
-              onClick={() => setPage((p) => Math.min(p + 1, totalPages))}
-              disabled={page === totalPages}
+              onClick={() => goToPage(Math.min(currentPage + 1, totalPages))}
+              disabled={currentPage === totalPages}
               className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
             >
               Trang sau
