@@ -114,24 +114,23 @@ export default function CategorySlugPage() {
       return false
     })
     .map((p, idx, arr) => {
-      const prev = arr[idx - 1]
-      return (
-        <>
-          {prev && p - prev > 1 && <span className="px-2">...</span>}
-          <button
-            key={p}
-            onClick={() => goToPage(p)}
-            className={`px-3 py-1 rounded ${
-              currentPage === p
-                ? "bg-red-500 text-white"
-                : "bg-gray-100 hover:bg-gray-200"
-            }`}
-          >
-            {p}
-          </button>
-        </>
-      )
-    })}
+  const prev = arr[idx - 1]
+  return (
+    <React.Fragment key={p}>
+      {prev && p - prev > 1 && <span className="px-2">...</span>}
+      <button
+        onClick={() => goToPage(p)}
+        className={`px-3 py-1 rounded ${
+          currentPage === p
+            ? "bg-red-500 text-white"
+            : "bg-gray-100 hover:bg-gray-200"
+        }`}
+      >
+        {p}
+      </button>
+    </React.Fragment>
+  )
+})}
 
   {/* Next */}
   <button
