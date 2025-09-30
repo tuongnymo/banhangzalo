@@ -5,6 +5,8 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation'
 import ProductCard from '@/components/ProductCard'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
+import React from "react";
+
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -95,7 +97,7 @@ export default function CategorySlugPage() {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-2 mt-6">
+<div className="flex justify-center items-center gap-2 mt-6">
   {/* Previous */}
   <button
     onClick={() => goToPage(currentPage - 1)}
@@ -105,23 +107,34 @@ export default function CategorySlugPage() {
     &lt;
   </button>
 
-  {/* Các trang */}
   {Array.from({ length: totalPages }, (_, i) => i + 1)
-    .slice(
-      Math.max(0, currentPage - 3),
-      Math.min(totalPages, currentPage + 2)
-    )
-    .map((p) => (
-      <button
-        key={p}
-        onClick={() => goToPage(p)}
-        className={`px-3 py-1 rounded ${
-          currentPage === p ? "bg-red-500 text-white" : "bg-gray-100"
-        }`}
-      >
-        {p}
-      </button>
-    ))}
+    .filter((p) => {
+      // luôn giữ trang đầu & cuối
+      if (p === 1 || p === totalPages) return true
+      // giữ các trang quanh currentPage
+      if (p >= currentPage - 2 && p <= currentPage + 2) return true
+      return false
+    })
+    .map((p, idx, arr) => {
+      const prev = arr[idx - 1]
+      return (
+        <React.Fragment key={p}>
+          {/* Thêm dấu ... nếu có khoảng trống */}
+          {prev && p - prev > 1 && <span className="px-2">...</span>}
+
+          <button
+            onClick={() => goToPage(p)}
+            className={`px-3 py-1 rounded ${
+              currentPage === p
+                ? "bg-red-500 text-white"
+                : "bg-gray-100 hover:bg-gray-200"
+            }`}
+          >
+            {p}
+          </button>
+        </React.Fragment>
+      )
+    })}
 
   {/* Next */}
   <button
@@ -132,6 +145,7 @@ export default function CategorySlugPage() {
     &gt;
   </button>
 </div>
+
 
         </>
       )}
