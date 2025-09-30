@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Link from "next/link";
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
@@ -55,25 +56,27 @@ export default function SearchPage() {
       ) : products.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {products.map((product) => (
-            <div
-              key={product.id}
-              className="group overflow-hidden rounded-lg border border-gray-200 hover:shadow-md transition-all"
-            >
-              <div className="relative h-64 w-full bg-gray-100">
-                <img
-                  src={product.images}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                />
-              </div>
-              <div className="p-4">
-                <h2 className="font-semibold text-lg mb-2">{product.name}</h2>
-                <p className="text-red-600 font-bold">
-                  {Number(product.price).toLocaleString()}₫
-                </p>
-              </div>
-            </div>
-          ))}
+  <Link
+    key={product.id}
+    href={`/product/${product.id}`}
+    className="group overflow-hidden rounded-lg border border-gray-200 hover:shadow-md transition-all block"
+  >
+    <div className="relative h-64 w-full bg-gray-100">
+      <img
+        src={product.images}
+        alt={product.name}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+      />
+    </div>
+    <div className="p-4">
+      <h2 className="font-semibold text-lg mb-2">{product.name}</h2>
+      <p className="text-red-600 font-bold">
+        {Number(product.price).toLocaleString()}₫
+      </p>
+    </div>
+  </Link>
+))}
+
         </div>
       ) : (
         <p className="text-gray-500">Không tìm thấy sản phẩm nào. Bên mình có nhận tìm kiếm sản phẩm theo yêu cầu của từng khách hàng</p>
