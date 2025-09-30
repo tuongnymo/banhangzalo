@@ -95,25 +95,44 @@ export default function CategorySlugPage() {
           </div>
 
           {/* Pagination */}
-          <div className="flex justify-center items-center gap-4 mt-6">
-            <button
-              onClick={() => goToPage(Math.max(currentPage - 1, 1))}
-              disabled={currentPage === 1}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Trang trước
-            </button>
-            <span>
-              Trang {currentPage} / {totalPages}
-            </span>
-            <button
-              onClick={() => goToPage(Math.min(currentPage + 1, totalPages))}
-              disabled={currentPage === totalPages}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Trang sau
-            </button>
-          </div>
+          <div className="flex justify-center items-center gap-2 mt-6">
+  {/* Previous */}
+  <button
+    onClick={() => goToPage(currentPage - 1)}
+    disabled={currentPage === 1}
+    className="px-3 py-1 rounded bg-gray-100 disabled:opacity-50"
+  >
+    &lt;
+  </button>
+
+  {/* Các trang */}
+  {Array.from({ length: totalPages }, (_, i) => i + 1)
+    .slice(
+      Math.max(0, currentPage - 3),
+      Math.min(totalPages, currentPage + 2)
+    )
+    .map((p) => (
+      <button
+        key={p}
+        onClick={() => goToPage(p)}
+        className={`px-3 py-1 rounded ${
+          currentPage === p ? "bg-red-500 text-white" : "bg-gray-100"
+        }`}
+      >
+        {p}
+      </button>
+    ))}
+
+  {/* Next */}
+  <button
+    onClick={() => goToPage(currentPage + 1)}
+    disabled={currentPage === totalPages}
+    className="px-3 py-1 rounded bg-gray-100 disabled:opacity-50"
+  >
+    &gt;
+  </button>
+</div>
+
         </>
       )}
     </div>
