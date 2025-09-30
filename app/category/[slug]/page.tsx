@@ -109,20 +109,17 @@ export default function CategorySlugPage() {
 
   {Array.from({ length: totalPages }, (_, i) => i + 1)
     .filter((p) => {
-      // luôn giữ trang đầu & cuối
-      if (p === 1 || p === totalPages) return true
-      // giữ các trang quanh currentPage
-      if (p >= currentPage - 2 && p <= currentPage + 2) return true
+      if (p === 1 || p === totalPages) return true // luôn giữ đầu & cuối
+      if (p >= currentPage - 2 && p <= currentPage + 2) return true // giữ quanh currentPage
       return false
     })
     .map((p, idx, arr) => {
       const prev = arr[idx - 1]
       return (
-        <React.Fragment key={p}>
-          {/* Thêm dấu ... nếu có khoảng trống */}
+        <>
           {prev && p - prev > 1 && <span className="px-2">...</span>}
-
           <button
+            key={p}
             onClick={() => goToPage(p)}
             className={`px-3 py-1 rounded ${
               currentPage === p
@@ -132,7 +129,7 @@ export default function CategorySlugPage() {
           >
             {p}
           </button>
-        </React.Fragment>
+        </>
       )
     })}
 
